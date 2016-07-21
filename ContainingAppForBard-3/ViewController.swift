@@ -33,7 +33,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
             self.showSendMailErrorAlert()
         }
     }
-    "Test"
+   // "Test"
     
     func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
