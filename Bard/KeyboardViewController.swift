@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import QuartzCore
 
 class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -33,6 +34,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
+    @IBOutlet weak var nameEntryTextField: UITextField!
     let quoteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
     let textColor = UIColor.blackColor()
     let borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).CGColor
@@ -305,6 +307,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         var categoryArray = Array(self.buttonTitles.keys).sort(<)
         selectedCategory = categoryArray[0]
         lastCategoryDisplayed = selectedCategory
+        
+        nameEntryTextField.layer.borderColor = borderColor
+        nameEntryTextField.layer.cornerRadius = 10
+        nameEntryTextField.layer.borderWidth = 1
         
         tableView1.delegate = self
         tableView1.dataSource = self

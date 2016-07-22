@@ -14,6 +14,7 @@
                 <outlet property="categoryTableViewTop" destination="UQ7-Yu-Nhi" id="9D0-o7-uhH"/>
                 <outlet property="deleteButton" destination="8fM-hd-egg" id="TQI-02-B1C"/>
                 <outlet property="expandCategoryButton" destination="MZg-ph-cbY" id="0kN-j6-deN"/>
+                <outlet property="nameEntryTextField" destination="2pX-DR-sNE" id="qNi-xI-DcY"/>
                 <outlet property="nameView" destination="Npz-By-jUS" id="cdh-8Q-Xlw"/>
                 <outlet property="nextKeyboard" destination="0Kw-gm-kfa" id="c2y-31-njy"/>
                 <outlet property="tableView1" destination="Bz2-mo-z6s" id="zs4-ZQ-A2Z"/>
