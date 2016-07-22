@@ -39,22 +39,23 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-By-jUS" userLabel="Name View">
-                    <rect key="frame" x="0.0" y="1" width="320" height="34"/>
+                    <rect key="frame" x="0.0" y="1" width="320" height="25"/>
                     <subviews>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pX-DR-sNE" userLabel="Name Entry Text Field">
-                            <rect key="frame" x="10" y="2" width="300" height="30"/>
+                            <rect key="frame" x="10" y="4" width="300" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="2pX-DR-sNE" secondAttribute="bottom" constant="2" id="6Td-uC-4y7"/>
-                        <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" constant="2" id="AzB-Ht-xeM"/>
+                        <constraint firstAttribute="bottom" secondItem="2pX-DR-sNE" secondAttribute="bottom" constant="4" id="6Td-uC-4y7"/>
+                        <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" constant="4" id="AzB-Ht-xeM"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" id="ECS-6H-ehW"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" constant="10" id="Okl-na-ZKY"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="centerX" secondItem="Npz-By-jUS" secondAttribute="centerX" id="csK-7j-bh2"/>
                         <constraint firstAttribute="trailing" secondItem="2pX-DR-sNE" secondAttribute="trailing" constant="10" id="ubW-sw-Gn4"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="centerY" secondItem="Npz-By-jUS" secondAttribute="centerY" id="wYe-F5-shK"/>
+                        <constraint firstAttribute="height" constant="25" id="xqV-zx-6ix"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -62,7 +63,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-gG-mVt" userLabel="Name-Quote Border View">
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-gG-mVt" userLabel="Name-Quote Border View">
                     <rect key="frame" x="0.0" y="35" width="320" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -75,7 +76,7 @@
                         </mask>
                     </variation>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bz2-mo-z6s" userLabel="Quote Table View">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bz2-mo-z6s" userLabel="Quote Table View">
                     <rect key="frame" x="0.0" y="36" width="320" height="120"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXf-Vk-oPY" userLabel="Category Table View Header">
