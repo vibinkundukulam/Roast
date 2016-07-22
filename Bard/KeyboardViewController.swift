@@ -22,6 +22,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView2: UITableView!
     @IBOutlet weak var arrowIcon: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var nameView: UIView!
     
     var lastRow = -1
     var wasDeleteLastKey = 0
@@ -34,6 +35,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
     let quoteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
     let textColor = UIColor.blackColor()
+    let borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).CGColor
     
     var yourArray: [(NSMutableAttributedString, NSAttributedString)] = []
     var mommaArray: [(NSMutableAttributedString, NSAttributedString)] = []
@@ -309,7 +311,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         tableView2.delegate = self
         tableView2.dataSource = self
-        
         
         tableView1.rowHeight = UITableViewAutomaticDimension
         tableView1.estimatedRowHeight = 30
