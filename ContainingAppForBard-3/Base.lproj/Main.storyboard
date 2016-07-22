@@ -605,10 +605,19 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-xO-Rxa" userLabel="Test Text Field">
+                                <rect key="frame" x="38" y="20" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GGu-tv-Q33"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="1WC-h5-f02" secondAttribute="trailing" constant="20" id="4ZA-r4-fOU"/>
+                            <constraint firstItem="cRh-xO-Rxa" firstAttribute="leading" secondItem="1WC-h5-f02" secondAttribute="leading" id="4gB-Pj-RWV"/>
                             <constraint firstItem="1WC-h5-f02" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="Efh-nL-1CR"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="mwy-9B-4Gs" secondAttribute="bottom" constant="305" id="HFN-Pu-0Lv"/>
                             <constraint firstAttribute="centerX" secondItem="1WC-h5-f02" secondAttribute="centerX" id="HLN-pU-obH"/>
@@ -617,8 +626,10 @@
                             <constraint firstItem="1WC-h5-f02" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" multiplier="3" id="RXc-DM-s7o"/>
                             <constraint firstItem="mwy-9B-4Gs" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="S3z-EE-38I"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="bottom" secondItem="mwy-9B-4Gs" secondAttribute="bottom" id="Zfo-wg-S0B"/>
+                            <constraint firstItem="cRh-xO-Rxa" firstAttribute="width" secondItem="1WC-h5-f02" secondAttribute="width" id="aBN-Es-32j"/>
                             <constraint firstItem="mwy-9B-4Gs" firstAttribute="top" secondItem="1WC-h5-f02" secondAttribute="bottom" id="b2D-fz-GTX"/>
                             <constraint firstItem="1WC-h5-f02" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.75" id="gzN-s1-X6U"/>
+                            <constraint firstItem="1WC-h5-f02" firstAttribute="top" secondItem="cRh-xO-Rxa" secondAttribute="bottom" constant="10" id="lQO-ce-Zgm"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="centerY" secondItem="1WC-h5-f02" secondAttribute="bottom" multiplier="1.2" id="nyt-Rc-gXc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwy-9B-4Gs" secondAttribute="trailing" id="szk-xR-xWN"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="1WC-h5-f02" secondAttribute="bottom" constant="200" id="yhc-lb-myy"/>
@@ -638,6 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="304.5" y="276.5"/>
         </scene>
     </scenes>
 </document>
