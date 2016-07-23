@@ -19,8 +19,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var nextKeyboard: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var categoryHeader: UIView!
+    @IBOutlet weak var textKeyboardView: UIView!
     @IBOutlet weak var tableView1: UITableView!
     @IBOutlet weak var tableView2: UITableView!
+    @IBOutlet weak var chooseQuoteView: UIView!
     @IBOutlet weak var arrowIcon: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var nameView: UIView!
@@ -91,6 +93,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     var rudeArray: [(NSMutableAttributedString, NSAttributedString)] = []
     
     var buttonTitles = Dictionary<String,[(NSMutableAttributedString, NSAttributedString)]>()
+    
+    
+    //
+    //
+    // Load everything when the keyboard first pops up
+    //
+    //
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -344,6 +353,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
         showNameLabel()
+        textKeyboardView.hidden = true
         
         
         // Set up table of quotes and categories
@@ -381,8 +391,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
 
     }
     
+    //
+    //
+    // End of view loading method
+    //
+    //
+    
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
         nameLabel.hidden = true
+        chooseQuoteView.hidden = true
+        textKeyboardView.hidden = false
     }
     
     func textFieldDidEndEditing(textField: UITextField) {  //delegate method
