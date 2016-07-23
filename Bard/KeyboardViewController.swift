@@ -24,6 +24,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var arrowIcon: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var nameView: UIView!
+    @IBOutlet weak var nameEntryTextField: UITextField!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    // Ensure keyboard remembers last key, quote
     
     var lastRow = -1
     var wasDeleteLastKey = 0
@@ -32,12 +36,30 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     var lastCategoryDisplayed = ""
     var sectionExpanded = false
     
+    
+    // Color scheme
+    
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
-    @IBOutlet weak var nameEntryTextField: UITextField!
     let quoteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-    let textColor = UIColor.blackColor()
     let borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).CGColor
+    let textColor = UIColor.blackColor()
+    let textInactiveColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0)
+    
+    var subtitleAttributes: [String: NSObject] {
+        get {
+            return [NSFontAttributeName : UIFont(name: "HelveticaNeue-Italic", size: 14)!,NSForegroundColorAttributeName : textColor]
+        }
+    }
+    
+    var normalAttributes: [String: NSObject] {
+        get {
+            return [NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 14)!,NSForegroundColorAttributeName : textColor]
+        }
+    }
+    
+    
+    // Creating initial arrays to hold quotes
     
     var yourArray: [(NSMutableAttributedString, NSAttributedString)] = []
     var mommaArray: [(NSMutableAttributedString, NSAttributedString)] = []
@@ -67,9 +89,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         print("test", terminator: "")
-        
-        let subtitleAttributes = [NSFontAttributeName : UIFont(name: "HelveticaNeue-Italic", size: 14)!,NSForegroundColorAttributeName : textColor]
-        let normalAttributes = [NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 14)!,NSForegroundColorAttributeName : textColor]
         
         talkingArray += [(NSMutableAttributedString(string: "You speak an infinite deal of nothing.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
         stupidArray += [(NSMutableAttributedString(string: "You speak unskilfully: or, if your knowledge be more, it is much darkened in your malice.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
@@ -308,9 +327,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         selectedCategory = categoryArray[0]
         lastCategoryDisplayed = selectedCategory
         
+        
+        // Format name entry text field
+        
         nameEntryTextField.layer.borderColor = borderColor
         nameEntryTextField.layer.cornerRadius = 10
         nameEntryTextField.layer.borderWidth = 1
+        
+        
+        
+        // Set up table of quotes and categories
         
         tableView1.delegate = self
         tableView1.dataSource = self
