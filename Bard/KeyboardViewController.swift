@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import QuartzCore
 
-class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource {
+class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
 
     @IBOutlet weak var categoryTableViewTop: NSLayoutConstraint!
@@ -45,6 +45,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     let borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).CGColor
     let textColor = UIColor.blackColor()
     let textInactiveColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0)
+    
+    var inactiveTextAttributes: [String: NSObject] {
+        get {
+            return [NSFontAttributeName : UIFont(name: "HelveticaNeue-Italic", size: 12)!,NSForegroundColorAttributeName : textInactiveColor]
+        }
+    }
     
     var subtitleAttributes: [String: NSObject] {
         get {
@@ -88,7 +94,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("test", terminator: "")
+        
         
         talkingArray += [(NSMutableAttributedString(string: "You speak an infinite deal of nothing.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
         stupidArray += [(NSMutableAttributedString(string: "You speak unskilfully: or, if your knowledge be more, it is much darkened in your malice.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
@@ -328,12 +334,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         lastCategoryDisplayed = selectedCategory
         
         
-        // Format name entry text field
+        // Set up name entry text field
         
         nameEntryTextField.layer.borderColor = borderColor
         nameEntryTextField.layer.cornerRadius = 10
         nameEntryTextField.layer.borderWidth = 1
         
+        nameEntryTextField.delegate = self
+        
+        nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
+        showNameLabel()
         
         
         // Set up table of quotes and categories
@@ -369,6 +379,20 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         deleteButton.addTarget(self, action: "deletePressed:", forControlEvents: .TouchUpInside)
         deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchUpInside)
 
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
+        nameLabel.hidden = true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {  //delegate method
+        showNameLabel()
+    }
+
+    func showNameLabel() {
+        if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
+            nameLabel.hidden = false
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
