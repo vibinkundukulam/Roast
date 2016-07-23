@@ -12,7 +12,7 @@ import QuartzCore
 
 class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
-
+    @IBOutlet weak var nameEntryTextFieldLeft: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewTop: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var expandCategoryButton: UIButton!
@@ -401,6 +401,23 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameLabel.hidden = true
         chooseQuoteView.hidden = true
         textKeyboardView.hidden = false
+        
+  /*     let newNameEntryTextFieldLeft = NSLayoutConstraint(
+            item: self.nameEntryTextField,
+            attribute: .Left,
+            relatedBy: .Equal,
+            toItem: self.chooseQuoteView,
+            attribute: .Left,
+            multiplier: 1,
+            constant: 20
+        )
+    */
+        self.nameEntryTextFieldLeft.constant = 30
+        
+        UIView.animateWithDuration(0.2, animations: {
+            self.nameEntryTextField.layoutIfNeeded()
+        })
+
     }
     
     func textFieldDidEndEditing(textField: UITextField) {  //delegate method
