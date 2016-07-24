@@ -10,14 +10,13 @@ import Foundation
 import UIKit
 
 class TextKeyboardView: UIView {
-    let buttonTitles = ["Q","W","E","R","T","Y","U","I","O","P"]
+    let buttonTitles = ["Q","W","E","R","T","Y","U","I","O","P" ]
     var buttons = [UIButton]()
     var keyboardRowView = UIView(frame: CGRectMake(0,0,320,50)) // need to make these dimensions dynamic
     
     func addRowOfButtons() {
         for buttonTitle in buttonTitles {
             let button = createButtonWithTitle(buttonTitle)
-            print("Button \(button.titleLabel) printed.")
             buttons.append(button)
             keyboardRowView.addSubview(button)
         }
@@ -65,6 +64,7 @@ class TextKeyboardView: UIView {
         button.titleLabel!.font = UIFont.systemFontOfSize(15)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         
         // add code for what happens on button press
         

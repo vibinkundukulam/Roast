@@ -103,7 +103,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Test)")
         
         
         talkingArray += [(NSMutableAttributedString(string: "You speak an infinite deal of nothing.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
@@ -363,7 +362,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addRowOfButtons()
         textKeyboardView.addSubview(textKeyboardView.keyboardRowView)
         textKeyboardView.addIndividualButtonConstraints(textKeyboardView.buttons, mainView: textKeyboardView.keyboardRowView)
-        print("Another test of print")
+        debugPrint("\(textKeyboardView.buttonTitles[0])")
+        debugPrint("Test 2")
         
         
         // Set up table of quotes and categories
