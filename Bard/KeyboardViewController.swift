@@ -19,7 +19,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var nextKeyboard: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var categoryHeader: UIView!
-    @IBOutlet weak var textKeyboardView: UIView!
+    @IBOutlet weak var textKeyboardView: TextKeyboardView!
     @IBOutlet weak var tableView1: UITableView!
     @IBOutlet weak var tableView2: UITableView!
     @IBOutlet weak var chooseQuoteView: UIView!
@@ -103,6 +103,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Test)")
         
         
         talkingArray += [(NSMutableAttributedString(string: "You speak an infinite deal of nothing.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
@@ -353,7 +354,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
         showNameLabel()
+        
+        
+        
+        // Add text keyboard in background
+        
         textKeyboardView.hidden = true
+        textKeyboardView.addRowOfButtons()
+        textKeyboardView.addSubview(textKeyboardView.keyboardRowView)
+        textKeyboardView.addIndividualButtonConstraints(textKeyboardView.buttons, mainView: textKeyboardView.keyboardRowView)
+        print("Another test of print")
         
         
         // Set up table of quotes and categories
@@ -402,16 +412,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         chooseQuoteView.hidden = true
         textKeyboardView.hidden = false
         
-  /*     let newNameEntryTextFieldLeft = NSLayoutConstraint(
-            item: self.nameEntryTextField,
-            attribute: .Left,
-            relatedBy: .Equal,
-            toItem: self.chooseQuoteView,
-            attribute: .Left,
-            multiplier: 1,
-            constant: 20
-        )
-    */
         self.nameEntryTextFieldLeft.constant = 30
         
         UIView.animateWithDuration(0.2, animations: {
@@ -510,7 +510,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 let lastQuote = lastCategoryQuotes![lastRow]
                 let lastString = lastQuote.0.string + "- " + lastQuote.1.string
                 let lastStringLength = lastString.characters.count - wasDeleteLastKey
-                for i in 1...lastStringLength {
+                for var i = lastStringLength; i > 0; --i {
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
           
@@ -553,7 +553,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 let quote = categoryQuotes![indexPath.row]
                 let string = quote.0.string + "- " + quote.1.string
                 let stringLength = string.characters.count - wasDeleteLastKey
-                for i in 1...stringLength {
+                for var i = stringLength; i > 0; --i {
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
         }

@@ -235,9 +235,8 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-0C-ci4" userLabel="Text Keyboard View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-0C-ci4" userLabel="Text Keyboard View" customClass="TextKeyboardView" customModule="Bard" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="27" width="320" height="173"/>
-                    <color key="backgroundColor" red="0.57267680919999997" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

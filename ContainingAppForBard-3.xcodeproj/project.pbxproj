@@ -17,6 +17,7 @@
 		5F74528D1B55AE800045CBF8 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74528C1B55AE800045CBF8 /* KeyboardViewController.swift */; };
 		5F7452901B55AE800045CBF8 /* Bard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5F7452881B55AE800045CBF8 /* Bard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5FE21F2E1B700FCA00B87FBC /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE21F2D1B700FCA00B87FBC /* View.xib */; };
+		C47E47741D44FFD900A90006 /* TextKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E47731D44FFD900A90006 /* TextKeyboardView.swift */; };
 		C4EED5431D4070B200AA1556 /* globe-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5421D4070B200AA1556 /* globe-icon.png */; };
 		C4EED5451D4070CB00AA1556 /* arrow-icon-white.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */; };
 		C4EED5491D40732C00AA1556 /* delete-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5481D40732C00AA1556 /* delete-icon.png */; };
@@ -71,6 +72,7 @@
 		5F7BFAC21B5AC6A400E2707A /* ContainingAppForBard-3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "ContainingAppForBard-3.entitlements"; sourceTree = "<group>"; };
 		5F7BFAC31B5AC6C200E2707A /* Bard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bard.entitlements; sourceTree = "<group>"; };
 		5FE21F2D1B700FCA00B87FBC /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		C47E47731D44FFD900A90006 /* TextKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextKeyboardView.swift; sourceTree = "<group>"; };
 		C4EED5421D4070B200AA1556 /* globe-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe-icon.png"; sourceTree = "<group>"; };
 		C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-icon-white.png"; sourceTree = "<group>"; };
 		C4EED5481D40732C00AA1556 /* delete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-icon.png"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			children = (
 				5F7BFAC31B5AC6C200E2707A /* Bard.entitlements */,
 				5F74528C1B55AE800045CBF8 /* KeyboardViewController.swift */,
+				C47E47731D44FFD900A90006 /* TextKeyboardView.swift */,
 				5FE21F2D1B700FCA00B87FBC /* View.xib */,
 				C4EED5481D40732C00AA1556 /* delete-icon.png */,
 				C4EED5421D4070B200AA1556 /* globe-icon.png */,
@@ -349,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C47E47741D44FFD900A90006 /* TextKeyboardView.swift in Sources */,
 				5F74528D1B55AE800045CBF8 /* KeyboardViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +483,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "ContainingAppForBard-3/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vibink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -494,6 +499,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "ContainingAppForBard-3/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vibink.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
