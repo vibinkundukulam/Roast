@@ -14,6 +14,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     @IBOutlet weak var nameEntryTextFieldLeft: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewTop: NSLayoutConstraint!
+    @IBOutlet weak var textKeyboardRowOne: UIView!
     @IBOutlet weak var categoryTableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var expandCategoryButton: UIButton!
     @IBOutlet weak var nextKeyboard: UIButton!
@@ -358,13 +359,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         // Add text keyboard in background
         
+
+        textKeyboardView.addRowOfButtons(textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(textKeyboardView.buttons, mainView: textKeyboardRowOne)
         textKeyboardView.hidden = true
-        textKeyboardView.addRowOfButtons()
-        textKeyboardView.addSubview(textKeyboardView.keyboardRowView)
-        textKeyboardView.addIndividualButtonConstraints(textKeyboardView.buttons, mainView: textKeyboardView.keyboardRowView)
-        debugPrint("\(textKeyboardView.buttonTitles[0])")
-        debugPrint("Test 2")
-        
         
         // Set up table of quotes and categories
         
@@ -417,6 +415,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         UIView.animateWithDuration(0.2, animations: {
             self.nameEntryTextField.layoutIfNeeded()
         })
+        
+        textKeyboardView.activeTextField = nameEntryTextField
 
     }
     

@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
+import QuartzCore
 
 class TextKeyboardView: UIView {
-    let buttonTitles = ["Q","W","E","R","T","Y","U","I","O","P" ]
+    let buttonTitles = ["q","w","e","r","t","y","u","i","o","p"]
     var buttons = [UIButton]()
-    var keyboardRowView = UIView(frame: CGRectMake(0,0,320,50)) // need to make these dimensions dynamic
+    var activeTextField: UITextField? = nil
     
-    func addRowOfButtons() {
+    func addRowOfButtons(keyboardRowView: UIView) {
         for buttonTitle in buttonTitles {
             let button = createButtonWithTitle(buttonTitle)
             buttons.append(button)
@@ -24,16 +25,16 @@ class TextKeyboardView: UIView {
     
     func addIndividualButtonConstraints(buttons: [UIButton], mainView: UIView) {
         for (index, button) in buttons.enumerate() {
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 1)
+            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 10)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -1)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -10)
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttons.count - 1 {
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -1)
             } else {
                 let nextButton = buttons[index+1]
-                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -1)
+                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -10)
             }
             
             var leftConstraint : NSLayoutConstraint!
@@ -43,7 +44,7 @@ class TextKeyboardView: UIView {
             } else {
                 
                 let prevtButton = buttons[index-1]
-                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: 1)
+                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: 10)
                 
                 let firstButton = buttons[0]
                 let widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 0)
@@ -57,17 +58,25 @@ class TextKeyboardView: UIView {
     }
     
     func createButtonWithTitle(title: String) -> UIButton {
-        let button = UIButton(type: .System) as UIButton
-        button.frame = CGRectMake(0, 0, 20, 20)
+        let button = UIButton(type: .System) as UIButton         // exact size doesn't matter
         button.setTitle(title, forState: .Normal)
         button.sizeToFit()
-        button.titleLabel!.font = UIFont.systemFontOfSize(15)
+        button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
-        button.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button.layer.cornerRadius = 5
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        // add code for what happens on button press
+        button.addTarget(self, action: "didTapButton:", forControlEvents: .TouchUpInside)
         
         return button
+    }
+    
+    func didTapButton(sender: AnyObject?) {
+        
+        let button = sender as! UIButton
+        let title = button.titleForState(.Normal)
+        activeTextField!.insertText(title!)
+        
     }
 }
