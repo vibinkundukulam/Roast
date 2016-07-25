@@ -11,11 +11,9 @@ import UIKit
 import QuartzCore
 
 class TextKeyboardView: UIView {
-    let buttonTitles = ["q","w","e","r","t","y","u","i","o","p"]
-    var buttons = [UIButton]()
     var activeTextField: UITextField? = nil
     
-    func addRowOfButtons(keyboardRowView: UIView) {
+    func addRowOfButtons(keyboardRowView: UIView, buttonTitles: [String], inout buttons: [UIButton]) {
         for buttonTitle in buttonTitles {
             let button = createButtonWithTitle(buttonTitle)
             buttons.append(button)
@@ -27,11 +25,11 @@ class TextKeyboardView: UIView {
         for (index, button) in buttons.enumerate() {
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 10)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -10)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -5)
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttons.count - 1 {
-                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -1)
+                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -5)
             } else {
                 let nextButton = buttons[index+1]
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -10)
@@ -40,7 +38,7 @@ class TextKeyboardView: UIView {
             var leftConstraint : NSLayoutConstraint!
             if index == 0 {
                 
-                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: 1)
+                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: 5)
             } else {
                 
                 let prevtButton = buttons[index-1]

@@ -17,7 +17,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var textKeyboardRowOne: UIView!
     @IBOutlet weak var categoryTableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var expandCategoryButton: UIButton!
+    @IBOutlet weak var textKeyboardRowTwo: UIView!
+    @IBOutlet weak var textKeyboardRowThree: UIView!
     @IBOutlet weak var nextKeyboard: UIButton!
+    @IBOutlet weak var textKeyboardRowFour: UIView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var categoryHeader: UIView!
     @IBOutlet weak var textKeyboardView: TextKeyboardView!
@@ -66,6 +69,18 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             return [NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 14)!,NSForegroundColorAttributeName : textColor]
         }
     }
+    
+    // Creating buttons for text keyboard
+    
+    let buttonTitlesRowOne = ["q","w","e","r","t","y","u","i","o","p"]
+    let buttonTitlesRowTwo = ["a","s","d","f","g","h","j","k","l"]
+    let buttonTitlesRowThree = ["z","x","c","v","b","n","m"]
+    let buttonTitlesRowFour = ["Space"]
+    var buttonsRowOne = [UIButton]()
+    var buttonsRowTwo = [UIButton]()
+    var buttonsRowThree = [UIButton]()
+    var buttonsRowFour = [UIButton]()
+    
     
     
     // Creating initial arrays to hold quotes
@@ -360,9 +375,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         // Add text keyboard in background
         
 
-        textKeyboardView.addRowOfButtons(textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(textKeyboardView.buttons, mainView: textKeyboardRowOne)
+        textKeyboardView.addRowOfButtons(textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addRowOfButtons(textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addIndividualButtonConstraints(buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addIndividualButtonConstraints(buttonsRowFour, mainView: textKeyboardRowFour)
         textKeyboardView.hidden = true
+        
         
         // Set up table of quotes and categories
         

@@ -487,11 +487,7 @@
                                     <constraint firstItem="jOl-XD-BBb" firstAttribute="top" secondItem="khu-uF-btX" secondAttribute="bottom" id="qzi-VT-ErC"/>
                                     <constraint firstAttribute="centerX" secondItem="i87-vh-Jrs" secondAttribute="centerX" id="r8w-a3-P4k"/>
                                     <constraint firstItem="XbO-b4-Krv" firstAttribute="height" secondItem="Id6-CB-kJ5" secondAttribute="height" constant="-1" id="rBn-6L-Ach"/>
-                                    <constraint firstItem="LvI-Ul-X3r" firstAttribute="top" secondItem="0Pj-gp-8Fb" secondAttribute="centerY" id="rMN-qp-w6m">
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </constraint>
+                                    <constraint firstItem="LvI-Ul-X3r" firstAttribute="top" secondItem="0Pj-gp-8Fb" secondAttribute="centerY" id="rMN-qp-w6m"/>
                                     <constraint firstItem="XbO-b4-Krv" firstAttribute="height" secondItem="Qvn-ZY-j83" secondAttribute="height" constant="-1" id="rW1-Oo-Bnm"/>
                                     <constraint firstItem="XbO-b4-Krv" firstAttribute="height" secondItem="lTe-na-88j" secondAttribute="height" constant="-2" id="rrK-PE-c1c"/>
                                     <constraint firstItem="bnI-8o-2uM" firstAttribute="leading" secondItem="1WC-h5-f02" secondAttribute="leading" id="ruT-ZF-PeD"/>
