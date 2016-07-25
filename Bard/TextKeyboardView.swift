@@ -22,33 +22,52 @@ class TextKeyboardView: UIView {
     }
     
     func addIndividualButtonConstraints(buttons: [UIButton], mainView: UIView) {
+        
+        // Calculate spaces
+        
+        let numButtons = buttons.count
+        let buttonWidth = mainView.frame.width / 12
+        let buttonSpace = CGFloat(numButtons) * buttonWidth
+        let spaceBetweenButtons = buttonWidth / 5
+        let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
+        let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
+        let sideMargin = leftOverSpace/2
+
+     /*   let spaceBetweenButtons = CGFloat(4)
+        let sideMargin = CGFloat(4) */
+        
+        
+        // Set constraints
+        
         for (index, button) in buttons.enumerate() {
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 10)
+            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -5)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttons.count - 1 {
-                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -5)
+                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
             } else {
                 let nextButton = buttons[index+1]
-                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -10)
+                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -spaceBetweenButtons)
             }
             
             var leftConstraint : NSLayoutConstraint!
             if index == 0 {
                 
-                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: 5)
+                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
             } else {
                 
                 let prevtButton = buttons[index-1]
-                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: 10)
+                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: spaceBetweenButtons)
                 
                 let firstButton = buttons[0]
                 let widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 0)
                 
                 mainView.addConstraint(widthConstraint)
             }
+            
+         //   let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: buttonWidth)
             
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
             

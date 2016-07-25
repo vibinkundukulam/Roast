@@ -432,8 +432,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         chooseQuoteView.hidden = true
         textKeyboardView.hidden = false
         
-        self.nameEntryTextFieldLeft.constant = 30
-        
+        nameEntryTextFieldLeft.constant = 30
+        nameEntryTextField.layer.borderColor = activeColor.CGColor
         UIView.animateWithDuration(0.2, animations: {
             self.nameEntryTextField.layoutIfNeeded()
         })
@@ -444,6 +444,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func textFieldDidEndEditing(textField: UITextField) {  //delegate method
         showNameLabel()
+        nameEntryTextField.layer.borderColor = borderColor
     }
 
     func showNameLabel() {
