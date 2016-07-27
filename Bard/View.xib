@@ -95,11 +95,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6X-cn-8I0" userLabel="Choose Quote View">
                     <rect key="frame" x="0.0" y="27" width="320" height="173"/>
                     <subviews>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bz2-mo-z6s" userLabel="Quote Table View">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="127"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bz2-mo-z6s" userLabel="Quote Table View">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
                         </tableView>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yXf-Vk-oPY" userLabel="Category Table View Header">
-                            <rect key="frame" x="0.0" y="127" width="320" height="44"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXf-Vk-oPY" userLabel="Category Table View Header">
+                            <rect key="frame" x="0.0" y="129" width="320" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-gm-kfa" userLabel="Next Keyboard Button">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="44"/>
@@ -203,15 +203,15 @@
                                 </mask>
                             </variation>
                         </view>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-eB-g35" userLabel="Border View">
-                            <rect key="frame" x="0.0" y="171" width="320" height="2"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-eB-g35" userLabel="Border View">
+                            <rect key="frame" x="0.0" y="173" width="320" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" identifier="Border View Height" id="xzs-Sn-8fG"/>
+                                <constraint firstAttribute="height" identifier="Border View Height" id="xzs-Sn-8fG"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="thq-F2-UuR" userLabel="Category Table View">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="thq-F2-UuR" userLabel="Category Table View">
                             <rect key="frame" x="0.0" y="173" width="320" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </tableView>

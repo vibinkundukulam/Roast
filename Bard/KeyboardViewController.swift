@@ -375,9 +375,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         textKeyboardView.hidden = true
         
-   
-        let keyboardHeight = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 800.0)
-        self.view.addConstraint(keyboardHeight)
         self.view.autoresizesSubviews = true
         
         

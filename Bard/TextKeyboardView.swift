@@ -73,9 +73,9 @@ class TextKeyboardView: UIView {
                 
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
                 
-                widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: mainView, attribute: .Width, multiplier: 1.0/12.0, constant: 0)
+       /*         widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: mainView, attribute: .Width, multiplier: 1.0/12.0, constant: 0)
                 
-                mainView.addConstraint(widthConstraint)
+                mainView.addConstraint(widthConstraint) */
                 
                 
             } else {
@@ -88,9 +88,10 @@ class TextKeyboardView: UIView {
                 
                 mainView.addConstraint(widthConstraint)
                 
+                widthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
+                
             }
             leftConstraint.identifier = "Left Constraint for \(button.titleLabel!.text)"
-            widthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
             
             
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])

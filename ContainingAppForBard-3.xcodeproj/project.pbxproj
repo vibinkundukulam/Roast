@@ -17,6 +17,8 @@
 		5F74528D1B55AE800045CBF8 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74528C1B55AE800045CBF8 /* KeyboardViewController.swift */; };
 		5F7452901B55AE800045CBF8 /* Bard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5F7452881B55AE800045CBF8 /* Bard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5FE21F2E1B700FCA00B87FBC /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE21F2D1B700FCA00B87FBC /* View.xib */; };
+		C47A18FF1D494BE500032D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F74526B1B55AE6A0045CBF8 /* Images.xcassets */; };
+		C47A19001D494BF700032D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F5CE8BE1B743B7200B7539F /* Images.xcassets */; };
 		C47E47741D44FFD900A90006 /* TextKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E47731D44FFD900A90006 /* TextKeyboardView.swift */; };
 		C47E47DA1D48F98C00A90006 /* TextKeyBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E47D91D48F98C00A90006 /* TextKeyBoardViewController.swift */; };
 		C4EED5431D4070B200AA1556 /* globe-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5421D4070B200AA1556 /* globe-icon.png */; };
@@ -307,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F74526A1B55AE6A0045CBF8 /* Main.storyboard in Resources */,
+				C47A19001D494BF700032D47 /* Images.xcassets in Resources */,
 				5F74526F1B55AE6A0045CBF8 /* LaunchScreen.xib in Resources */,
 				5F74526C1B55AE6A0045CBF8 /* Images.xcassets in Resources */,
 			);
@@ -326,6 +329,7 @@
 				C4EED5451D4070CB00AA1556 /* arrow-icon-white.png in Resources */,
 				5FE21F2E1B700FCA00B87FBC /* View.xib in Resources */,
 				C4EED5491D40732C00AA1556 /* delete-icon.png in Resources */,
+				C47A18FF1D494BE500032D47 /* Images.xcassets in Resources */,
 				5F5CE8BF1B743B7200B7539F /* Images.xcassets in Resources */,
 				C4EED5431D4070B200AA1556 /* globe-icon.png in Resources */,
 			);
