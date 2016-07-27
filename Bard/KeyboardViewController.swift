@@ -375,6 +375,11 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         textKeyboardView.hidden = true
         
+   
+        let keyboardHeight = NSLayoutConstraint(item: self.view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 0.0, constant: 800.0)
+        self.view.addConstraint(keyboardHeight)
+        self.view.autoresizesSubviews = true
+        
         
         // Set up table of quotes and categories
         
@@ -416,9 +421,17 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // End of view loading method
     //
     //
-    override func viewDidLayoutSubviews() {
-        
-        
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator);
+        coordinator.animateAlongsideTransition(nil, completion: {
+            _ in
+            print("Test width = \(self.textKeyboardRowOne.frame.width)")
+            print("Test height = \(self.view.frame.height)")
+            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowOne, mainView: self.textKeyboardRowOne)
+            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowTwo, mainView: self.textKeyboardRowTwo)
+            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowThree, mainView: self.textKeyboardRowThree)
+            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowFour, mainView: self.textKeyboardRowFour)
+        })
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
@@ -427,15 +440,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         // Add text keyboard in background
         
-        print(self.view.frame.size)
-        print("Row One width after layout is \(textKeyboardRowOne.frame.width)")
-        
-        
-        
-        textKeyboardView.addRowOfButtons(textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addRowOfButtons(textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)

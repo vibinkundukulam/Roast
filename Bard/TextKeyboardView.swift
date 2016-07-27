@@ -13,7 +13,7 @@ import QuartzCore
 class TextKeyboardView: UIView {
     var activeTextField: UITextField? = nil
     
-    func addRowOfButtons(keyboardRowView: UIView, buttonTitles: [String], inout buttons: [UIButton]) {
+    func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String], inout buttons: [UIButton]) {
         for buttonTitle in buttonTitles {
             let button = createButtonWithTitle(buttonTitle)
             buttons.append(button)
@@ -22,7 +22,7 @@ class TextKeyboardView: UIView {
     }
     
     func addIndividualButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
-        
+     
         // Calculate spaces
         
         let numButtons = buttons.count
@@ -33,10 +33,24 @@ class TextKeyboardView: UIView {
         let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
         
+        print("----")
+        print("Main View width = \(mainView.frame.width)")
+        print("Number of buttons = \(numButtons)")
+        print("Button width = \(buttonWidth)")
+        print("Space between buttons = \(spaceBetweenButtons)")
+        print("Side margin = \(sideMargin)")
+        print("Check: Total Sum of widths = \(leftOverSpace + buttonSpace + spaceSpace)")
+        
+        
         
         // Set constraints
         
         for (index, button) in buttons.enumerate() {
+            
+            // Remove all constraints
+            
+            button.removeConstraints(button.constraints)
+            
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
             topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
             
@@ -59,7 +73,7 @@ class TextKeyboardView: UIView {
                 
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
                 
-                widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: buttonWidth)
+                widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: mainView, attribute: .Width, multiplier: 1.0/12.0, constant: 0)
                 
                 mainView.addConstraint(widthConstraint)
                 
@@ -82,7 +96,6 @@ class TextKeyboardView: UIView {
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
             
         }
-        buttons.removeAll()
     }
     
     func createButtonWithTitle(title: String) -> UIButton {
