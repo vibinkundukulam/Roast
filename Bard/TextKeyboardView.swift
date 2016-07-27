@@ -21,7 +21,7 @@ class TextKeyboardView: UIView {
         }
     }
     
-    func addIndividualButtonConstraints(buttons: [UIButton], mainView: UIView) {
+    func addIndividualButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
         
         // Calculate spaces
         
@@ -32,17 +32,16 @@ class TextKeyboardView: UIView {
         let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
         let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
-
-     /*   let spaceBetweenButtons = CGFloat(4)
-        let sideMargin = CGFloat(4) */
         
         
         // Set constraints
         
         for (index, button) in buttons.enumerate() {
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
+            topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
             
             let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
+            bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttons.count - 1 {
@@ -50,34 +49,45 @@ class TextKeyboardView: UIView {
             } else {
                 let nextButton = buttons[index+1]
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -spaceBetweenButtons)
+                
             }
+            rightConstraint.identifier = "Right Constraint for \(button.titleLabel!.text)"
             
             var leftConstraint : NSLayoutConstraint!
+            var widthConstraint: NSLayoutConstraint!
             if index == 0 {
                 
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
+                
+                widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: buttonWidth)
+                
+                mainView.addConstraint(widthConstraint)
+                
+                
             } else {
                 
                 let prevtButton = buttons[index-1]
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: spaceBetweenButtons)
                 
                 let firstButton = buttons[0]
-                let widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 0)
+                widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 0)
                 
                 mainView.addConstraint(widthConstraint)
+                
             }
+            leftConstraint.identifier = "Left Constraint for \(button.titleLabel!.text)"
+            widthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
             
-         //   let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: buttonWidth)
             
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
             
         }
+        buttons.removeAll()
     }
     
     func createButtonWithTitle(title: String) -> UIButton {
         let button = UIButton(type: .System) as UIButton         // exact size doesn't matter
         button.setTitle(title, forState: .Normal)
-        button.sizeToFit()
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)

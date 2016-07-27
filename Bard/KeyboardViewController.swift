@@ -372,17 +372,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         
         
-        // Add text keyboard in background
         
-
-        textKeyboardView.addRowOfButtons(textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addRowOfButtons(textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
-        textKeyboardView.addIndividualButtonConstraints(buttonsRowOne, mainView: textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(buttonsRowTwo, mainView: textKeyboardRowTwo)
-        textKeyboardView.addIndividualButtonConstraints(buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addIndividualButtonConstraints(buttonsRowFour, mainView: textKeyboardRowFour)
         textKeyboardView.hidden = true
         
         
@@ -426,10 +416,30 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // End of view loading method
     //
     //
+    override func viewDidLayoutSubviews() {
+        
+        
+    }
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
         nameLabel.hidden = true
         chooseQuoteView.hidden = true
+        
+        // Add text keyboard in background
+        
+        print(self.view.frame.size)
+        print("Row One width after layout is \(textKeyboardRowOne.frame.width)")
+        
+        
+        
+        textKeyboardView.addRowOfButtons(textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addRowOfButtons(textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
         textKeyboardView.hidden = false
         
         nameEntryTextFieldLeft.constant = 30
