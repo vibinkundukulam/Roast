@@ -17,10 +17,10 @@
 		5F74528D1B55AE800045CBF8 /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F74528C1B55AE800045CBF8 /* KeyboardViewController.swift */; };
 		5F7452901B55AE800045CBF8 /* Bard.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5F7452881B55AE800045CBF8 /* Bard.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5FE21F2E1B700FCA00B87FBC /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE21F2D1B700FCA00B87FBC /* View.xib */; };
+		C45B176C1D499FCE0024C935 /* Draw2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45B176B1D499FCE0024C935 /* Draw2D.swift */; };
 		C47A18FF1D494BE500032D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F74526B1B55AE6A0045CBF8 /* Images.xcassets */; };
 		C47A19001D494BF700032D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F5CE8BE1B743B7200B7539F /* Images.xcassets */; };
 		C47E47741D44FFD900A90006 /* TextKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E47731D44FFD900A90006 /* TextKeyboardView.swift */; };
-		C47E47DA1D48F98C00A90006 /* TextKeyBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E47D91D48F98C00A90006 /* TextKeyBoardViewController.swift */; };
 		C4EED5431D4070B200AA1556 /* globe-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5421D4070B200AA1556 /* globe-icon.png */; };
 		C4EED5451D4070CB00AA1556 /* arrow-icon-white.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */; };
 		C4EED5491D40732C00AA1556 /* delete-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5481D40732C00AA1556 /* delete-icon.png */; };
@@ -75,8 +75,8 @@
 		5F7BFAC21B5AC6A400E2707A /* ContainingAppForBard-3.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "ContainingAppForBard-3.entitlements"; sourceTree = "<group>"; };
 		5F7BFAC31B5AC6C200E2707A /* Bard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bard.entitlements; sourceTree = "<group>"; };
 		5FE21F2D1B700FCA00B87FBC /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		C45B176B1D499FCE0024C935 /* Draw2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draw2D.swift; sourceTree = "<group>"; };
 		C47E47731D44FFD900A90006 /* TextKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextKeyboardView.swift; sourceTree = "<group>"; };
-		C47E47D91D48F98C00A90006 /* TextKeyBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextKeyBoardViewController.swift; sourceTree = "<group>"; };
 		C4EED5421D4070B200AA1556 /* globe-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe-icon.png"; sourceTree = "<group>"; };
 		C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-icon-white.png"; sourceTree = "<group>"; };
 		C4EED5481D40732C00AA1556 /* delete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-icon.png"; sourceTree = "<group>"; };
@@ -171,9 +171,9 @@
 			children = (
 				5F7BFAC31B5AC6C200E2707A /* Bard.entitlements */,
 				5F74528C1B55AE800045CBF8 /* KeyboardViewController.swift */,
+				C45B176B1D499FCE0024C935 /* Draw2D.swift */,
 				C47E47731D44FFD900A90006 /* TextKeyboardView.swift */,
 				5FE21F2D1B700FCA00B87FBC /* View.xib */,
-				C47E47D91D48F98C00A90006 /* TextKeyBoardViewController.swift */,
 				C4EED5481D40732C00AA1556 /* delete-icon.png */,
 				C4EED5421D4070B200AA1556 /* globe-icon.png */,
 				5F5CE8BE1B743B7200B7539F /* Images.xcassets */,
@@ -359,9 +359,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C47E47DA1D48F98C00A90006 /* TextKeyBoardViewController.swift in Sources */,
 				C47E47741D44FFD900A90006 /* TextKeyboardView.swift in Sources */,
 				5F74528D1B55AE800045CBF8 /* KeyboardViewController.swift in Sources */,
+				C45B176C1D499FCE0024C935 /* Draw2D.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

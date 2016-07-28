@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KeyboardViewController" customModule="Bard" customModuleProvider="target">
             <connections>
                 <outlet property="arrowIcon" destination="NeG-D6-vRC" id="4yG-Iu-yLD"/>
+                <outlet property="backButton" destination="mnK-9n-OIn" id="jvE-eh-y3u"/>
                 <outlet property="categoryHeader" destination="yXf-Vk-oPY" id="A5i-CJ-yCe"/>
                 <outlet property="categoryLabel" destination="g9M-jz-emq" id="FXe-fa-Ydh"/>
                 <outlet property="chooseQuoteView" destination="S6X-cn-8I0" id="gzJ-nI-kdM"/>
@@ -47,17 +48,24 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-By-jUS" userLabel="Name View">
-                    <rect key="frame" x="0.0" y="1" width="320" height="25"/>
+                    <rect key="frame" x="0.0" y="1" width="320" height="24"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnK-9n-OIn" userLabel="Back Button" customClass="Draw2D" customModule="Bard" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
+                            <color key="backgroundColor" red="0.57267680919999997" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="yGk-To-LPG"/>
+                            </constraints>
+                        </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pX-DR-sNE" userLabel="Name Entry Text Field">
-                            <rect key="frame" x="10" y="4" width="300" height="17"/>
+                            <rect key="frame" x="10" y="4" width="300" height="16"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9a-B8-WKM">
                             <rect key="frame" x="20" y="2" width="45" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -66,11 +74,14 @@
                         <constraint firstAttribute="bottom" secondItem="2pX-DR-sNE" secondAttribute="bottom" constant="4" id="6Td-uC-4y7"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" constant="4" id="AzB-Ht-xeM"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" id="ECS-6H-ehW"/>
+                        <constraint firstItem="mnK-9n-OIn" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" id="NUv-jI-cWE"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" constant="10" id="Okl-na-ZKY"/>
+                        <constraint firstItem="mnK-9n-OIn" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" id="PA1-FA-OGI"/>
+                        <constraint firstAttribute="bottom" secondItem="mnK-9n-OIn" secondAttribute="bottom" id="m4J-Bz-I2x"/>
                         <constraint firstItem="R9a-B8-WKM" firstAttribute="centerY" secondItem="2pX-DR-sNE" secondAttribute="centerY" id="mY2-wJ-IRc"/>
                         <constraint firstAttribute="trailing" secondItem="2pX-DR-sNE" secondAttribute="trailing" constant="10" id="ubW-sw-Gn4"/>
                         <constraint firstItem="2pX-DR-sNE" firstAttribute="centerY" secondItem="Npz-By-jUS" secondAttribute="centerY" id="wYe-F5-shK"/>
-                        <constraint firstAttribute="height" constant="25" id="xqV-zx-6ix"/>
+                        <constraint firstAttribute="height" constant="24" id="xqV-zx-6ix"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -79,7 +90,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-gG-mVt" userLabel="Name-Quote Border View">
-                    <rect key="frame" x="0.0" y="26" width="320" height="1"/>
+                    <rect key="frame" x="0.0" y="25" width="320" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="1vF-0s-yw7"/>
@@ -92,13 +103,13 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6X-cn-8I0" userLabel="Choose Quote View">
-                    <rect key="frame" x="0.0" y="27" width="320" height="173"/>
+                    <rect key="frame" x="0.0" y="26" width="320" height="174"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bz2-mo-z6s" userLabel="Quote Table View">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="129"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXf-Vk-oPY" userLabel="Category Table View Header">
-                            <rect key="frame" x="0.0" y="129" width="320" height="44"/>
+                            <rect key="frame" x="0.0" y="130" width="320" height="44"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Kw-gm-kfa" userLabel="Next Keyboard Button">
                                     <rect key="frame" x="0.0" y="0.0" width="40" height="44"/>
@@ -203,7 +214,7 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Dy-eB-g35" userLabel="Border View">
-                            <rect key="frame" x="0.0" y="173" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="174" width="320" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -211,7 +222,7 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="thq-F2-UuR" userLabel="Category Table View">
-                            <rect key="frame" x="0.0" y="173" width="320" height="0.0"/>
+                            <rect key="frame" x="0.0" y="174" width="320" height="0.0"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </tableView>
                     </subviews>
@@ -240,7 +251,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-0C-ci4" userLabel="Text Keyboard View" customClass="TextKeyboardView" customModule="Bard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="27" width="320" height="173"/>
+                    <rect key="frame" x="0.0" y="26" width="320" height="174"/>
                     <subviews>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTx-Mv-mme" userLabel="Row 1">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>

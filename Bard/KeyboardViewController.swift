@@ -15,6 +15,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var nameEntryTextFieldLeft: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewTop: NSLayoutConstraint!
     @IBOutlet weak var textKeyboardRowOne: UIView!
+    @IBOutlet weak var backButton: Draw2D!
     @IBOutlet weak var categoryTableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var expandCategoryButton: UIButton!
     @IBOutlet weak var textKeyboardRowTwo: UIView!
@@ -32,6 +33,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var nameEntryTextField: UITextField!
     @IBOutlet weak var nameLabel: UILabel!
+    
     
     // Ensure keyboard remembers last key, quote
     
@@ -371,10 +373,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         showNameLabel()
         
         
+        // Set up text keyboard in background
         
-        
+        backButton.hidden = true
         textKeyboardView.hidden = true
-        
         self.view.autoresizesSubviews = true
         
         
@@ -445,6 +447,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        backButton.hidden = false
         textKeyboardView.hidden = false
         
         nameEntryTextFieldLeft.constant = 30
