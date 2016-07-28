@@ -379,19 +379,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
         backButton.addGestureRecognizer(gestureRecognizer)
         
-        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
-        
-        
-        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
-
         
         backButton.hidden = true
         textKeyboardView.hidden = true
@@ -454,6 +441,21 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
+        
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        
+        
+        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
+
+        
         backButton.backgroundColor = UIColor.whiteColor()
         nameLabel.hidden = true
         chooseQuoteView.hidden = true

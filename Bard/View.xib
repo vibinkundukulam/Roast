@@ -113,12 +113,12 @@
                             <rect key="frame" x="0.0" y="43" width="320" height="43"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-mM-82E" userLabel="Row 4">
-                            <rect key="frame" x="0.0" y="129" width="320" height="43"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6S-JF-h7U" userLabel="Row 3">
                             <rect key="frame" x="0.0" y="86" width="320" height="43"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-mM-82E" userLabel="Row 4">
+                            <rect key="frame" x="0.0" y="129" width="320" height="43"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
@@ -327,6 +327,10 @@
                 </mask>
             </variation>
         </view>
+        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="bZZ-k3-fCl">
+            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </activityIndicatorView>
     </objects>
     <resources>
         <image name="arrow-icon-white.png" width="200" height="200"/>
