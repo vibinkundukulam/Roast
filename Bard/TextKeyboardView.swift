@@ -33,16 +33,6 @@ class TextKeyboardView: UIView {
         let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
         
-        print("----")
-        print("Main View width = \(mainView.frame.width)")
-        print("Number of buttons = \(numButtons)")
-        print("Button width = \(buttonWidth)")
-        print("Space between buttons = \(spaceBetweenButtons)")
-        print("Side margin = \(sideMargin)")
-        print("Check: Total Sum of widths = \(leftOverSpace + buttonSpace + spaceSpace)")
-        
-        
-        
         // Set constraints
         
         for (index, button) in buttons.enumerate() {
