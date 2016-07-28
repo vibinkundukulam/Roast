@@ -375,6 +375,15 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         // Set up text keyboard in background
         
+        backButton.userInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
+        backButton.addGestureRecognizer(gestureRecognizer)
+        
+        nextKeyboard.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
+        nextKeyboard.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
+        nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+
+        
         backButton.hidden = true
         textKeyboardView.hidden = true
         self.view.autoresizesSubviews = true
@@ -434,6 +443,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
+        backButton.backgroundColor = UIColor.whiteColor()
         nameLabel.hidden = true
         chooseQuoteView.hidden = true
         
@@ -461,8 +471,20 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     }
     
     func textFieldDidEndEditing(textField: UITextField) {  //delegate method
-        showNameLabel()
+
+        
         nameEntryTextField.layer.borderColor = borderColor
+        textKeyboardView.hidden = true
+        backButton.hidden = true
+        showNameLabel()
+        chooseQuoteView.hidden = false
+        
+        self.nameEntryTextFieldLeft.constant = 10
+        self.nameEntryTextField.layoutIfNeeded()
+        
+        nameEntryTextField.resignFirstResponder()
+        textKeyboardView.activeTextField = nil
+        
     }
 
     func showNameLabel() {
@@ -615,6 +637,11 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func deletePressed(button: UIButton) {
         (textDocumentProxy as UIKeyInput).deleteBackward()
         wasDeleteLastKey = wasDeleteLastKey + 1
+    }
+    
+    func backButtonPressed() {
+        textFieldDidEndEditing(nameEntryTextField)
+        backButton.backgroundColor = activeColor
     }
     
     @IBAction func expandCategory() {

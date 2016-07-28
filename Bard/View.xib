@@ -52,7 +52,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnK-9n-OIn" userLabel="Back Button" customClass="Draw2D" customModule="Bard" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
-                            <color key="backgroundColor" red="0.57267680919999997" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="yGk-To-LPG"/>
                             </constraints>
@@ -99,6 +99,51 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="yDf-pg-kQ9"/>
+                        </mask>
+                    </variation>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-0C-ci4" userLabel="Text Keyboard View" customClass="TextKeyboardView" customModule="Bard" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="26" width="320" height="174"/>
+                    <subviews>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTx-Mv-mme" userLabel="Row 1">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVQ-bV-okK" userLabel="Row 2">
+                            <rect key="frame" x="0.0" y="43" width="320" height="43"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-mM-82E" userLabel="Row 4">
+                            <rect key="frame" x="0.0" y="129" width="320" height="43"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6S-JF-h7U" userLabel="Row 3">
+                            <rect key="frame" x="0.0" y="86" width="320" height="43"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="TVQ-bV-okK" firstAttribute="top" secondItem="rTx-Mv-mme" secondAttribute="bottom" id="1fL-DE-6jO"/>
+                        <constraint firstAttribute="trailing" secondItem="Q6S-JF-h7U" secondAttribute="trailing" id="3cd-OP-Iqt"/>
+                        <constraint firstItem="rTx-Mv-mme" firstAttribute="height" secondItem="Kpi-0C-ci4" secondAttribute="height" multiplier="0.25" id="7eD-6G-SKq"/>
+                        <constraint firstItem="IJa-mM-82E" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="8IH-9a-B7a"/>
+                        <constraint firstItem="TVQ-bV-okK" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="NJ7-HG-Lvk"/>
+                        <constraint firstItem="TVQ-bV-okK" firstAttribute="height" secondItem="rTx-Mv-mme" secondAttribute="height" id="Nwn-Jy-Mn2"/>
+                        <constraint firstItem="Q6S-JF-h7U" firstAttribute="height" secondItem="TVQ-bV-okK" secondAttribute="height" id="PE6-Cd-eGf"/>
+                        <constraint firstItem="IJa-mM-82E" firstAttribute="top" secondItem="Q6S-JF-h7U" secondAttribute="bottom" id="RBY-in-VI6"/>
+                        <constraint firstAttribute="trailing" secondItem="rTx-Mv-mme" secondAttribute="trailing" id="UCp-X5-eYK"/>
+                        <constraint firstAttribute="trailing" secondItem="TVQ-bV-okK" secondAttribute="trailing" id="aQg-R6-m7z"/>
+                        <constraint firstItem="IJa-mM-82E" firstAttribute="top" secondItem="TVQ-bV-okK" secondAttribute="bottom" id="k89-PL-2Zn"/>
+                        <constraint firstAttribute="trailing" secondItem="IJa-mM-82E" secondAttribute="trailing" id="lA6-tL-rl7"/>
+                        <constraint firstItem="rTx-Mv-mme" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="nbg-xT-Mip"/>
+                        <constraint firstItem="Q6S-JF-h7U" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="qu2-yK-Kw6"/>
+                        <constraint firstItem="rTx-Mv-mme" firstAttribute="top" secondItem="Kpi-0C-ci4" secondAttribute="top" id="rjh-q4-RMG"/>
+                        <constraint firstItem="Q6S-JF-h7U" firstAttribute="top" secondItem="TVQ-bV-okK" secondAttribute="bottom" id="swT-Ib-vXF"/>
+                        <constraint firstItem="IJa-mM-82E" firstAttribute="height" secondItem="Q6S-JF-h7U" secondAttribute="height" id="umT-oW-Msg"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="k89-PL-2Zn"/>
                         </mask>
                     </variation>
                 </view>
@@ -247,51 +292,6 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="WBg-aZ-AjT"/>
-                        </mask>
-                    </variation>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-0C-ci4" userLabel="Text Keyboard View" customClass="TextKeyboardView" customModule="Bard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="26" width="320" height="174"/>
-                    <subviews>
-                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTx-Mv-mme" userLabel="Row 1">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVQ-bV-okK" userLabel="Row 2">
-                            <rect key="frame" x="0.0" y="43" width="320" height="43"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-mM-82E" userLabel="Row 4">
-                            <rect key="frame" x="0.0" y="129" width="320" height="43"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6S-JF-h7U" userLabel="Row 3">
-                            <rect key="frame" x="0.0" y="86" width="320" height="43"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
-                    <constraints>
-                        <constraint firstItem="TVQ-bV-okK" firstAttribute="top" secondItem="rTx-Mv-mme" secondAttribute="bottom" id="1fL-DE-6jO"/>
-                        <constraint firstAttribute="trailing" secondItem="Q6S-JF-h7U" secondAttribute="trailing" id="3cd-OP-Iqt"/>
-                        <constraint firstItem="rTx-Mv-mme" firstAttribute="height" secondItem="Kpi-0C-ci4" secondAttribute="height" multiplier="0.25" id="7eD-6G-SKq"/>
-                        <constraint firstItem="IJa-mM-82E" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="8IH-9a-B7a"/>
-                        <constraint firstItem="TVQ-bV-okK" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="NJ7-HG-Lvk"/>
-                        <constraint firstItem="TVQ-bV-okK" firstAttribute="height" secondItem="rTx-Mv-mme" secondAttribute="height" id="Nwn-Jy-Mn2"/>
-                        <constraint firstItem="Q6S-JF-h7U" firstAttribute="height" secondItem="TVQ-bV-okK" secondAttribute="height" id="PE6-Cd-eGf"/>
-                        <constraint firstItem="IJa-mM-82E" firstAttribute="top" secondItem="Q6S-JF-h7U" secondAttribute="bottom" id="RBY-in-VI6"/>
-                        <constraint firstAttribute="trailing" secondItem="rTx-Mv-mme" secondAttribute="trailing" id="UCp-X5-eYK"/>
-                        <constraint firstAttribute="trailing" secondItem="TVQ-bV-okK" secondAttribute="trailing" id="aQg-R6-m7z"/>
-                        <constraint firstItem="IJa-mM-82E" firstAttribute="top" secondItem="TVQ-bV-okK" secondAttribute="bottom" id="k89-PL-2Zn"/>
-                        <constraint firstAttribute="trailing" secondItem="IJa-mM-82E" secondAttribute="trailing" id="lA6-tL-rl7"/>
-                        <constraint firstItem="rTx-Mv-mme" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="nbg-xT-Mip"/>
-                        <constraint firstItem="Q6S-JF-h7U" firstAttribute="leading" secondItem="Kpi-0C-ci4" secondAttribute="leading" id="qu2-yK-Kw6"/>
-                        <constraint firstItem="rTx-Mv-mme" firstAttribute="top" secondItem="Kpi-0C-ci4" secondAttribute="top" id="rjh-q4-RMG"/>
-                        <constraint firstItem="Q6S-JF-h7U" firstAttribute="top" secondItem="TVQ-bV-okK" secondAttribute="bottom" id="swT-Ib-vXF"/>
-                        <constraint firstItem="IJa-mM-82E" firstAttribute="height" secondItem="Q6S-JF-h7U" secondAttribute="height" id="umT-oW-Msg"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="k89-PL-2Zn"/>
                         </mask>
                     </variation>
                 </view>
