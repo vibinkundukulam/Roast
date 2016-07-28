@@ -77,7 +77,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     let buttonTitlesRowOne = ["q","w","e","r","t","y","u","i","o","p"]
     let buttonTitlesRowTwo = ["a","s","d","f","g","h","j","k","l"]
     let buttonTitlesRowThree = ["z","x","c","v","b","n","m"]
-    let buttonTitlesRowFour = ["Space"]
+    let buttonTitlesRowFour = ["CHG", "Space", "Trump 'Em"]
     var buttonsRowOne = [UIButton]()
     var buttonsRowTwo = [UIButton]()
     var buttonsRowThree = [UIButton]()
@@ -382,11 +382,15 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
         textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
         textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        
+        
+        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
 
         
         backButton.hidden = true
@@ -438,13 +442,15 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator);
         coordinator.animateAlongsideTransition(nil, completion: {
             _ in
-            print("Test width = \(self.textKeyboardRowOne.frame.width)")
-            print("Test height = \(self.view.frame.height)")
             self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowOne, mainView: self.textKeyboardRowOne)
             self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowTwo, mainView: self.textKeyboardRowTwo)
             self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowThree, mainView: self.textKeyboardRowThree)
             self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowFour, mainView: self.textKeyboardRowFour)
         })
+    }
+    
+    func trumpButtonPressed(sender: AnyObject?) {
+        textFieldDidEndEditing(nameEntryTextField)
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
