@@ -37,10 +37,6 @@ class TextKeyboardView: UIView {
         
         for (index, button) in buttons.enumerate() {
             
-            // Remove all constraints
-            
-            button.removeConstraints(button.constraints)
-            
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
             topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
             
@@ -62,10 +58,6 @@ class TextKeyboardView: UIView {
             if index == 0 {
                 
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
-                
-       /*         widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: .Equal, toItem: mainView, attribute: .Width, multiplier: 1.0/12.0, constant: 0)
-                
-                mainView.addConstraint(widthConstraint) */
                 
                 
             } else {

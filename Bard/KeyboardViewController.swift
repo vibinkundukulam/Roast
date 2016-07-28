@@ -379,9 +379,14 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
         backButton.addGestureRecognizer(gestureRecognizer)
         
-        nextKeyboard.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        nextKeyboard.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
-        nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
 
         
         backButton.hidden = true
@@ -447,16 +452,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameLabel.hidden = true
         chooseQuoteView.hidden = true
         
-        // Add text keyboard in background
-        
-        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
         backButton.hidden = false
         textKeyboardView.hidden = false
         
