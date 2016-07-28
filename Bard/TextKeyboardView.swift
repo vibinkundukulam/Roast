@@ -12,6 +12,7 @@ import QuartzCore
 
 class TextKeyboardView: UIView {
     var activeTextField: UITextField? = nil
+    let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     
     func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String], inout buttons: [UIButton]) {
         for buttonTitle in buttonTitles {
@@ -38,7 +39,6 @@ class TextKeyboardView: UIView {
             }
             button.setTitle(buttonTitles[index], forState: .Normal)
             button.titleLabel!.font = UIFont.systemFontOfSize(16)
-            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
             button.layer.cornerRadius = 5
             button.translatesAutoresizingMaskIntoConstraints = false
             buttons.append(button)
@@ -57,6 +57,10 @@ class TextKeyboardView: UIView {
         let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
         let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
+        print("\nTotal width: \(mainView.frame.width)")
+        print("Button Width: \(buttonWidth)")
+        print("Space between buttons: \(spaceBetweenButtons)")
+        print("Side Margin: \(sideMargin)")
         
         // Set constraints
         
@@ -116,6 +120,7 @@ class TextKeyboardView: UIView {
         let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
         let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
+        let spaceButtonWidth = 5 * textButtonWidth + 4 * spaceBetweenButtons
         
         
         // Set constraints
@@ -151,11 +156,17 @@ class TextKeyboardView: UIView {
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: spaceBetweenButtons)
                 
                 if index == 1 {
-                    let spaceWidthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: (5 * textButtonWidth + 4 * spaceBetweenButtons))
+                    let spaceWidthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: spaceButtonWidth)
                     
                     mainView.addConstraint(spaceWidthConstraint)
                     spaceWidthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
                     
+                } else if index == 2 {
+                    let changeKeyboardButton = buttons[0]
+                    let trumpWidthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: changeKeyboardButton, attribute: .Width, multiplier: 1.0, constant: 0.0)
+                    
+                    mainView.addConstraint(trumpWidthConstraint)
+                    trumpWidthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
                 }
                 
             }
@@ -178,7 +189,8 @@ class TextKeyboardView: UIView {
     
     func createChangeKeyboardButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.backgroundColor = UIColor.darkGrayColor()
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.backgroundColor = navColor
         
         return button
     }
@@ -186,6 +198,7 @@ class TextKeyboardView: UIView {
     func createSpaceButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
         button.addTarget(self, action: "didPressSpace:", forControlEvents: .TouchUpInside)
         
         return button
@@ -193,7 +206,8 @@ class TextKeyboardView: UIView {
     
     func createTrumpButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.backgroundColor = UIColor.darkGrayColor()
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.backgroundColor = navColor
         
         return button
     }
