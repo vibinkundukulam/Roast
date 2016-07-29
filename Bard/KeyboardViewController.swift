@@ -123,6 +123,395 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createInsults()
+        
+        let nib = UINib(nibName: "View", bundle: nil)
+        let objects = nib.instantiateWithOwner(self, options: nil)
+        view = objects[0] as! UIView;
+
+        var categoryArray = Array(self.buttonTitles.keys).sort(<)
+        selectedCategory = categoryArray[0]
+        lastCategoryDisplayed = selectedCategory
+        
+        
+        // Set up name entry text field
+        
+        nameEntryTextField.layer.borderColor = borderColor
+        nameEntryTextField.layer.cornerRadius = 10
+        nameEntryTextField.layer.borderWidth = 1
+        
+        nameEntryTextField.delegate = self
+        
+        nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
+        showNameLabel()
+        
+        
+        // Set up text keyboard in background
+        
+        backButton.userInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
+        backButton.addGestureRecognizer(gestureRecognizer)
+        
+        self.view.setNeedsLayout()
+        self.textKeyboardRowOne.setNeedsLayout()
+        self.textKeyboardRowTwo.setNeedsLayout()
+        self.textKeyboardRowThree.setNeedsLayout()
+        self.textKeyboardRowFour.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        
+        
+        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
+        
+        backButton.hidden = true
+        textKeyboardView.hidden = true
+        self.view.autoresizesSubviews = true
+        
+        
+        // Set up table of quotes and categories
+        
+        tableView1.delegate = self
+        tableView1.dataSource = self
+        
+        tableView2.delegate = self
+        tableView2.dataSource = self
+        
+        
+        // Quotes
+        
+        tableView1.rowHeight = UITableViewAutomaticDimension
+        tableView1.estimatedRowHeight = 30
+        tableView1.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell")
+        tableView1.backgroundColor = quoteColor
+        tableView1.separatorColor = UIColor.clearColor()
+        
+        
+        // Categories
+        
+        tableView2.rowHeight = UITableViewAutomaticDimension
+        tableView2.estimatedRowHeight = 30
+        tableView2.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell2")
+        tableView2.backgroundColor = navColor
+        categoryLabel.text = selectedCategory
+        
+        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+        tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        
+        nextKeyboard.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
+        nextKeyboard.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
+        nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        
+        deleteButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
+        deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
+        deleteButton.addTarget(self, action: "deletePressed:", forControlEvents: .TouchUpInside)
+        deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchUpInside)
+
+    }
+    
+    //
+    //
+    // End of view loading method
+    //
+    //
+    
+    func trumpButtonPressed(sender: AnyObject?) {
+        nameEntryTextField.resignFirstResponder()
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
+        
+        backButton.backgroundColor = UIColor.whiteColor()
+        nameLabel.hidden = true
+        chooseQuoteView.hidden = true
+        
+        backButton.hidden = false
+        textKeyboardView.hidden = false
+        
+        nameEntryTextFieldLeft.constant = 30
+        nameEntryTextField.layer.borderColor = activeColor.CGColor
+        UIView.animateWithDuration(0.2, animations: {
+            self.nameEntryTextField.layoutIfNeeded()
+        })
+        
+        textKeyboardView.activeTextField = nameEntryTextField
+
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {  //delegate method
+
+        
+        nameEntryTextField.layer.borderColor = borderColor
+        textKeyboardView.hidden = true
+        backButton.hidden = true
+        showNameLabel()
+        chooseQuoteView.hidden = false
+        
+        nameEntryTextFieldLeft.constant = 10
+        nameEntryTextField.layoutIfNeeded()
+        enteredName = nameEntryTextField.text!
+        
+        createInsults()
+        
+        tableView1.reloadData()
+        
+        textKeyboardView.activeTextField = nil
+
+    }
+
+    func showNameLabel() {
+        if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
+            nameLabel.hidden = false
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+       return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableView1 {
+            return buttonTitles[selectedCategory]!.count
+        } else {
+            return buttonTitles.count
+
+        }
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+
+        if tableView == tableView1 {
+            let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell")
+            
+            var categoryQuotes = self.buttonTitles[selectedCategory]
+            let quote = categoryQuotes![indexPath.row].0
+            let author = categoryQuotes![indexPath.row].1
+            let fullQuote = NSMutableAttributedString()
+            fullQuote.appendAttributedString(quote)
+            fullQuote.appendAttributedString(author)
+            
+            cell.textLabel?.attributedText = fullQuote
+            cell.textLabel?.textAlignment = .Center
+            cell.textLabel?.numberOfLines = 0
+            
+            cell.backgroundColor = quoteColor
+            
+            let myCustomSelectionColorView = UIView()
+            myCustomSelectionColorView.backgroundColor = activeColor
+            cell.selectedBackgroundView = myCustomSelectionColorView
+            
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.separatorInset = UIEdgeInsetsZero
+                
+            return cell
+           
+        } else {
+            
+            let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell2")
+            
+            var categoryArray = Array(self.buttonTitles.keys).sort(<)
+            cell.textLabel?.text = categoryArray[indexPath.row]
+            cell.textLabel?.textAlignment = .Center
+            cell.textLabel?.font = UIFont(name: "Helvetica Neue-Bold", size: 15)
+            cell.textLabel?.textColor = UIColor.whiteColor()
+            cell.textLabel?.numberOfLines = 0
+            cell.backgroundColor = navColor
+            
+            let myCustomSelectionColorView = UIView()
+            myCustomSelectionColorView.backgroundColor = activeColor
+            cell.selectedBackgroundView = myCustomSelectionColorView
+            
+            cell.preservesSuperviewLayoutMargins = false
+            cell.layoutMargins = UIEdgeInsetsZero
+            cell.separatorInset = UIEdgeInsetsZero
+            
+            return cell
+        }
+     
+        
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == tableView1 {
+            var categoryQuotes = self.buttonTitles[selectedCategory]
+            let quote = categoryQuotes![indexPath.row]
+            let string = quote.0.string + "- " + quote.1.string
+            
+            if lastRow != -1 {
+                let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
+                let lastQuote = lastCategoryQuotes![lastRow]
+                let lastString = lastQuote.0.string + "- " + lastQuote.1.string
+                let lastStringLength = lastString.characters.count - wasDeleteLastKey
+                for var i = lastStringLength; i > 0; --i {
+                    (textDocumentProxy as UIKeyInput).deleteBackward()
+                }
+          
+                if lastRow == indexPath.row && lastCategorySelected == selectedCategory {
+                    self.tableView1.deselectRowAtIndexPath(indexPath, animated: false)
+                    lastRow = -1
+                    lastCategorySelected = ""
+                } else {
+                    (textDocumentProxy as UIKeyInput).insertText("\(string)")
+                    lastRow = indexPath.row
+                    lastCategorySelected = selectedCategory
+                }
+                
+                lastCategoryDisplayed = selectedCategory
+                wasDeleteLastKey = 0
+                
+            } else {
+                (textDocumentProxy as UIKeyInput).insertText("\(string)")
+                wasDeleteLastKey = 0
+                lastRow = indexPath.row
+                lastCategorySelected = selectedCategory
+            }
+        } else {
+                var categoryArray = Array(self.buttonTitles.keys).sort(<)
+                selectedCategory = categoryArray[indexPath.row]
+                if lastCategoryDisplayed != selectedCategory {
+                    categoryLabel.text = selectedCategory
+                    lastCategoryDisplayed = selectedCategory
+                    tableView1.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Right)
+                }
+        expandCategory()
+        }
+        
+        
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView == tableView1 {
+                var categoryQuotes = self.buttonTitles[selectedCategory]
+                let quote = categoryQuotes![indexPath.row]
+                let string = quote.0.string + "- " + quote.1.string
+                let stringLength = string.characters.count - wasDeleteLastKey
+                for var i = stringLength; i > 0; --i {
+                    (textDocumentProxy as UIKeyInput).deleteBackward()
+                }
+        }
+    }
+   
+    func buttonActive(button: UIButton) {
+        button.backgroundColor = activeColor
+    }
+    
+    func buttonInactive(button: UIButton) {
+        button.backgroundColor = navColor
+    }
+
+    func nextKeyboardPressed(button: UIButton) {
+        advanceToNextInputMode()
+    }
+    
+    func deletePressed(button: UIButton) {
+        (textDocumentProxy as UIKeyInput).deleteBackward()
+        wasDeleteLastKey = wasDeleteLastKey + 1
+    }
+    
+    func backButtonPressed() {
+        nameEntryTextField.resignFirstResponder()
+        backButton.backgroundColor = activeColor
+    }
+    
+    @IBAction func expandCategory() {
+        if sectionExpanded {
+            
+            self.categoryLabel.text = lastCategoryDisplayed
+
+            self.view.removeConstraint(categoryTableViewTop)
+            
+            let newTopConstraint = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: self.tableView1,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0
+            )
+            
+            let newBottomConstraint = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0
+            )
+            
+            self.categoryTableViewTop = newTopConstraint
+            self.categoryTableViewBottom = newBottomConstraint
+            self.view.addConstraints([newTopConstraint, newBottomConstraint])
+
+            UIView.animateWithDuration(0.2, animations: {
+                self.view.layoutIfNeeded()
+                })
+            sectionExpanded = false
+            self.arrowIcon.transform = CGAffineTransformMakeScale(1,1)
+            
+        } else {
+            
+            self.categoryLabel.text = ""
+            
+            self.view.removeConstraint(categoryTableViewTop)
+            self.view.removeConstraint(categoryTableViewBottom)
+            
+            let newTopConstraint = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Top,
+                multiplier: 1,
+                constant: 0
+            )
+            
+            self.categoryTableViewTop = newTopConstraint
+            self.view.addConstraint(newTopConstraint)
+            
+            UIView.animateWithDuration(0.2, animations: {
+                self.view.layoutIfNeeded()
+                })
+            sectionExpanded = true
+            self.arrowIcon.transform = CGAffineTransformMakeScale(1,-1)
+        }
+        
+    }
+    
+    func createInsults() {
+        
+        yourArray.removeAll()
+        incompetentArray.removeAll()
+        disgustingArray.removeAll()
+        poorArray.removeAll()
+        fatArray.removeAll()
+        uglyArray.removeAll()
+        gonnaArray.removeAll()
+        worstArray.removeAll()
+        groupArray.removeAll()
+        awkwardArray.removeAll()
+        annoyingArray.removeAll()
+        oldArray.removeAll()
+        boringArray.removeAll()
+        unfashionableArray.removeAll()
+        unwantedArray.removeAll()
+        shortArray.removeAll()
+        easyArray.removeAll()
+        uncaringArray.removeAll()
+        stupidArray.removeAll()
+        talkingArray.removeAll()
+        rudeArray.removeAll()
         
         talkingArray += [(NSMutableAttributedString(string: "\(enteredName), You speak an infinite deal of nothing.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
         stupidArray += [(NSMutableAttributedString(string: "\(enteredName), You speak unskilfully: or, if your knowledge be more, it is much darkened in your malice.\n", attributes: normalAttributes), NSAttributedString(string: "Shakespeare" , attributes: subtitleAttributes))]
@@ -352,366 +741,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         buttonTitles["Stupid"] = stupidArray
         buttonTitles["Talking too much"] = talkingArray
         buttonTitles["Rude"] = rudeArray
-        
-        let nib = UINib(nibName: "View", bundle: nil)
-        let objects = nib.instantiateWithOwner(self, options: nil)
-        view = objects[0] as! UIView;
-
-        var categoryArray = Array(self.buttonTitles.keys).sort(<)
-        selectedCategory = categoryArray[0]
-        lastCategoryDisplayed = selectedCategory
-        
-        
-        // Set up name entry text field
-        
-        nameEntryTextField.layer.borderColor = borderColor
-        nameEntryTextField.layer.cornerRadius = 10
-        nameEntryTextField.layer.borderWidth = 1
-        
-        nameEntryTextField.delegate = self
-        
-        nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
-        showNameLabel()
-        
-        
-        // Set up text keyboard in background
-        
-        backButton.userInteractionEnabled = true
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
-        backButton.addGestureRecognizer(gestureRecognizer)
-        
-        self.view.setNeedsLayout()
-        self.textKeyboardRowOne.setNeedsLayout()
-        self.textKeyboardRowTwo.setNeedsLayout()
-        self.textKeyboardRowThree.setNeedsLayout()
-        self.textKeyboardRowFour.setNeedsLayout()
-        self.view.layoutIfNeeded()
-        
-        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
-        
-        
-        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
-        
-        backButton.hidden = true
-        textKeyboardView.hidden = true
-        self.view.autoresizesSubviews = true
-        
-        
-        // Set up table of quotes and categories
-        
-        tableView1.delegate = self
-        tableView1.dataSource = self
-        
-        tableView2.delegate = self
-        tableView2.dataSource = self
-        
-        
-        // Quotes
-        
-        tableView1.rowHeight = UITableViewAutomaticDimension
-        tableView1.estimatedRowHeight = 30
-        tableView1.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell")
-        tableView1.backgroundColor = quoteColor
-        tableView1.separatorColor = UIColor.clearColor()
-        
-        
-        // Categories
-        
-        tableView2.rowHeight = UITableViewAutomaticDimension
-        tableView2.estimatedRowHeight = 30
-        tableView2.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell2")
-        tableView2.backgroundColor = navColor
-        categoryLabel.text = selectedCategory
-        
-        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
-        
-        nextKeyboard.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        nextKeyboard.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
-        nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        
-        deleteButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
-        deleteButton.addTarget(self, action: "deletePressed:", forControlEvents: .TouchUpInside)
-        deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchUpInside)
-
-    }
-    
-    //
-    //
-    // End of view loading method
-    //
-    //
-    
-    func trumpButtonPressed(sender: AnyObject?) {
-        nameEntryTextField.resignFirstResponder()
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
-        
-        backButton.backgroundColor = UIColor.whiteColor()
-        nameLabel.hidden = true
-        chooseQuoteView.hidden = true
-        
-        backButton.hidden = false
-        textKeyboardView.hidden = false
-        
-        nameEntryTextFieldLeft.constant = 30
-        nameEntryTextField.layer.borderColor = activeColor.CGColor
-        UIView.animateWithDuration(0.2, animations: {
-            self.nameEntryTextField.layoutIfNeeded()
-        })
-        
-        textKeyboardView.activeTextField = nameEntryTextField
-
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {  //delegate method
-
-        
-        nameEntryTextField.layer.borderColor = borderColor
-        textKeyboardView.hidden = true
-        backButton.hidden = true
-        showNameLabel()
-        chooseQuoteView.hidden = false
-        
-        self.nameEntryTextFieldLeft.constant = 10
-        self.nameEntryTextField.layoutIfNeeded()
-        enteredName = nameEntryTextField.text!
-        
-        textKeyboardView.activeTextField = nil
-        print("\(enteredName)")
-    }
-
-    func showNameLabel() {
-        if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
-            nameLabel.hidden = false
-        }
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-       return 1
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == tableView1 {
-            return buttonTitles[selectedCategory]!.count
-        } else {
-            return buttonTitles.count
-
-        }
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-
-        if tableView == tableView1 {
-            
-            let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell")
-            
-            var categoryQuotes = self.buttonTitles[selectedCategory]
-            let quote = categoryQuotes![indexPath.row].0
-            let author = categoryQuotes![indexPath.row].1
-            let fullQuote = NSMutableAttributedString()
-            fullQuote.appendAttributedString(quote)
-            fullQuote.appendAttributedString(author)
-            
-            cell.textLabel?.attributedText = fullQuote
-            cell.textLabel?.textAlignment = .Center
-            cell.textLabel?.numberOfLines = 0
-            
-            cell.backgroundColor = quoteColor
-            
-            let myCustomSelectionColorView = UIView()
-            myCustomSelectionColorView.backgroundColor = activeColor
-            cell.selectedBackgroundView = myCustomSelectionColorView
-            
-            cell.preservesSuperviewLayoutMargins = false
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.separatorInset = UIEdgeInsetsZero
-                
-            return cell
-           
-        } else {
-            
-            let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell2")
-            
-            var categoryArray = Array(self.buttonTitles.keys).sort(<)
-            cell.textLabel?.text = categoryArray[indexPath.row]
-            cell.textLabel?.textAlignment = .Center
-            cell.textLabel?.font = UIFont(name: "Helvetica Neue-Bold", size: 15)
-            cell.textLabel?.textColor = UIColor.whiteColor()
-            cell.textLabel?.numberOfLines = 0
-            cell.backgroundColor = navColor
-            
-            let myCustomSelectionColorView = UIView()
-            myCustomSelectionColorView.backgroundColor = activeColor
-            cell.selectedBackgroundView = myCustomSelectionColorView
-            
-            cell.preservesSuperviewLayoutMargins = false
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.separatorInset = UIEdgeInsetsZero
-            
-            return cell
-        }
-     
-        
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView == tableView1 {
-            var categoryQuotes = self.buttonTitles[selectedCategory]
-            let quote = categoryQuotes![indexPath.row]
-            let string = quote.0.string + "- " + quote.1.string
-            
-            if lastRow != -1 {
-                let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
-                let lastQuote = lastCategoryQuotes![lastRow]
-                let lastString = lastQuote.0.string + "- " + lastQuote.1.string
-                let lastStringLength = lastString.characters.count - wasDeleteLastKey
-                for var i = lastStringLength; i > 0; --i {
-                    (textDocumentProxy as UIKeyInput).deleteBackward()
-                }
-          
-                if lastRow == indexPath.row && lastCategorySelected == selectedCategory {
-                    self.tableView1.deselectRowAtIndexPath(indexPath, animated: false)
-                    lastRow = -1
-                    lastCategorySelected = ""
-                } else {
-                    (textDocumentProxy as UIKeyInput).insertText("\(string)")
-                    lastRow = indexPath.row
-                    lastCategorySelected = selectedCategory
-                }
-                
-                lastCategoryDisplayed = selectedCategory
-                wasDeleteLastKey = 0
-                
-            } else {
-                (textDocumentProxy as UIKeyInput).insertText("\(string)")
-                wasDeleteLastKey = 0
-                lastRow = indexPath.row
-                lastCategorySelected = selectedCategory
-            }
-        } else {
-                var categoryArray = Array(self.buttonTitles.keys).sort(<)
-                selectedCategory = categoryArray[indexPath.row]
-                if lastCategoryDisplayed != selectedCategory {
-                    categoryLabel.text = selectedCategory
-                    lastCategoryDisplayed = selectedCategory
-                    tableView1.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Right)
-                }
-        expandCategory()
-        }
-        
-        
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView == tableView1 {
-                var categoryQuotes = self.buttonTitles[selectedCategory]
-                let quote = categoryQuotes![indexPath.row]
-                let string = quote.0.string + "- " + quote.1.string
-                let stringLength = string.characters.count - wasDeleteLastKey
-                for var i = stringLength; i > 0; --i {
-                    (textDocumentProxy as UIKeyInput).deleteBackward()
-                }
-        }
-    }
-   
-    func buttonActive(button: UIButton) {
-        button.backgroundColor = activeColor
-    }
-    
-    func buttonInactive(button: UIButton) {
-        button.backgroundColor = navColor
-    }
-
-    func nextKeyboardPressed(button: UIButton) {
-        advanceToNextInputMode()
-    }
-    
-    func deletePressed(button: UIButton) {
-        (textDocumentProxy as UIKeyInput).deleteBackward()
-        wasDeleteLastKey = wasDeleteLastKey + 1
-    }
-    
-    func backButtonPressed() {
-        textFieldDidEndEditing(nameEntryTextField)
-        backButton.backgroundColor = activeColor
-    }
-    
-    @IBAction func expandCategory() {
-        if sectionExpanded {
-            
-            self.categoryLabel.text = lastCategoryDisplayed
-
-            self.view.removeConstraint(categoryTableViewTop)
-            
-            let newTopConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: self.tableView1,
-                attribute: .Bottom,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            let newBottomConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Bottom,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Bottom,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            self.categoryTableViewTop = newTopConstraint
-            self.categoryTableViewBottom = newBottomConstraint
-            self.view.addConstraints([newTopConstraint, newBottomConstraint])
-
-            UIView.animateWithDuration(0.2, animations: {
-                self.view.layoutIfNeeded()
-                })
-            sectionExpanded = false
-            self.arrowIcon.transform = CGAffineTransformMakeScale(1,1)
-            
-        } else {
-            
-            self.categoryLabel.text = ""
-            
-            self.view.removeConstraint(categoryTableViewTop)
-            self.view.removeConstraint(categoryTableViewBottom)
-            
-            let newTopConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Top,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            self.categoryTableViewTop = newTopConstraint
-            self.view.addConstraint(newTopConstraint)
-            
-            UIView.animateWithDuration(0.2, animations: {
-                self.view.layoutIfNeeded()
-                })
-            sectionExpanded = true
-            self.arrowIcon.transform = CGAffineTransformMakeScale(1,-1)
-        }
-        
     }
     
     
