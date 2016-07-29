@@ -108,6 +108,7 @@ class TextKeyboardView: UIView {
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
             
         }
+        buttons.removeAll()
     }
     
     func addFinalRowButtonConstraints(inout buttons: [UIButton], mainView: UIView) {

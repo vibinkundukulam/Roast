@@ -379,6 +379,25 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
         backButton.addGestureRecognizer(gestureRecognizer)
         
+        self.view.setNeedsLayout()
+        self.textKeyboardRowOne.setNeedsLayout()
+        self.textKeyboardRowTwo.setNeedsLayout()
+        self.textKeyboardRowThree.setNeedsLayout()
+        self.textKeyboardRowFour.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
+        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        
+        
+        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
         
         backButton.hidden = true
         textKeyboardView.hidden = true
@@ -425,16 +444,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // End of view loading method
     //
     //
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator);
-        coordinator.animateAlongsideTransition(nil, completion: {
-            _ in
-            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowOne, mainView: self.textKeyboardRowOne)
-            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowTwo, mainView: self.textKeyboardRowTwo)
-            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowThree, mainView: self.textKeyboardRowThree)
-            self.textKeyboardView.addIndividualButtonConstraints(&self.buttonsRowFour, mainView: self.textKeyboardRowFour)
-        })
-    }
     
     func trumpButtonPressed(sender: AnyObject?) {
         textFieldDidEndEditing(nameEntryTextField)
@@ -442,18 +451,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
         
-        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
         
-        
-        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
 
         
         backButton.backgroundColor = UIColor.whiteColor()
