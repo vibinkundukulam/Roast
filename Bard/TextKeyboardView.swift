@@ -57,10 +57,7 @@ class TextKeyboardView: UIView {
         let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
         let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
-        print("\nTotal width: \(mainView.frame.width)")
-        print("Button Width: \(buttonWidth)")
-        print("Space between buttons: \(spaceBetweenButtons)")
-        print("Side Margin: \(sideMargin)")
+        
         
         // Set constraints
         
