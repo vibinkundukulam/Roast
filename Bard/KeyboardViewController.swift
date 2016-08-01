@@ -12,11 +12,14 @@ import QuartzCore
 
 class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    
     @IBOutlet weak var nameEntryTextFieldLeft: NSLayoutConstraint!
-    @IBOutlet weak var categoryTableViewTop: NSLayoutConstraint!
+    @IBOutlet weak var categoryTableViewHeaderTop: NSLayoutConstraint!
+    
+    @IBOutlet weak var categoryTableViewHeaderBottom: NSLayoutConstraint!
+    
     @IBOutlet weak var textKeyboardRowOne: UIView!
     @IBOutlet weak var backButton: Draw2D!
-    @IBOutlet weak var categoryTableViewBottom: NSLayoutConstraint!
     @IBOutlet weak var expandCategoryButton: UIButton!
     @IBOutlet weak var textKeyboardRowTwo: UIView!
     @IBOutlet weak var textKeyboardRowThree: UIView!
@@ -113,7 +116,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         createInsults()
         
         let nib = UINib(nibName: "View", bundle: nil)
@@ -123,7 +125,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         var categoryArray = Array(self.buttonTitles.keys).sort(<)
         selectedCategory = categoryArray[0]
         lastCategoryDisplayed = selectedCategory
-        
         
         // Set up name entry text field
         
@@ -149,6 +150,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.textKeyboardRowThree.setNeedsLayout()
         self.textKeyboardRowFour.setNeedsLayout()
         self.view.layoutIfNeeded()
+        
         
         textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
         textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
@@ -205,7 +207,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
         deleteButton.addTarget(self, action: "deletePressed:", forControlEvents: .TouchUpInside)
         deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchUpInside)
-
     }
     
     //
@@ -261,6 +262,83 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func showNameLabel() {
         if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
             nameLabel.hidden = false
+        }
+    }
+    
+    @IBAction func expandCategory() {
+        if sectionExpanded {
+            print("section was expanded?: \(sectionExpanded)")
+            self.categoryLabel.text = lastCategoryDisplayed
+            
+            self.view.removeConstraint(categoryTableViewHeaderTop)
+            
+            let newTopConstraint = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: self.tableView1,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0
+            )
+            
+            
+            let newBottomConstraint = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0
+            )
+            
+            self.categoryTableViewHeaderTop = newTopConstraint
+            self.categoryTableViewHeaderBottom = newBottomConstraint
+            self.view.addConstraints([newTopConstraint, newBottomConstraint])
+            
+            UIView.animateWithDuration(0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+            sectionExpanded = false
+            self.arrowIcon.transform = CGAffineTransformMakeScale(1,1)
+            
+        } else {
+            print("section was expanded?: \(sectionExpanded)")
+            self.categoryLabel.text = ""
+            
+            NSLayoutConstraint.deactivateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
+            
+            let newCategoryTableViewHeaderTopConstraint = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Top,
+                multiplier: 1,
+                constant: 0
+            )
+            newCategoryTableViewHeaderTopConstraint.identifier = "New Category Header Top - Parent View Top"
+            
+            let newQuoteTableViewBottomConstraint =
+            NSLayoutConstraint(
+                item: self.tableView1,
+                attribute: .Bottom,
+                relatedBy: .Equal,
+                toItem: self.view,
+                attribute: .Bottom,
+                multiplier: 1,
+                constant: 0
+            )
+            newQuoteTableViewBottomConstraint.identifier = "New Quote Table Bottom - Parent View Bottom"
+            
+            self.view.addConstraints([newCategoryTableViewHeaderTopConstraint, newQuoteTableViewBottomConstraint])
+            
+            UIView.animateWithDuration(0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+            sectionExpanded = true
+            self.arrowIcon.transform = CGAffineTransformMakeScale(1,-1)
         }
     }
     
@@ -414,71 +492,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         backButton.backgroundColor = activeColor
     }
     
-    @IBAction func expandCategory() {
-        if sectionExpanded {
-            
-            self.categoryLabel.text = lastCategoryDisplayed
 
-            self.view.removeConstraint(categoryTableViewTop)
-            
-            let newTopConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: self.tableView1,
-                attribute: .Bottom,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            let newBottomConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Bottom,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Bottom,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            self.categoryTableViewTop = newTopConstraint
-            self.categoryTableViewBottom = newBottomConstraint
-            self.view.addConstraints([newTopConstraint, newBottomConstraint])
-
-            UIView.animateWithDuration(0.2, animations: {
-                self.view.layoutIfNeeded()
-                })
-            sectionExpanded = false
-            self.arrowIcon.transform = CGAffineTransformMakeScale(1,1)
-            
-        } else {
-            
-            self.categoryLabel.text = ""
-            
-            self.view.removeConstraint(categoryTableViewTop)
-            self.view.removeConstraint(categoryTableViewBottom)
-            
-            let newTopConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Top,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            self.categoryTableViewTop = newTopConstraint
-            self.view.addConstraint(newTopConstraint)
-            
-            UIView.animateWithDuration(0.2, animations: {
-                self.view.layoutIfNeeded()
-                })
-            sectionExpanded = true
-            self.arrowIcon.transform = CGAffineTransformMakeScale(1,-1)
-        }
-        
-    }
     
     func createInsults() {
         

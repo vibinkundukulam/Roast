@@ -12,6 +12,8 @@
                 <outlet property="backButton" destination="mnK-9n-OIn" id="jvE-eh-y3u"/>
                 <outlet property="categoryHeader" destination="yXf-Vk-oPY" id="A5i-CJ-yCe"/>
                 <outlet property="categoryLabel" destination="g9M-jz-emq" id="FXe-fa-Ydh"/>
+                <outlet property="categoryTableViewHeaderBottom" destination="EOl-Jd-EAV" id="LSP-WT-Thc"/>
+                <outlet property="categoryTableViewHeaderTop" destination="kGV-7r-GS3" id="DEg-x2-E6Y"/>
                 <outlet property="chooseQuoteView" destination="S6X-cn-8I0" id="gzJ-nI-kdM"/>
                 <outlet property="deleteButton" destination="8fM-hd-egg" id="TQI-02-B1C"/>
                 <outlet property="expandCategoryButton" destination="MZg-ph-cbY" id="0kN-j6-deN"/>
@@ -196,7 +198,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="expandCategory" destination="-1" eventType="touchUpInside" id="RWL-fj-Jcc"/>
+                                        <action selector="expandCategory" destination="-1" eventType="touchUpInside" id="8ic-zU-ttw"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9M-jz-emq">
@@ -225,7 +227,7 @@
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="g9M-jz-emq" secondAttribute="centerX" id="1qm-Wr-1X6"/>
                                 <constraint firstItem="0Kw-gm-kfa" firstAttribute="leading" secondItem="yXf-Vk-oPY" secondAttribute="leading" id="2WR-St-mfT"/>
-                                <constraint firstAttribute="height" constant="44" id="5hy-DS-LpW"/>
+                                <constraint firstAttribute="height" constant="44" identifier="Category Table View Header Height" id="5hy-DS-LpW"/>
                                 <constraint firstAttribute="centerY" secondItem="NZ7-I8-9YA" secondAttribute="centerY" id="BV3-Tm-Wd1"/>
                                 <constraint firstAttribute="centerX" secondItem="NZ7-I8-9YA" secondAttribute="centerX" id="GfH-wf-TE3"/>
                                 <constraint firstAttribute="centerY" secondItem="NeG-D6-vRC" secondAttribute="centerY" id="LC4-R6-PDn"/>
@@ -276,18 +278,18 @@
                         <constraint firstItem="thq-F2-UuR" firstAttribute="top" secondItem="1Dy-eB-g35" secondAttribute="bottom" identifier="Category Table Top" id="6Ko-Po-D3S"/>
                         <constraint firstItem="1Dy-eB-g35" firstAttribute="leading" secondItem="S6X-cn-8I0" secondAttribute="leading" id="75V-qu-IMt"/>
                         <constraint firstItem="thq-F2-UuR" firstAttribute="leading" secondItem="S6X-cn-8I0" secondAttribute="leading" id="88q-yc-uJ3"/>
-                        <constraint firstAttribute="bottom" secondItem="thq-F2-UuR" secondAttribute="bottom" identifier="Category Table Bottom" id="Cfb-Od-3Nj"/>
+                        <constraint firstAttribute="bottom" secondItem="yXf-Vk-oPY" secondAttribute="bottom" identifier="Category Table View Header Bottom" id="EOl-Jd-EAV"/>
                         <constraint firstItem="yXf-Vk-oPY" firstAttribute="leading" secondItem="S6X-cn-8I0" secondAttribute="leading" id="I8D-Uu-0bJ"/>
                         <constraint firstAttribute="trailing" secondItem="Bz2-mo-z6s" secondAttribute="trailing" id="IzH-yw-g0a"/>
                         <constraint firstItem="Bz2-mo-z6s" firstAttribute="leading" secondItem="S6X-cn-8I0" secondAttribute="leading" id="Ola-bw-rMs"/>
                         <constraint firstAttribute="bottom" secondItem="Bz2-mo-z6s" secondAttribute="bottom" id="WBg-aZ-AjT"/>
                         <constraint firstAttribute="trailing" secondItem="yXf-Vk-oPY" secondAttribute="trailing" id="a9c-oe-vOg"/>
+                        <constraint firstAttribute="bottom" secondItem="thq-F2-UuR" secondAttribute="bottom" id="fLy-Jq-56O"/>
                         <constraint firstItem="Bz2-mo-z6s" firstAttribute="top" secondItem="S6X-cn-8I0" secondAttribute="top" id="ge6-Vw-zaq"/>
-                        <constraint firstItem="1Dy-eB-g35" firstAttribute="top" secondItem="yXf-Vk-oPY" secondAttribute="bottom" id="ggX-JK-qAq"/>
-                        <constraint firstItem="yXf-Vk-oPY" firstAttribute="top" secondItem="Bz2-mo-z6s" secondAttribute="bottom" id="kGV-7r-GS3"/>
+                        <constraint firstItem="1Dy-eB-g35" firstAttribute="top" secondItem="yXf-Vk-oPY" secondAttribute="bottom" identifier="Category Header Bottom - Border View Top" id="ggX-JK-qAq"/>
+                        <constraint firstItem="yXf-Vk-oPY" firstAttribute="top" secondItem="Bz2-mo-z6s" secondAttribute="bottom" identifier="Category Table View Header Top" id="kGV-7r-GS3"/>
                         <constraint firstAttribute="trailing" secondItem="1Dy-eB-g35" secondAttribute="trailing" id="lCg-vZ-x21"/>
                         <constraint firstAttribute="trailing" secondItem="thq-F2-UuR" secondAttribute="trailing" id="sHL-l1-xeW"/>
-                        <constraint firstAttribute="bottom" secondItem="yXf-Vk-oPY" secondAttribute="bottom" identifier="Category Header Bottom" id="tVb-Jf-wkh"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
@@ -317,6 +319,7 @@
                 <constraint firstItem="2HK-S0-Cvi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="pkw-Am-O93"/>
                 <constraint firstAttribute="bottom" secondItem="Kpi-0C-ci4" secondAttribute="bottom" id="uLi-fm-7c4"/>
                 <constraint firstAttribute="trailing" secondItem="S6X-cn-8I0" secondAttribute="trailing" id="ueQ-f9-pJ5"/>
+                <constraint firstItem="yXf-Vk-oPY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="156" id="y6m-vP-weG"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -324,13 +327,10 @@
                 <mask key="constraints">
                     <exclude reference="VBZ-E8-zx4"/>
                     <exclude reference="SvM-JW-d17"/>
+                    <exclude reference="y6m-vP-weG"/>
                 </mask>
             </variation>
         </view>
-        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="bZZ-k3-fCl">
-            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-        </activityIndicatorView>
     </objects>
     <resources>
         <image name="arrow-icon-white.png" width="200" height="200"/>
