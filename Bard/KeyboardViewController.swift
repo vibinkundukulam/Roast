@@ -12,30 +12,46 @@ import QuartzCore
 
 class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    // Consraints
     
     @IBOutlet weak var nameEntryTextFieldLeft: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewHeaderTop: NSLayoutConstraint!
-    
     @IBOutlet weak var categoryTableViewHeaderBottom: NSLayoutConstraint!
+    var expandedCategoryTableViewHeaderTopConstraint: NSLayoutConstraint? = nil
+    var expandedQuoteTableViewBottomConstraint: NSLayoutConstraint? = nil
     
+
+
+    
+    // Text keyboard
+    
+    @IBOutlet weak var textKeyboardView: TextKeyboardView!
     @IBOutlet weak var textKeyboardRowOne: UIView!
-    @IBOutlet weak var backButton: Draw2D!
-    @IBOutlet weak var expandCategoryButton: UIButton!
     @IBOutlet weak var textKeyboardRowTwo: UIView!
     @IBOutlet weak var textKeyboardRowThree: UIView!
-    @IBOutlet weak var nextKeyboard: UIButton!
     @IBOutlet weak var textKeyboardRowFour: UIView!
+    
+    @IBOutlet weak var nextKeyboard: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var categoryHeader: UIView!
-    @IBOutlet weak var textKeyboardView: TextKeyboardView!
-    @IBOutlet weak var tableView1: UITableView!
-    @IBOutlet weak var tableView2: UITableView!
-    @IBOutlet weak var chooseQuoteView: UIView!
-    @IBOutlet weak var arrowIcon: UIImageView!
-    @IBOutlet weak var categoryLabel: UILabel!
+    
+    
+    // Name input
+    
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var nameEntryTextField: UITextField!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var backButton: Draw2D!
+    
+    
+    // Choose quote
+    
+    @IBOutlet weak var chooseQuoteView: UIView!
+    @IBOutlet weak var tableView1: UITableView!
+    @IBOutlet weak var categoryHeader: UIView!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var tableView2: UITableView!
+    @IBOutlet weak var arrowIcon: UIImageView!
+    @IBOutlet weak var expandCategoryButton: UIButton!
     
     
     // Ensure keyboard remembers last key, quote, name
@@ -267,35 +283,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     @IBAction func expandCategory() {
         if sectionExpanded {
-            print("section was expanded?: \(sectionExpanded)")
             self.categoryLabel.text = lastCategoryDisplayed
             
-            self.view.removeConstraint(categoryTableViewHeaderTop)
+            nameView.hidden = false
             
-            let newTopConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: self.tableView1,
-                attribute: .Bottom,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            
-            let newBottomConstraint = NSLayoutConstraint(
-                item: self.categoryHeader,
-                attribute: .Bottom,
-                relatedBy: .Equal,
-                toItem: self.view,
-                attribute: .Bottom,
-                multiplier: 1,
-                constant: 0
-            )
-            
-            self.categoryTableViewHeaderTop = newTopConstraint
-            self.categoryTableViewHeaderBottom = newBottomConstraint
-            self.view.addConstraints([newTopConstraint, newBottomConstraint])
+            NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedQuoteTableViewBottomConstraint!])
+            NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
             
             UIView.animateWithDuration(0.2, animations: {
                 self.view.layoutIfNeeded()
@@ -304,12 +297,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             self.arrowIcon.transform = CGAffineTransformMakeScale(1,1)
             
         } else {
-            print("section was expanded?: \(sectionExpanded)")
             self.categoryLabel.text = ""
+            
+            nameView.hidden = true
             
             NSLayoutConstraint.deactivateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
             
-            let newCategoryTableViewHeaderTopConstraint = NSLayoutConstraint(
+            expandedCategoryTableViewHeaderTopConstraint = NSLayoutConstraint(
                 item: self.categoryHeader,
                 attribute: .Top,
                 relatedBy: .Equal,
@@ -318,9 +312,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 multiplier: 1,
                 constant: 0
             )
-            newCategoryTableViewHeaderTopConstraint.identifier = "New Category Header Top - Parent View Top"
+            expandedCategoryTableViewHeaderTopConstraint!.identifier = "New Category Header Top - Parent View Top"
             
-            let newQuoteTableViewBottomConstraint =
+            expandedQuoteTableViewBottomConstraint =
             NSLayoutConstraint(
                 item: self.tableView1,
                 attribute: .Bottom,
@@ -330,9 +324,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 multiplier: 1,
                 constant: 0
             )
-            newQuoteTableViewBottomConstraint.identifier = "New Quote Table Bottom - Parent View Bottom"
+            expandedQuoteTableViewBottomConstraint!.identifier = "New Quote Table Bottom - Parent View Bottom"
             
-            self.view.addConstraints([newCategoryTableViewHeaderTopConstraint, newQuoteTableViewBottomConstraint])
+            self.view.addConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedQuoteTableViewBottomConstraint!])
             
             UIView.animateWithDuration(0.2, animations: {
                 self.view.layoutIfNeeded()
