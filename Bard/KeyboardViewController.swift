@@ -62,7 +62,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     var selectedCategory = ""
     var lastCategoryDisplayed = ""
     var sectionExpanded = false
-    var enteredName = ""
+    var name = ""
     
     
     // Color scheme
@@ -132,7 +132,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createInsults()
+        createInsultsWithoutName()
         
         let nib = UINib(nibName: "View", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
@@ -265,9 +265,14 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         nameEntryTextFieldLeft.constant = 10
         nameEntryTextField.layoutIfNeeded()
-        enteredName = nameEntryTextField.text!
+        name = nameEntryTextField.text!
         
-        createInsults()
+        if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
+            createInsultsWithoutName()
+        } else {
+            createInsultsWithName()
+        }
+        
         
         tableView1.reloadData()
         
@@ -488,7 +493,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
 
     
-    func createInsults() {
+    func createInsultsWithoutName() {
         
         liarArray.removeAll()
         weakArray.removeAll()
@@ -608,5 +613,125 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         buttonTitles["Poor"] = poorArray
     }
     
+    func createInsultsWithName() {
+        
+        liarArray.removeAll()
+        weakArray.removeAll()
+        uglyArray.removeAll()
+        stupidArray.removeAll()
+        manipulativeArray.removeAll()
+        worthlessArray.removeAll()
+        bestArray.removeAll()
+        jealousArray.removeAll()
+        uptightArray.removeAll()
+        crazyArray.removeAll()
+        sleazyArray.removeAll()
+        whatArray.removeAll()
+        poorArray.removeAll()
+        
+        liarArray += [(NSMutableAttributedString(string: "Crooked \(name)!\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name)'s temperament is weak.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "\(name) doesn't even look presidential.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name) suffers from plain old bad judgement.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name) has zero imagination and even less stamina.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name) has ZERO leadership ability.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        manipulativeArray += [(NSMutableAttributedString(string: "\(name)'s constantly playing the women's card - it is sad!\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s one of the all time great enablers!\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "Who should star in a reboot of Liar Liar - \(name) or Ted Cruz? Let me know.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "\(name)'s a major national security risk.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s totally incompetent as a manager and leader.\n", attributes: normalAttributes), NSAttributedString(string: "Hillary Clinton" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "\(name) wants to look cool, but it's far too late.\n", attributes: normalAttributes), NSAttributedString(string: "Jeb Bush" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name)'s by far the weakest of the lot.\n", attributes: normalAttributes), NSAttributedString(string: "Jeb Bush" , attributes: subtitleAttributes))]
+        jealousArray += [(NSMutableAttributedString(string: "\(name) will do anything to stay at the trough.\n", attributes: normalAttributes), NSAttributedString(string: "Jeb Bush" , attributes: subtitleAttributes))]
+        uptightArray += [(NSMutableAttributedString(string: "\(name) should go home and relax!\n", attributes: normalAttributes), NSAttributedString(string: "Jeb Bush" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s a total embarassment to themselves and their family.\n", attributes: normalAttributes), NSAttributedString(string: "Jeb Bush" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s bottom (and gone), I'm top (by a lot).\n", attributes: normalAttributes), NSAttributedString(string: "Jeb Bush" , attributes: subtitleAttributes))]
+        crazyArray += [(NSMutableAttributedString(string: "\(name) really went wacko today.\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s mathematically dead and totally desparate.\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "All \(name) can do is be a spoiler, never a nice thing to do.\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "\(name) lies like a dog-over and over again!\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "\(name) is a world class LIAR!\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "\(name)'s the worst liar, crazy or very dishonest\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name) will fall like all others.\n", attributes: normalAttributes), NSAttributedString(string: "Ted Cruz" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "If I listen to \(name) for more than ten minutes straight, I develop a massive headache.\n", attributes: normalAttributes), NSAttributedString(string: "Carly Fiorina" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) - ALL TALK AND NO ACTION!\n", attributes: normalAttributes), NSAttributedString(string: "Lindsey Graham" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s a dumb mouthpiece.\n", attributes: normalAttributes), NSAttributedString(string: "Lindsey Graham" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "I will sue \(name) just for fun!\n", attributes: normalAttributes), NSAttributedString(string: "John Kasich" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) couldn't be elected dog catcher\n", attributes: normalAttributes), NSAttributedString(string: "George Pataki" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) didn't get the right gene.\n", attributes: normalAttributes), NSAttributedString(string: "Rand Paul" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "\(name) should be forced to take an IQ test.\n", attributes: normalAttributes), NSAttributedString(string: "Rick Perry" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) will never MAKE AMERICA GREAT AGAIN!\n", attributes: normalAttributes), NSAttributedString(string: "Marco Rubio" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name) looks like a little boy on stage.\n", attributes: normalAttributes), NSAttributedString(string: "Marco Rubio" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name) couldn't even respond properly without pouring sweat and chugging water.\n", attributes: normalAttributes), NSAttributedString(string: "Marco Rubio" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name)'s a perfect little puppet.\n", attributes: normalAttributes), NSAttributedString(string: "Marco Rubio" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s never made ten cents.\n", attributes: normalAttributes), NSAttributedString(string: "Marco Rubio" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name) knows nothing about finance\n", attributes: normalAttributes), NSAttributedString(string: "Marco Rubio" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "I know more about \(name) than they knows about themselves.\n", attributes: normalAttributes), NSAttributedString(string: "Cory Booker" , attributes: subtitleAttributes))]
+        sleazyArray += [(NSMutableAttributedString(string: "\(name)'s the WORST abuser of woman in U.S. political history.\n", attributes: normalAttributes), NSAttributedString(string: "Bill Clinton" , attributes: subtitleAttributes))]
+        sleazyArray += [(NSMutableAttributedString(string: "\(name) DEMONSTRATED A PENCHANT FOR SEXISM.\n", attributes: normalAttributes), NSAttributedString(string: "Bill Clinton" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s a crude dope!\n", attributes: normalAttributes), NSAttributedString(string: "Michael Nutter" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "\(name) looks and sounds so ridiculous.\n", attributes: normalAttributes), NSAttributedString(string: "Barack Obama" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "\(name) has a career that is totally based on a lie.\n", attributes: normalAttributes), NSAttributedString(string: "Elizabeth Warren" , attributes: subtitleAttributes))]
+        sleazyArray += [(NSMutableAttributedString(string: "Perv sleazebag.\n", attributes: normalAttributes), NSAttributedString(string: "Anthony Weiner" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) should focus on all of the problems that they've caused with their ineptitude.\n", attributes: normalAttributes), NSAttributedString(string: "Bill de Blasio" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "The people of South Carolina are embarrassed by \(name)!\n", attributes: normalAttributes), NSAttributedString(string: "Nikki Haley" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "All \(name) does is talk, talk, talk, but they're incapable of doing anything.\n", attributes: normalAttributes), NSAttributedString(string: "John McCain" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name) choked like a dog.\n", attributes: normalAttributes), NSAttributedString(string: "Mitt Romney" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s a mixed up person who doesn't have a clue.\n", attributes: normalAttributes), NSAttributedString(string: "Mitt Romney" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name)'s the person who choked and let us all down.\n", attributes: normalAttributes), NSAttributedString(string: "Mitt Romney" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s a total joke, and everyone knows it!\n", attributes: normalAttributes), NSAttributedString(string: "Mitt Romney" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s so awkward and goofy.\n", attributes: normalAttributes), NSAttributedString(string: "Mitt Romney" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "I don't need \(name)'s angry advice!\n", attributes: normalAttributes), NSAttributedString(string: "Mitt Romney" , attributes: subtitleAttributes))]
+        whatArray += [(NSMutableAttributedString(string: "\(name) looks more like a gym rat than a U.S. Senator.\n", attributes: normalAttributes), NSAttributedString(string: "Ben Sasse" , attributes: subtitleAttributes))]
+        whatArray += [(NSMutableAttributedString(string: "\(name) forgot to mention my phenomenal biz success rate.\n", attributes: normalAttributes), NSAttributedString(string: "John Sununu" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name)'s a failing, crying, lost soul!\n", attributes: normalAttributes), NSAttributedString(string: "Glenn Beck" , attributes: subtitleAttributes))]
+        crazyArray += [(NSMutableAttributedString(string: "\(name)'s a mental basketcase.\n", attributes: normalAttributes), NSAttributedString(string: "Glenn Beck" , attributes: subtitleAttributes))]
+        whatArray += [(NSMutableAttributedString(string: "\(name) always seems to be crying.\n", attributes: normalAttributes), NSAttributedString(string: "Glenn Beck" , attributes: subtitleAttributes))]
+        poorArray += [(NSMutableAttributedString(string: "Lightweight, \(name) comes to my office begging for money like a dog.\n", attributes: normalAttributes), NSAttributedString(string: "Brent Bozell" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "I consider \(name) one of the dumbest of all pundits- \(name) has no sense of the real world!\n", attributes: normalAttributes), NSAttributedString(string: "David Brooks" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s closing in on being the dumbest of them all. \(name) doesn't have a clue.\n", attributes: normalAttributes), NSAttributedString(string: "David Brooks" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s been so wrong & hates it!\n", attributes: normalAttributes), NSAttributedString(string: "Carl Cameron" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) has been largely forgotten.\n", attributes: normalAttributes), NSAttributedString(string: "Katie Couric" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s a totally biased loser who doesn't have a clue.\n", attributes: normalAttributes), NSAttributedString(string: "S.E. Cupp" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s hard to watch, zero talent!\n", attributes: normalAttributes), NSAttributedString(string: "S.E. Cupp" , attributes: subtitleAttributes))]
+        sleazyArray += [(NSMutableAttributedString(string: "\(name)'s a major sleaze and buffoon.\n", attributes: normalAttributes), NSAttributedString(string: "Erick Erickson" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "Uncomfortable looking, \(name)!\n", attributes: normalAttributes), NSAttributedString(string: "Willie Geist" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "\(name) just doesn't know about winning! But a nice person.\n", attributes: normalAttributes), NSAttributedString(string: "Bernard Goldberg" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "Sleepy Eyes, \(name)!\n", attributes: normalAttributes), NSAttributedString(string: "Bernard Goldberg" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s not smart enough to know what's going on at the border.\n", attributes: normalAttributes), NSAttributedString(string: "Mary Katharine Ham" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s just a 3rd rate 'gotcha' guy!\n", attributes: normalAttributes), NSAttributedString(string: "Hugh Hewitt" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "\(name) wouldn't know the truth if it hit them in the face.\n", attributes: normalAttributes), NSAttributedString(string: "Jeff Horwitz" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "Liberal clown.\n", attributes: normalAttributes), NSAttributedString(string: "Arianna Huffington" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "Dope!\n", attributes: normalAttributes), NSAttributedString(string: "Brit Hume" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "\(name)'s so average in so many ways!\n", attributes: normalAttributes), NSAttributedString(string: "Megyn Kelly" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name)'s sick, & the most overrated person!\n", attributes: normalAttributes), NSAttributedString(string: "Megyn Kelly" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name), get a life!\n", attributes: normalAttributes), NSAttributedString(string: "Megyn Kelly" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "I refuse to call \(name) a bimbo, because that would not be politically correct.\n", attributes: normalAttributes), NSAttributedString(string: "Megyn Kelly" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "\(name)'s very bad at math.\n", attributes: normalAttributes), NSAttributedString(string: "Megyn Kelly" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) should take another eleven day 'unscheduled' vacation.\n", attributes: normalAttributes), NSAttributedString(string: "Megyn Kelly" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "No focus, poor level of concentration!\n", attributes: normalAttributes), NSAttributedString(string: "Ruth Marcus" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "I think \(name) should have gone to prison for what they did.\n", attributes: normalAttributes), NSAttributedString(string: "Steve Rattner" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "Not much power or insight!\n", attributes: normalAttributes), NSAttributedString(string: "Joe Scarborough" , attributes: subtitleAttributes))]
+        weakArray += [(NSMutableAttributedString(string: "\(name)'s a major lightweight with no credibility.\n", attributes: normalAttributes), NSAttributedString(string: "Ben Schreckinger" , attributes: subtitleAttributes))]
+        bestArray += [(NSMutableAttributedString(string: "Hater & racist.\n", attributes: normalAttributes), NSAttributedString(string: "Tavis Smiley" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "\(name) should be ashamed of themselves.\n", attributes: normalAttributes), NSAttributedString(string: "Shep Smith" , attributes: subtitleAttributes))]
+        stupidArray += [(NSMutableAttributedString(string: "Really dumb puppet.\n", attributes: normalAttributes), NSAttributedString(string: "Marc Threaten (sic)" , attributes: subtitleAttributes))]
+        worthlessArray += [(NSMutableAttributedString(string: "Sleepy eyes \(name) will be fired like a dog. I can't imagine what is taking so long!\n", attributes: normalAttributes), NSAttributedString(string: "Chuck Todd" , attributes: subtitleAttributes))]
+        
+        buttonTitles["Liar"] = liarArray
+        buttonTitles["Weak"] = weakArray
+        buttonTitles["Ugly"] = uglyArray
+        buttonTitles["Stupid"] = stupidArray
+        buttonTitles["Manipulative"] = manipulativeArray
+        buttonTitles["Worthless"] = worthlessArray
+        buttonTitles["The Best"] = bestArray
+        buttonTitles["Jealous"] = jealousArray
+        buttonTitles["Uptight"] = uptightArray
+        buttonTitles["Crazy"] = crazyArray
+        buttonTitles["Sleazy"] = sleazyArray
+        buttonTitles["What?"] = whatArray
+        buttonTitles["Poor"] = poorArray
+    }
+
     
 }
