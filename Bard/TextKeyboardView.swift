@@ -11,7 +11,7 @@ import UIKit
 import QuartzCore
 
 class TextKeyboardView: UIView {
-    var activeTextField: UITextField? = nil
+    var activeButton: UIButton? = nil
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     
     func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String], inout buttons: [UIButton]) {
@@ -213,13 +213,15 @@ class TextKeyboardView: UIView {
     func didTapTextButton(sender: AnyObject?) {
         
         let button = sender as! UIButton
-        let title = button.titleForState(.Normal)
-        activeTextField!.insertText(title!)
+        let letter = button.titleForState(.Normal)
+        let oldLabel = activeButton!.titleForState(.Normal)
+        activeButton!.setTitle("\(oldLabel!)\(letter!)", forState: .Normal)
         
     }
     
     func didPressSpace(sender: AnyObject?) {
-        activeTextField!.insertText(" ")
+        let oldLabel = activeButton!.titleForState(.Normal)
+        activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
     }
     
 

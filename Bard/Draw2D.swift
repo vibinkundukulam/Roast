@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Draw2D: UIView {
+class Draw2D: UIControl {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

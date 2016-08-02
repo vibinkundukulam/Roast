@@ -12,9 +12,8 @@ import QuartzCore
 
 class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
-    // Consraints
+    // Table consraints
     
-    @IBOutlet weak var nameEntryTextFieldLeft: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewHeaderTop: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewHeaderBottom: NSLayoutConstraint!
     var expandedCategoryTableViewHeaderTopConstraint: NSLayoutConstraint? = nil
@@ -38,9 +37,11 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // Name input
     
     @IBOutlet weak var nameView: UIView!
-    @IBOutlet weak var nameEntryTextField: UITextField!
+    @IBOutlet weak var nameEntryButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var backButton: Draw2D!
+    @IBOutlet weak var nameEntryButtonLeft: NSLayoutConstraint!
+    
     
     
     // Choose quote
@@ -141,24 +142,26 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         var categoryArray = Array(self.buttonTitles.keys).sort(<)
         selectedCategory = categoryArray[0]
         lastCategoryDisplayed = selectedCategory
+        nameEntryButton.setTitle("", forState: .Normal)
+        
         
         // Set up name entry text field
         
-        nameEntryTextField.layer.borderColor = borderColor
-        nameEntryTextField.layer.cornerRadius = 10
-        nameEntryTextField.layer.borderWidth = 1
+        nameEntryButton.layer.borderColor = borderColor
+        nameEntryButton.layer.cornerRadius = 10
+        nameEntryButton.layer.borderWidth = 1
         
-        nameEntryTextField.delegate = self
+        nameEntryButton.addTarget(self, action: "nameEntryButtonPressed:", forControlEvents: .TouchUpInside)
         
         nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
         showNameLabel()
         
         
+        
+        
         // Set up text keyboard in background
         
-        backButton.userInteractionEnabled = true
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("backButtonPressed"))
-        backButton.addGestureRecognizer(gestureRecognizer)
+        backButton.addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
         
         self.view.setNeedsLayout()
         self.textKeyboardRowOne.setNeedsLayout()
@@ -179,7 +182,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         
         buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        buttonsRowFour[2].addTarget(self, action: "trumpButtonPressed:", forControlEvents: .TouchUpInside)
+        buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
         
         backButton.hidden = true
         textKeyboardView.hidden = true
@@ -231,11 +234,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     //
     //
     
-    func trumpButtonPressed(sender: AnyObject?) {
-        nameEntryTextField.resignFirstResponder()
-    }
-    
-    func textFieldDidBeginEditing(textField: UITextField) {    //delegate method
+    func nameEntryButtonPressed(button: UIButton) {    //delegate method
         
         backButton.backgroundColor = UIColor.whiteColor()
         nameLabel.hidden = true
@@ -244,30 +243,34 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         backButton.hidden = false
         textKeyboardView.hidden = false
         
-        nameEntryTextFieldLeft.constant = 30
-        nameEntryTextField.layer.borderColor = activeColor.CGColor
-        UIView.animateWithDuration(0.2, animations: {
-            self.nameEntryTextField.layoutIfNeeded()
-        })
+        nameEntryButtonLeft.constant = 30.0
         
-        textKeyboardView.activeTextField = nameEntryTextField
+        UIView.animateWithDuration(0.2, animations: {
+        self.nameView.layoutIfNeeded()
+        })
+
+
+        
+
+        nameEntryButton.layer.borderColor = activeColor.CGColor
+
+        
+        textKeyboardView.activeButton = nameEntryButton
 
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {  //delegate method
-
+    func nameEntryButtonDidEndEditing(sender: AnyObject?) {
+        name = textKeyboardView.activeButton!.titleForState(.Normal)!
         
-        nameEntryTextField.layer.borderColor = borderColor
+        nameEntryButton.layer.borderColor = borderColor
         textKeyboardView.hidden = true
         backButton.hidden = true
-        showNameLabel()
         chooseQuoteView.hidden = false
+        showNameLabel()
         
-        nameEntryTextFieldLeft.constant = 10
-        nameEntryTextField.layoutIfNeeded()
-        name = nameEntryTextField.text!
+        nameEntryButtonLeft.constant = 10.0
         
-        if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
+        if name == "" {
             createInsultsWithoutName()
         } else {
             createInsultsWithName()
@@ -276,12 +279,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         tableView1.reloadData()
         
-        textKeyboardView.activeTextField = nil
+        textKeyboardView.activeButton = nil
+
 
     }
 
     func showNameLabel() {
-        if nameEntryTextField.text == "" && !nameEntryTextField.isFirstResponder() {
+        if name == "" {
             nameLabel.hidden = false
         }
     }
@@ -485,11 +489,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func deletePressed(button: UIButton) {
         (textDocumentProxy as UIKeyInput).deleteBackward()
         wasDeleteLastKey = wasDeleteLastKey + 1
-    }
-    
-    func backButtonPressed() {
-        nameEntryTextField.resignFirstResponder()
-        backButton.backgroundColor = activeColor
     }
     
 

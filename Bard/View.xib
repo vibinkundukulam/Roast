@@ -17,8 +17,8 @@
                 <outlet property="chooseQuoteView" destination="S6X-cn-8I0" id="gzJ-nI-kdM"/>
                 <outlet property="deleteButton" destination="8fM-hd-egg" id="TQI-02-B1C"/>
                 <outlet property="expandCategoryButton" destination="MZg-ph-cbY" id="0kN-j6-deN"/>
-                <outlet property="nameEntryTextField" destination="2pX-DR-sNE" id="qNi-xI-DcY"/>
-                <outlet property="nameEntryTextFieldLeft" destination="Okl-na-ZKY" id="g33-xG-0Pr"/>
+                <outlet property="nameEntryButton" destination="8p6-Gv-7WO" id="JNI-nl-Ym6"/>
+                <outlet property="nameEntryButtonLeft" destination="jYQ-Ll-gkh" id="O95-wz-bN0"/>
                 <outlet property="nameLabel" destination="R9a-B8-WKM" id="vB7-El-qGh"/>
                 <outlet property="nameView" destination="Npz-By-jUS" id="cdh-8Q-Xlw"/>
                 <outlet property="nextKeyboard" destination="0Kw-gm-kfa" id="c2y-31-njy"/>
@@ -59,11 +59,12 @@
                                 <constraint firstAttribute="width" constant="30" id="yGk-To-LPG"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2pX-DR-sNE" userLabel="Name Entry Text Field">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p6-Gv-7WO" userLabel="Name Entry Button">
                             <rect key="frame" x="10" y="4" width="300" height="16"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
+                            <state key="normal">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                        </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9a-B8-WKM">
                             <rect key="frame" x="20" y="2" width="45" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -72,24 +73,18 @@
                         </label>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="R9a-B8-WKM" firstAttribute="leading" secondItem="2pX-DR-sNE" secondAttribute="leading" constant="10" id="4x0-hL-ro0"/>
-                        <constraint firstAttribute="bottom" secondItem="2pX-DR-sNE" secondAttribute="bottom" constant="4" id="6Td-uC-4y7"/>
-                        <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" constant="4" id="AzB-Ht-xeM"/>
-                        <constraint firstItem="2pX-DR-sNE" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" id="ECS-6H-ehW"/>
+                        <constraint firstAttribute="trailing" secondItem="8p6-Gv-7WO" secondAttribute="trailing" constant="10" id="7V2-9s-chx"/>
+                        <constraint firstItem="R9a-B8-WKM" firstAttribute="leading" secondItem="8p6-Gv-7WO" secondAttribute="leading" constant="10" id="L4n-0L-33F"/>
                         <constraint firstItem="mnK-9n-OIn" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" id="NUv-jI-cWE"/>
-                        <constraint firstItem="2pX-DR-sNE" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" constant="10" id="Okl-na-ZKY"/>
                         <constraint firstItem="mnK-9n-OIn" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" id="PA1-FA-OGI"/>
+                        <constraint firstItem="R9a-B8-WKM" firstAttribute="centerY" secondItem="8p6-Gv-7WO" secondAttribute="centerY" id="Q4Q-xG-nl0"/>
+                        <constraint firstItem="8p6-Gv-7WO" firstAttribute="top" secondItem="Npz-By-jUS" secondAttribute="top" constant="4" id="fbb-Ew-ByX"/>
+                        <constraint firstItem="8p6-Gv-7WO" firstAttribute="centerY" secondItem="Npz-By-jUS" secondAttribute="centerY" id="gZI-PT-H8n"/>
+                        <constraint firstItem="8p6-Gv-7WO" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" constant="10" id="jYQ-Ll-gkh"/>
                         <constraint firstAttribute="bottom" secondItem="mnK-9n-OIn" secondAttribute="bottom" id="m4J-Bz-I2x"/>
-                        <constraint firstItem="R9a-B8-WKM" firstAttribute="centerY" secondItem="2pX-DR-sNE" secondAttribute="centerY" id="mY2-wJ-IRc"/>
-                        <constraint firstAttribute="trailing" secondItem="2pX-DR-sNE" secondAttribute="trailing" constant="10" id="ubW-sw-Gn4"/>
-                        <constraint firstItem="2pX-DR-sNE" firstAttribute="centerY" secondItem="Npz-By-jUS" secondAttribute="centerY" id="wYe-F5-shK"/>
                         <constraint firstAttribute="height" constant="24" id="xqV-zx-6ix"/>
+                        <constraint firstAttribute="bottom" secondItem="8p6-Gv-7WO" secondAttribute="bottom" constant="4" id="z1Z-aC-trc"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="ECS-6H-ehW"/>
-                        </mask>
-                    </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-gG-mVt" userLabel="Name-Quote Border View">
                     <rect key="frame" x="0.0" y="25" width="320" height="1"/>
@@ -331,6 +326,12 @@
                 </mask>
             </variation>
         </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NKZ-Vt-YG9">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button"/>
+            <point key="canvasLocation" x="401" y="64"/>
+        </button>
     </objects>
     <resources>
         <image name="arrow-icon-white.png" width="200" height="200"/>
