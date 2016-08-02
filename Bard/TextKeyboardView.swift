@@ -90,10 +90,8 @@ class TextKeyboardView: UIView {
         for (index, button) in buttons.enumerate() {
             
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-            topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
             
             let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
-            bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttons.count - 1 {
@@ -103,7 +101,6 @@ class TextKeyboardView: UIView {
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -spaceBetweenButtons)
                 
             }
-            rightConstraint.identifier = "Right Constraint for \(button.titleLabel!.text)"
             
             var leftConstraint : NSLayoutConstraint!
             var widthConstraint: NSLayoutConstraint!
@@ -136,30 +133,46 @@ class TextKeyboardView: UIView {
     
     func addShiftButtonConstraints(inout button: UIButton, mainView: UIView) {
         
+        // Calculate side margin based off 10 buttons in the top row
+        
+        let sideMargin = (mainView.frame.width - 10 * mainView.frame.width / 12 - mainView.frame.width / 60 * 9)/2
+        
+        // Calculate the button width
+        
+        let thirdRowSideMargin = (mainView.frame.width - 7 * mainView.frame.width / 12 - mainView.frame.width / 60 * 6)/2
+        let spaceBetweenButtons = mainView.frame.width / 60
+        let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
+        
         let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-    //    topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
         
         let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
-    //    bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
         
-        let leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: 2)
+        let leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
 
-        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 40)
+        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
             
         mainView.addConstraints([topConstraint, bottomConstraint, leftConstraint, widthConstraint])
     }
     
     func addDeleteButtonConstraints(inout button: UIButton, mainView: UIView) {
         
+        // Calculate side margin based off 10 buttons in the top row
+        
+        let sideMargin = (mainView.frame.width - 10 * mainView.frame.width / 12 - mainView.frame.width / 60 * 9)/2
+        
+        // Calculate the button width
+        
+        let thirdRowSideMargin = (mainView.frame.width - 7 * mainView.frame.width / 12 - mainView.frame.width / 60 * 6)/2
+        let spaceBetweenButtons = mainView.frame.width / 60
+        let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
+        
         let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-        //    topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
         
         let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
-        //    bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
         
-        let rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: 2)
+        let rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
         
-        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 40)
+        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
         
         mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, widthConstraint])
     }
@@ -182,10 +195,8 @@ class TextKeyboardView: UIView {
         for (index, button) in buttons.enumerate() {
             
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-            topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
             
             let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
-            bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttons.count - 1 {
@@ -195,7 +206,6 @@ class TextKeyboardView: UIView {
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -spaceBetweenButtons)
                 
             }
-            rightConstraint.identifier = "Right Constraint for \(button.titleLabel!.text)"
             
             var leftConstraint : NSLayoutConstraint!
             
