@@ -164,7 +164,7 @@
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="pay-9Y-nk4">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="globe-white-vectorized" translatesAutoresizingMaskIntoConstraints="NO" id="pay-9Y-nk4">
                                     <rect key="frame" x="8" y="10" width="25" height="25"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -188,7 +188,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-icon-white.png" translatesAutoresizingMaskIntoConstraints="NO" id="NeG-D6-vRC">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-white-vectorized" translatesAutoresizingMaskIntoConstraints="NO" id="NeG-D6-vRC">
                                     <rect key="frame" x="285" y="10" width="25" height="25"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -295,15 +295,9 @@
                 </mask>
             </variation>
         </view>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NKZ-Vt-YG9">
-            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <state key="normal" title="Button"/>
-            <point key="canvasLocation" x="401" y="64"/>
-        </button>
     </objects>
     <resources>
-        <image name="arrow-icon-white.png" width="200" height="200"/>
-        <image name="globe-icon.png" width="594" height="598"/>
+        <image name="arrow-white-vectorized" width="300" height="300"/>
+        <image name="globe-white-vectorized" width="300" height="300"/>
     </resources>
 </document>

@@ -21,9 +21,6 @@
 		C47A18FF1D494BE500032D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F74526B1B55AE6A0045CBF8 /* Images.xcassets */; };
 		C47A19001D494BF700032D47 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F5CE8BE1B743B7200B7539F /* Images.xcassets */; };
 		C47E47741D44FFD900A90006 /* TextKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47E47731D44FFD900A90006 /* TextKeyboardView.swift */; };
-		C4EED5431D4070B200AA1556 /* globe-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5421D4070B200AA1556 /* globe-icon.png */; };
-		C4EED5451D4070CB00AA1556 /* arrow-icon-white.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */; };
-		C4EED5491D40732C00AA1556 /* delete-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C4EED5481D40732C00AA1556 /* delete-icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,9 +74,6 @@
 		5FE21F2D1B700FCA00B87FBC /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		C45B176B1D499FCE0024C935 /* Draw2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Draw2D.swift; sourceTree = "<group>"; };
 		C47E47731D44FFD900A90006 /* TextKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextKeyboardView.swift; sourceTree = "<group>"; };
-		C4EED5421D4070B200AA1556 /* globe-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "globe-icon.png"; sourceTree = "<group>"; };
-		C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-icon-white.png"; sourceTree = "<group>"; };
-		C4EED5481D40732C00AA1556 /* delete-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete-icon.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,10 +168,7 @@
 				C45B176B1D499FCE0024C935 /* Draw2D.swift */,
 				C47E47731D44FFD900A90006 /* TextKeyboardView.swift */,
 				5FE21F2D1B700FCA00B87FBC /* View.xib */,
-				C4EED5481D40732C00AA1556 /* delete-icon.png */,
-				C4EED5421D4070B200AA1556 /* globe-icon.png */,
 				5F5CE8BE1B743B7200B7539F /* Images.xcassets */,
-				C4EED5441D4070CB00AA1556 /* arrow-icon-white.png */,
 				5F74528A1B55AE800045CBF8 /* Supporting Files */,
 			);
 			path = Bard;
@@ -326,12 +317,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4EED5451D4070CB00AA1556 /* arrow-icon-white.png in Resources */,
-				C4EED5491D40732C00AA1556 /* delete-icon.png in Resources */,
 				C47A18FF1D494BE500032D47 /* Images.xcassets in Resources */,
 				5F5CE8BF1B743B7200B7539F /* Images.xcassets in Resources */,
 				C45B176D1D4EC49D0024C935 /* View.xib in Resources */,
-				C4EED5431D4070B200AA1556 /* globe-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
