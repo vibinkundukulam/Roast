@@ -44,6 +44,32 @@ class TextKeyboardView: UIView {
             buttons.append(button)
             keyboardRowView.addSubview(button)
         }
+        
+        
+    }
+    
+    func addShiftButton(inout keyboardRowView: UIView!, inout button: UIButton) {
+        var newButton: UIButton
+        newButton = createShiftButton()
+        
+        newButton.setTitle("CAPS", forState: .Normal)
+        newButton.titleLabel!.font = UIFont.systemFontOfSize(16)
+        newButton.layer.cornerRadius = 5
+        newButton.translatesAutoresizingMaskIntoConstraints = false
+        button = newButton
+        keyboardRowView.addSubview(newButton)
+    }
+    
+    func addDeleteButton(inout keyboardRowView: UIView!, inout button: UIButton) {
+        var newButton: UIButton
+        newButton = createDeleteButton()
+        
+        newButton.setTitle("DEL", forState: .Normal)
+        newButton.titleLabel!.font = UIFont.systemFontOfSize(16)
+        newButton.layer.cornerRadius = 5
+        newButton.translatesAutoresizingMaskIntoConstraints = false
+        button = newButton
+        keyboardRowView.addSubview(button)
     }
 
     func addIndividualButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
@@ -106,6 +132,36 @@ class TextKeyboardView: UIView {
             
         }
         buttons.removeAll()
+    }
+    
+    func addShiftButtonConstraints(inout button: UIButton, mainView: UIView) {
+        
+        let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
+    //    topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
+        
+        let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
+    //    bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
+        
+        let leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: 2)
+
+        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 40)
+            
+        mainView.addConstraints([topConstraint, bottomConstraint, leftConstraint, widthConstraint])
+    }
+    
+    func addDeleteButtonConstraints(inout button: UIButton, mainView: UIView) {
+        
+        let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
+        //    topConstraint.identifier = "Top Constraint for \(button.titleLabel!.text)"
+        
+        let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
+        //    bottomConstraint.identifier = "Bottom Constraint for \(button.titleLabel!.text)"
+        
+        let rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: 2)
+        
+        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 40)
+        
+        mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, widthConstraint])
     }
     
     func addFinalRowButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
@@ -177,10 +233,28 @@ class TextKeyboardView: UIView {
 
     }
     
+    
+    
     func createButtonWithTitle() -> UIButton {
         let button = UIButton(type: .System) as UIButton         // exact size doesn't matter
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.addTarget(self, action: "didTapTextButton:", forControlEvents: .TouchUpInside)
+        
+        return button
+    }
+    
+    func createShiftButton() -> UIButton {
+        let button = UIButton(type: .System) as UIButton
+        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        
+        return button
+    }
+    
+    func createDeleteButton() -> UIButton {
+        let button = UIButton(type: .System) as UIButton
+        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         
         return button
     }

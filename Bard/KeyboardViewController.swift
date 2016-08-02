@@ -101,6 +101,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     var buttonsRowTwo = [UIButton]()
     var buttonsRowThree = [UIButton]()
     var buttonsRowFour = [UIButton]()
+    var shiftButton = UIButton()
+    var deleteButton = UIButton()
     
     
     
@@ -173,10 +175,17 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
         textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
         textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        
+        textKeyboardView.addShiftButton(&textKeyboardRowThree, button: &shiftButton)
+        textKeyboardView.addDeleteButton(&textKeyboardRowThree, button: &deleteButton)
+        
+        
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
         textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
+        textKeyboardView.addShiftButtonConstraints(&shiftButton, mainView: textKeyboardRowThree)
+        textKeyboardView.addDeleteButtonConstraints(&deleteButton, mainView: textKeyboardRowThree)
         
         
         buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
