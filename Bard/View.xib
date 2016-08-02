@@ -15,7 +15,6 @@
                 <outlet property="categoryTableViewHeaderBottom" destination="EOl-Jd-EAV" id="LSP-WT-Thc"/>
                 <outlet property="categoryTableViewHeaderTop" destination="kGV-7r-GS3" id="DEg-x2-E6Y"/>
                 <outlet property="chooseQuoteView" destination="S6X-cn-8I0" id="gzJ-nI-kdM"/>
-                <outlet property="deleteButton" destination="8fM-hd-egg" id="TQI-02-B1C"/>
                 <outlet property="expandCategoryButton" destination="MZg-ph-cbY" id="0kN-j6-deN"/>
                 <outlet property="nameEntryButton" destination="8p6-Gv-7WO" id="JNI-nl-Ym6"/>
                 <outlet property="nameEntryButtonLeft" destination="jYQ-Ll-gkh" id="O95-wz-bN0"/>
@@ -173,21 +172,8 @@
                                         <constraint firstAttribute="width" constant="25" id="mXJ-MP-7Uv"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fM-hd-egg" userLabel="Delete Button">
-                                    <rect key="frame" x="40" y="0.0" width="40" height="44"/>
-                                    <color key="backgroundColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="40" id="aKq-Un-qN0"/>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="qSW-pv-SMJ"/>
-                                    </constraints>
-                                    <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <state key="normal">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MZg-ph-cbY" userLabel="Expand Category Button">
-                                    <rect key="frame" x="80" y="0.0" width="240" height="44"/>
+                                    <rect key="frame" x="40" y="0.0" width="280" height="44"/>
                                     <color key="backgroundColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <state key="normal">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -210,23 +196,13 @@
                                         <constraint firstAttribute="height" constant="25" id="ge9-mF-e4w"/>
                                     </constraints>
                                 </imageView>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delete-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-I8-9YA" userLabel="Delete Icon">
-                                    <rect key="frame" x="40" y="2" width="40" height="40"/>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="40" id="acs-lc-WiN"/>
-                                        <constraint firstAttribute="height" constant="40" id="vw2-jT-jdW"/>
-                                    </constraints>
-                                </imageView>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="centerX" secondItem="g9M-jz-emq" secondAttribute="centerX" id="1qm-Wr-1X6"/>
                                 <constraint firstItem="0Kw-gm-kfa" firstAttribute="leading" secondItem="yXf-Vk-oPY" secondAttribute="leading" id="2WR-St-mfT"/>
                                 <constraint firstAttribute="height" constant="44" identifier="Category Table View Header Height" id="5hy-DS-LpW"/>
-                                <constraint firstAttribute="centerY" secondItem="NZ7-I8-9YA" secondAttribute="centerY" id="BV3-Tm-Wd1"/>
-                                <constraint firstAttribute="centerX" secondItem="NZ7-I8-9YA" secondAttribute="centerX" id="GfH-wf-TE3"/>
                                 <constraint firstAttribute="centerY" secondItem="NeG-D6-vRC" secondAttribute="centerY" id="LC4-R6-PDn"/>
-                                <constraint firstItem="NZ7-I8-9YA" firstAttribute="centerX" secondItem="8fM-hd-egg" secondAttribute="centerX" id="NR1-kG-Zf3"/>
+                                <constraint firstItem="MZg-ph-cbY" firstAttribute="leading" secondItem="0Kw-gm-kfa" secondAttribute="trailing" id="Spp-6F-wQm"/>
                                 <constraint firstItem="0Kw-gm-kfa" firstAttribute="top" secondItem="yXf-Vk-oPY" secondAttribute="top" id="VYs-Tb-0p3"/>
                                 <constraint firstAttribute="centerY" secondItem="NeG-D6-vRC" secondAttribute="centerY" constant="-0.5" id="VfQ-aj-pfa"/>
                                 <constraint firstAttribute="bottom" secondItem="0Kw-gm-kfa" secondAttribute="bottom" id="XoD-oY-kxF"/>
@@ -234,21 +210,14 @@
                                 <constraint firstItem="0Kw-gm-kfa" firstAttribute="centerX" secondItem="pay-9Y-nk4" secondAttribute="centerX" id="YJo-VZ-8El"/>
                                 <constraint firstAttribute="trailing" secondItem="NeG-D6-vRC" secondAttribute="trailing" constant="25" id="alJ-eD-nwp"/>
                                 <constraint firstItem="MZg-ph-cbY" firstAttribute="leading" secondItem="0Kw-gm-kfa" secondAttribute="trailing" id="bsn-O3-Oi7"/>
-                                <constraint firstItem="8fM-hd-egg" firstAttribute="leading" secondItem="0Kw-gm-kfa" secondAttribute="trailing" id="eTp-87-ozh"/>
-                                <constraint firstAttribute="bottom" secondItem="8fM-hd-egg" secondAttribute="bottom" id="ecv-HW-ANx"/>
-                                <constraint firstItem="NZ7-I8-9YA" firstAttribute="centerY" secondItem="8fM-hd-egg" secondAttribute="centerY" id="i9E-yy-fpj"/>
                                 <constraint firstAttribute="centerY" secondItem="g9M-jz-emq" secondAttribute="centerY" id="kIL-pe-bb4"/>
                                 <constraint firstAttribute="trailing" secondItem="NeG-D6-vRC" secondAttribute="trailing" constant="10" id="pa0-wA-S8d"/>
-                                <constraint firstItem="MZg-ph-cbY" firstAttribute="leading" secondItem="8fM-hd-egg" secondAttribute="trailing" id="rpd-ot-T6N"/>
                                 <constraint firstItem="MZg-ph-cbY" firstAttribute="top" secondItem="yXf-Vk-oPY" secondAttribute="top" id="sJi-Qq-Sod"/>
-                                <constraint firstItem="8fM-hd-egg" firstAttribute="top" secondItem="yXf-Vk-oPY" secondAttribute="top" id="ukU-4K-Z3v"/>
                                 <constraint firstItem="0Kw-gm-kfa" firstAttribute="centerY" secondItem="pay-9Y-nk4" secondAttribute="centerY" id="vKi-J8-Kjz"/>
                                 <constraint firstAttribute="bottom" secondItem="MZg-ph-cbY" secondAttribute="bottom" id="vtz-xP-JPH"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="BV3-Tm-Wd1"/>
-                                    <exclude reference="GfH-wf-TE3"/>
                                     <exclude reference="bsn-O3-Oi7"/>
                                     <exclude reference="LC4-R6-PDn"/>
                                     <exclude reference="alJ-eD-nwp"/>
@@ -335,7 +304,6 @@
     </objects>
     <resources>
         <image name="arrow-icon-white.png" width="200" height="200"/>
-        <image name="delete-icon.png" width="128" height="128"/>
         <image name="globe-icon.png" width="594" height="598"/>
     </resources>
 </document>

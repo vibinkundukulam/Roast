@@ -31,7 +31,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var textKeyboardRowFour: UIView!
     
     @IBOutlet weak var nextKeyboard: UIButton!
-    @IBOutlet weak var deleteButton: UIButton!
     
     
     // Name input
@@ -58,7 +57,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // Ensure keyboard remembers last key, quote, name
     
     var lastRow = -1
-    var wasDeleteLastKey = 0
     var lastCategorySelected = ""
     var selectedCategory = ""
     var lastCategoryDisplayed = ""
@@ -221,11 +219,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nextKeyboard.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
         nextKeyboard.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
         nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        
-        deleteButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
-        deleteButton.addTarget(self, action: "deletePressed:", forControlEvents: .TouchUpInside)
-        deleteButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchUpInside)
     }
     
     //
@@ -424,7 +417,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                 let lastQuote = lastCategoryQuotes![lastRow]
                 let lastString = lastQuote.0.string
-                let lastStringLength = lastString.characters.count - wasDeleteLastKey
+                let lastStringLength = lastString.characters.count
                 for var i = lastStringLength; i > 0; --i {
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
@@ -440,11 +433,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 }
                 
                 lastCategoryDisplayed = selectedCategory
-                wasDeleteLastKey = 0
                 
             } else {
                 (textDocumentProxy as UIKeyInput).insertText("\(string)")
-                wasDeleteLastKey = 0
                 lastRow = indexPath.row
                 lastCategorySelected = selectedCategory
             }
@@ -467,7 +458,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 var categoryQuotes = self.buttonTitles[selectedCategory]
                 let quote = categoryQuotes![indexPath.row]
                 let string = quote.0.string + "- " + quote.1.string
-                let stringLength = string.characters.count - wasDeleteLastKey
+                let stringLength = string.characters.count
                 for var i = stringLength; i > 0; --i {
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
@@ -484,11 +475,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
 
     func nextKeyboardPressed(button: UIButton) {
         advanceToNextInputMode()
-    }
-    
-    func deletePressed(button: UIButton) {
-        (textDocumentProxy as UIKeyInput).deleteBackward()
-        wasDeleteLastKey = wasDeleteLastKey + 1
     }
     
 
