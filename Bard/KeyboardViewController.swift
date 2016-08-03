@@ -600,8 +600,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         worthlessArray += [(NSMutableAttributedString(string: "A total waste of money!", attributes: normalAttributes), NSAttributedString(string: "on Jeb Bush's campaign" , attributes: subtitleAttributes))]
         weakArray += [(NSMutableAttributedString(string: "Very gentle and soft.", attributes: normalAttributes), NSAttributedString(string: "on Democratic candidates" , attributes: subtitleAttributes))]
         worthlessArray += [(NSMutableAttributedString(string: "Low level degenerate.", attributes: normalAttributes), NSAttributedString(string: "on ISIS" , attributes: subtitleAttributes))]
-        liarArray += [(NSMutableAttributedString(string: "All bull...all talk and no action.", attributes: normalAttributes), NSAttributedString(string: "on Other candidates" , attributes: subtitleAttributes))]
-        manipulativeArray += [(NSMutableAttributedString(string: "You're an expert in never facing any consequence.", attributes: normalAttributes), NSAttributedString(string: "on Politicians" , attributes: subtitleAttributes))]
+        liarArray += [(NSMutableAttributedString(string: "All bull...all talk and no action.", attributes: normalAttributes), NSAttributedString(string: "on other candidates" , attributes: subtitleAttributes))]
+        manipulativeArray += [(NSMutableAttributedString(string: "You're an expert in never facing any consequence.", attributes: normalAttributes), NSAttributedString(string: "on politicians" , attributes: subtitleAttributes))]
         
         buttonTitles["Liar"] = liarArray
         buttonTitles["Weak"] = weakArray

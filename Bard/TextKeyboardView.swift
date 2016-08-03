@@ -264,7 +264,7 @@ class TextKeyboardView: UIView {
         let button = UIButton(type: .System) as UIButton
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.backgroundColor = navColor
-        
+        button.addTarget(self, action: "didPressShift:", forControlEvents: .TouchUpInside)
         return button
     }
     
@@ -272,6 +272,7 @@ class TextKeyboardView: UIView {
         let button = UIButton(type: .System) as UIButton
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.backgroundColor = navColor
+        button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchUpInside)
         
         return button
     }
@@ -325,6 +326,19 @@ class TextKeyboardView: UIView {
     func didPressSpace(sender: AnyObject?) {
         let oldLabel = activeButton!.titleForState(.Normal)
         activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
+    }
+    
+    func didPressShift(sender: AnyObject?) {
+        
+        // PLACEHOLDER: change letters to caps
+        
+    }
+    
+    func didPressDelete(sender: AnyObject?) {
+        let oldLabel = activeButton!.titleForState(.Normal)
+        let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
+        activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
+        
     }
     
 
