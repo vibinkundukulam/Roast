@@ -315,7 +315,7 @@ class TextKeyboardView: UIView {
     }
     
     func didTapTextButton(sender: AnyObject?) {
-        
+   
         let button = sender as! UIButton
         let letter = button.titleForState(.Normal)
         let oldLabel = activeButton!.titleForState(.Normal)
@@ -336,9 +336,10 @@ class TextKeyboardView: UIView {
     
     func didPressDelete(sender: AnyObject?) {
         let oldLabel = activeButton!.titleForState(.Normal)
-        let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
-        activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
-        
+        if oldLabel!.characters.count > 0 {
+            let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
+            activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
+        }
     }
     
 
