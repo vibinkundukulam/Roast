@@ -11,7 +11,9 @@ import UIKit
 import QuartzCore
 
 class TextKeyboardView: UIView {
-    var activeButton: UIButton? = nil
+    var activeButton: UIButton!
+    var timer: NSTimer!
+    var timecount: Int = 0
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
     
@@ -327,7 +329,7 @@ class TextKeyboardView: UIView {
         deleteImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
         button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchDown)
-        button.addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         
         return button
     }
@@ -376,18 +378,33 @@ class TextKeyboardView: UIView {
         activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
     }
     
-    func didPressDelete(button: UIButton) {
+    func didPressDelete(sender: AnyObject?) {
         let oldLabel = activeButton!.titleForState(.Normal)
         if oldLabel!.characters.count > 0 {
             let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
             activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
         }
-        button.backgroundColor = activeColor
-        button.imageView!.tintColor = UIColor.blackColor()
+        deleteButton.backgroundColor = activeColor
+        deleteButton.imageView!.tintColor = UIColor.blackColor()
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "rapidDelete:", userInfo: nil, repeats: true)
+        
+    }
+    
+    func rapidDelete(sender: AnyObject?) {
+        
+        let oldLabel = activeButton!.titleForState(.Normal)
+        if oldLabel!.characters.count > 0 {
+            let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
+            activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
+        }
+        deleteButton.backgroundColor = activeColor
+        deleteButton.imageView!.tintColor = UIColor.blackColor()
     }
     
     func navButtonInactive(button: UIButton) {
         button.backgroundColor = navColor
+        timer.invalidate()
     }
     
     func textButtonActive(button: UIButton) {
