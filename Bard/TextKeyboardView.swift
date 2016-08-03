@@ -29,6 +29,12 @@ class TextKeyboardView: UIView {
     var shiftButton = UIButton()
     var deleteButton = UIButton()
     
+    // Creating image icons
+    
+    let changeKeyboardImageView = UIImageView(image: UIImage(named: "globe-white-vectorized"))
+    let shiftImageView = UIImageView(image: UIImage(named: "shiftarrow-black")?.imageWithRenderingMode(.AlwaysTemplate))
+    let deleteImageView = UIImageView(image: UIImage(named: "delete-white-vectorized"))
+    
     
     func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String]) {
             for buttonTitle in buttonTitles {
@@ -61,6 +67,7 @@ class TextKeyboardView: UIView {
         for index in 0...2 {
             if index == 0 {
                 button = createChangeKeyboardButton()
+                button.addSubview(changeKeyboardImageView)
             } else if index == 1 {
                 button = createSpaceButton()
             } else {
@@ -78,13 +85,8 @@ class TextKeyboardView: UIView {
     
     func addShiftButton(inout keyboardRowView: UIView!) {
         shiftButton = createShiftButton()
-        
-        let shiftImage = UIImage(named: "shiftarrow-black")
-        
-        shiftButton.imageEdgeInsets = UIEdgeInsetsMake(12.0,10.0,12.0,10.0)
-        
-        shiftButton.setImage(shiftImage, forState: .Normal)
-        shiftButton.tintColor = UIColor.whiteColor()
+        shiftButton.addSubview(shiftImageView)
+        shiftImageView.tintColor = UIColor.whiteColor()
         shiftButton.layer.cornerRadius = 5
         shiftButton.translatesAutoresizingMaskIntoConstraints = false
         keyboardRowView.addSubview(shiftButton)
@@ -92,13 +94,8 @@ class TextKeyboardView: UIView {
     
     func addDeleteButton(inout keyboardRowView: UIView!) {
         deleteButton = createDeleteButton()
-        
-        let deleteImage = UIImage(named: "delete-white-vectorized")
-        
-        deleteButton.setImage(deleteImage, forState: .Normal)
-        
-        
-        deleteButton.tintColor = UIColor.whiteColor()
+        deleteButton.addSubview(deleteImageView)
+        deleteImageView.tintColor = UIColor.whiteColor()
         deleteButton.layer.cornerRadius = 5
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         keyboardRowView.addSubview(deleteButton)
@@ -184,6 +181,16 @@ class TextKeyboardView: UIView {
         let widthConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
             
         mainView.addConstraints([topConstraint, bottomConstraint, leftConstraint, widthConstraint])
+        
+        // Add image constraints
+        
+        let heightShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .Height, relatedBy: .Equal, toItem: shiftButton, attribute: .Height, multiplier: 0.60, constant: 0)
+        
+        let xShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterX, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
+        
+        let yShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterY, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+        
+        mainView.addConstraints([heightShiftConstraint, xShiftConstraint, yShiftConstraint])
     }
     
     func addDeleteButtonConstraints(mainView: UIView) {
@@ -207,6 +214,16 @@ class TextKeyboardView: UIView {
         let widthConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
         
         mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, widthConstraint])
+        
+        // Add image constraints
+        
+        let heightDeleteConstraint = NSLayoutConstraint(item: deleteImageView, attribute: .Height, relatedBy: .Equal, toItem: deleteButton, attribute: .Height, multiplier: 0.80, constant: 0)
+        
+        let xDeleteConstraint = NSLayoutConstraint(item: deleteImageView, attribute: .CenterX, relatedBy: .Equal, toItem: deleteButton, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
+        
+        let yDeleteConstraint = NSLayoutConstraint(item: deleteImageView, attribute: .CenterY, relatedBy: .Equal, toItem: deleteButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+        
+        mainView.addConstraints([heightDeleteConstraint, xDeleteConstraint, yDeleteConstraint])
     }
     
     func addFinalRowButtonConstraints(mainView: UIView) {
@@ -244,6 +261,16 @@ class TextKeyboardView: UIView {
             if index == 0 {
                 
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
+                
+                // Globe constraints
+                
+                let heightGlobeConstraint = NSLayoutConstraint(item: changeKeyboardImageView, attribute: .Height, relatedBy: .Equal, toItem: button, attribute: .Height, multiplier: 0.70, constant: 0)
+                
+                let xGlobeConstraint = NSLayoutConstraint(item: changeKeyboardImageView, attribute: .CenterX, relatedBy: .Equal, toItem: button, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
+                
+                 let yGlobeConstraint = NSLayoutConstraint(item: changeKeyboardImageView, attribute: .CenterY, relatedBy: .Equal, toItem: button, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+                
+                mainView.addConstraints([heightGlobeConstraint, xGlobeConstraint, yGlobeConstraint])
                 
                 
             } else {
@@ -287,14 +314,16 @@ class TextKeyboardView: UIView {
     
     func createShiftButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        shiftImageView.translatesAutoresizingMaskIntoConstraints = false
+        shiftImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
         return button
     }
     
     func createDeleteButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        deleteImageView.translatesAutoresizingMaskIntoConstraints = false
+        deleteImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
         button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchUpInside)
         
@@ -303,13 +332,8 @@ class TextKeyboardView: UIView {
     
     func createChangeKeyboardButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        
-        let changeKeyboardImage = UIImage(named: "globe-white-vectorized")
-        
-        button.imageEdgeInsets = UIEdgeInsetsMake(9.0,0.0,9.0,0.0)
-        
-        button.setImage(changeKeyboardImage, forState: .Normal)
-        button.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        changeKeyboardImageView.translatesAutoresizingMaskIntoConstraints = false
+        changeKeyboardImageView.contentMode = .ScaleAspectFit
         button.tintColor = UIColor.whiteColor()
         
         button.backgroundColor = navColor

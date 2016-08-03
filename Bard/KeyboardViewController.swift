@@ -148,6 +148,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         
         
+        self.view.autoresizesSubviews = true
         
         // Set up text keyboard in background
         
@@ -185,7 +186,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         backButton.hidden = true
         textKeyboardView.hidden = true
-        self.view.autoresizesSubviews = true
         
         
         // Set up table of quotes and categories
