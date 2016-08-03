@@ -14,20 +14,49 @@ class TextKeyboardView: UIView {
     var activeButton: UIButton? = nil
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     
-    func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String], inout buttons: [UIButton]) {
-        for buttonTitle in buttonTitles {
-            let button = createButtonWithTitle()
-            button.setTitle(buttonTitle, forState: .Normal)
-            button.titleLabel!.font = UIFont.systemFontOfSize(16)
-            button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            button.layer.cornerRadius = 5
-            button.translatesAutoresizingMaskIntoConstraints = false
-            buttons.append(button)
-            keyboardRowView.addSubview(button)
-        }
+    // Creating buttons for text keyboard
+    
+    let buttonTitlesRowOne = ["q","w","e","r","t","y","u","i","o","p"]
+    let buttonTitlesRowTwo = ["a","s","d","f","g","h","j","k","l"]
+    let buttonTitlesRowThree = ["z","x","c","v","b","n","m"]
+    let shiftedButtonTitlesRowOne = ["Q","W","E","R","T","Y","U","I","O","P"]
+    let shiftedButtonTitlesRowTwo = ["A","S","D","F","G","H","J","K","L"]
+    let shiftedButtonTitlesRowThree = ["Z","X","C","V","B","N","M"]
+    var buttonsRowOne = [UIButton]()
+    var buttonsRowTwo = [UIButton]()
+    var buttonsRowThree = [UIButton]()
+    var buttonsRowFour = [UIButton]()
+    var shiftButton = UIButton()
+    var deleteButton = UIButton()
+    
+    
+    func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String]) {
+            for buttonTitle in buttonTitles {
+                let button = createButtonWithTitle()
+                button.setTitle(buttonTitle, forState: .Normal)
+                button.titleLabel!.font = UIFont.systemFontOfSize(16)
+                button.setTitleColor(UIColor.blackColor(), forState: .Normal)
+                button.layer.cornerRadius = 5
+                button.translatesAutoresizingMaskIntoConstraints = false
+                if buttonTitles == buttonTitlesRowOne {
+                    buttonsRowOne.append(button)
+                } else if buttonTitles == buttonTitlesRowTwo {
+                    buttonsRowTwo.append(button)
+                } else if buttonTitles == buttonTitlesRowThree {
+                    buttonsRowThree.append(button)
+                } else if buttonTitles == shiftedButtonTitlesRowOne {
+                    buttonsRowOne.append(button)
+                } else if buttonTitles == shiftedButtonTitlesRowTwo {
+                    buttonsRowTwo.append(button)
+                } else if buttonTitles == shiftedButtonTitlesRowThree {
+                    buttonsRowThree.append(button)
+                }
+                keyboardRowView.addSubview(button)
+            }
+ 
     }
     
-    func addFinalRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String], inout buttons: [UIButton]) {
+    func addFinalRowOfButtons(inout keyboardRowView: UIView!) {
         var button: UIButton
         for index in 0...2 {
             if index == 0 {
@@ -40,43 +69,39 @@ class TextKeyboardView: UIView {
             
             button.layer.cornerRadius = 5
             button.translatesAutoresizingMaskIntoConstraints = false
-            buttons.append(button)
+            buttonsRowFour.append(button)
             keyboardRowView.addSubview(button)
         }
         
         
     }
     
-    func addShiftButton(inout keyboardRowView: UIView!, inout button: UIButton) {
-        var newButton: UIButton
-        newButton = createShiftButton()
+    func addShiftButton(inout keyboardRowView: UIView!) {
+        shiftButton = createShiftButton()
         
         let shiftImage = UIImage(named: "shiftarrow-black")
         
-        newButton.imageEdgeInsets = UIEdgeInsetsMake(12.0,10.0,12.0,10.0)
+        shiftButton.imageEdgeInsets = UIEdgeInsetsMake(12.0,10.0,12.0,10.0)
         
-        newButton.setImage(shiftImage, forState: .Normal)
-        newButton.tintColor = UIColor.whiteColor()
-        newButton.layer.cornerRadius = 5
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        button = newButton
-        keyboardRowView.addSubview(newButton)
+        shiftButton.setImage(shiftImage, forState: .Normal)
+        shiftButton.tintColor = UIColor.whiteColor()
+        shiftButton.layer.cornerRadius = 5
+        shiftButton.translatesAutoresizingMaskIntoConstraints = false
+        keyboardRowView.addSubview(shiftButton)
     }
     
-    func addDeleteButton(inout keyboardRowView: UIView!, inout button: UIButton) {
-        var newButton: UIButton
-        newButton = createDeleteButton()
+    func addDeleteButton(inout keyboardRowView: UIView!) {
+        deleteButton = createDeleteButton()
         
         let deleteImage = UIImage(named: "delete-white-vectorized")
         
-        newButton.setImage(deleteImage, forState: .Normal)
+        deleteButton.setImage(deleteImage, forState: .Normal)
         
         
-        newButton.tintColor = UIColor.whiteColor()
-        newButton.layer.cornerRadius = 5
-        newButton.translatesAutoresizingMaskIntoConstraints = false
-        button = newButton
-        keyboardRowView.addSubview(button)
+        deleteButton.tintColor = UIColor.whiteColor()
+        deleteButton.layer.cornerRadius = 5
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        keyboardRowView.addSubview(deleteButton)
     }
 
     func addIndividualButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
@@ -138,7 +163,7 @@ class TextKeyboardView: UIView {
         buttons.removeAll()
     }
     
-    func addShiftButtonConstraints(inout button: UIButton, mainView: UIView) {
+    func addShiftButtonConstraints(mainView: UIView) {
         
         // Calculate side margin based off 10 buttons in the top row
         
@@ -150,18 +175,18 @@ class TextKeyboardView: UIView {
         let spaceBetweenButtons = mainView.frame.width / 60
         let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
         
-        let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
+        let topConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
         
-        let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
+        let bottomConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
         
-        let leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
+        let leftConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
 
-        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
+        let widthConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
             
         mainView.addConstraints([topConstraint, bottomConstraint, leftConstraint, widthConstraint])
     }
     
-    func addDeleteButtonConstraints(inout button: UIButton, mainView: UIView) {
+    func addDeleteButtonConstraints(mainView: UIView) {
         
         // Calculate side margin based off 10 buttons in the top row
         
@@ -173,18 +198,18 @@ class TextKeyboardView: UIView {
         let spaceBetweenButtons = mainView.frame.width / 60
         let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
         
-        let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
+        let topConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
         
-        let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
+        let bottomConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
         
-        let rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
+        let rightConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
         
-        let widthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
+        let widthConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
         
         mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, widthConstraint])
     }
     
-    func addFinalRowButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
+    func addFinalRowButtonConstraints(mainView: UIView) {
         // Calculate spaces
         
         let numButtons = 10
@@ -199,17 +224,17 @@ class TextKeyboardView: UIView {
         
         // Set constraints
         
-        for (index, button) in buttons.enumerate() {
+        for (index, button) in buttonsRowFour.enumerate() {
             
             let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
             
             let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
             
             var rightConstraint : NSLayoutConstraint!
-            if index == buttons.count - 1 {
+            if index == buttonsRowFour.count - 1 {
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
             } else {
-                let nextButton = buttons[index+1]
+                let nextButton = buttonsRowFour[index+1]
                 rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -spaceBetweenButtons)
                 
             }
@@ -223,7 +248,7 @@ class TextKeyboardView: UIView {
                 
             } else {
                 
-                let prevtButton = buttons[index-1]
+                let prevtButton = buttonsRowFour[index-1]
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: spaceBetweenButtons)
                 
                 if index == 1 {
@@ -233,7 +258,7 @@ class TextKeyboardView: UIView {
                     spaceWidthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
                     
                 } else if index == 2 {
-                    let changeKeyboardButton = buttons[0]
+                    let changeKeyboardButton = buttonsRowFour[0]
                     let trumpWidthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: changeKeyboardButton, attribute: .Width, multiplier: 1.0, constant: 0.0)
                     
                     mainView.addConstraint(trumpWidthConstraint)
@@ -264,7 +289,6 @@ class TextKeyboardView: UIView {
         let button = UIButton(type: .System) as UIButton
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.backgroundColor = navColor
-        button.addTarget(self, action: "didPressShift:", forControlEvents: .TouchUpInside)
         return button
     }
     
@@ -326,12 +350,6 @@ class TextKeyboardView: UIView {
     func didPressSpace(sender: AnyObject?) {
         let oldLabel = activeButton!.titleForState(.Normal)
         activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
-    }
-    
-    func didPressShift(sender: AnyObject?) {
-        
-        // PLACEHOLDER: change letters to caps
-        
     }
     
     func didPressDelete(sender: AnyObject?) {

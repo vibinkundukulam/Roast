@@ -62,6 +62,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     var lastCategoryDisplayed = ""
     var sectionExpanded = false
     var name = ""
+    var shiftButtonPressed = false
     
     
     // Color scheme
@@ -90,21 +91,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             return [NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 14)!,NSForegroundColorAttributeName : textColor]
         }
     }
-    
-    // Creating buttons for text keyboard
-    
-    let buttonTitlesRowOne = ["q","w","e","r","t","y","u","i","o","p"]
-    let buttonTitlesRowTwo = ["a","s","d","f","g","h","j","k","l"]
-    let buttonTitlesRowThree = ["z","x","c","v","b","n","m"]
-    let buttonTitlesRowFour = ["CHG", "Space", "Trump 'Em"]
-    var buttonsRowOne = [UIButton]()
-    var buttonsRowTwo = [UIButton]()
-    var buttonsRowThree = [UIButton]()
-    var buttonsRowFour = [UIButton]()
-    var shiftButton = UIButton()
-    var deleteButton = UIButton()
-    
-    
+
     
     // Creating initial arrays to hold quotes
     
@@ -174,25 +161,27 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.view.layoutIfNeeded()
         
         
-        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: buttonTitlesRowOne, buttons: &buttonsRowOne)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: buttonTitlesRowTwo, buttons: &buttonsRowTwo)
-        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: buttonTitlesRowThree, buttons: &buttonsRowThree)
-        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour, buttonTitles: buttonTitlesRowFour, buttons: &buttonsRowFour)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
+        textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour)
         
-        textKeyboardView.addShiftButton(&textKeyboardRowThree, button: &shiftButton)
-        textKeyboardView.addDeleteButton(&textKeyboardRowThree, button: &deleteButton)
-        
-        
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowOne, mainView: textKeyboardRowOne)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowTwo, mainView: textKeyboardRowTwo)
-        textKeyboardView.addIndividualButtonConstraints(&buttonsRowThree, mainView: textKeyboardRowThree)
-        textKeyboardView.addFinalRowButtonConstraints(&buttonsRowFour, mainView: textKeyboardRowFour)
-        textKeyboardView.addShiftButtonConstraints(&shiftButton, mainView: textKeyboardRowThree)
-        textKeyboardView.addDeleteButtonConstraints(&deleteButton, mainView: textKeyboardRowThree)
+        textKeyboardView.addShiftButton(&textKeyboardRowThree)
+        textKeyboardView.addDeleteButton(&textKeyboardRowThree)
         
         
-        buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addFinalRowButtonConstraints(textKeyboardRowFour)
+        textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
+        textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
+        
+        
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+        textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents:. TouchUpInside)
+        
         
         backButton.hidden = true
         textKeyboardView.hidden = true
@@ -253,15 +242,57 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         UIView.animateWithDuration(0.2, animations: {
         self.nameView.layoutIfNeeded()
         })
+ 
 
-
-        
-
-        nameEntryButton.layer.borderColor = activeColor.CGColor
+        nameEntryButton.layer.borderColor = navColor.CGColor
 
         
         textKeyboardView.activeButton = nameEntryButton
 
+    }
+    
+    func shiftButtonPressed(sender: AnyObject?) {
+        if shiftButtonPressed {
+            for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
+            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
+            textKeyboardView.addShiftButton(&textKeyboardRowThree)
+            textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
+            textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
+            
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents:. TouchUpInside)
+            
+        } else {
+            
+            for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
+            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.shiftedButtonTitlesRowOne)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.shiftedButtonTitlesRowTwo)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.shiftedButtonTitlesRowThree)
+            textKeyboardView.addShiftButton(&textKeyboardRowThree)
+            textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
+            textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
+            
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents:. TouchUpInside)
+        }
+        
+        shiftButtonPressed = !shiftButtonPressed
     }
     
     func nameEntryButtonDidEndEditing(sender: AnyObject?) {
