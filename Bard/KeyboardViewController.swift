@@ -151,6 +151,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.layer.borderColor = borderColor
         nameEntryButton.layer.cornerRadius = 10
         nameEntryButton.layer.borderWidth = 1
+        nameEntryButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)
+        nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         
         nameEntryButton.addTarget(self, action: "nameEntryButtonPressed:", forControlEvents: .TouchUpInside)
         

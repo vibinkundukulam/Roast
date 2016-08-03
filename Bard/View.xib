@@ -58,8 +58,9 @@
                                 <constraint firstAttribute="width" constant="30" id="yGk-To-LPG"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p6-Gv-7WO" userLabel="Name Entry Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p6-Gv-7WO" userLabel="Name Entry Button">
                             <rect key="frame" x="10" y="4" width="300" height="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
