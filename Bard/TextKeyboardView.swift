@@ -37,8 +37,7 @@ class TextKeyboardView: UIView {
             } else {
                 button = createTrumpButton()
             }
-            button.setTitle(buttonTitles[index], forState: .Normal)
-            button.titleLabel!.font = UIFont.systemFontOfSize(16)
+            
             button.layer.cornerRadius = 5
             button.translatesAutoresizingMaskIntoConstraints = false
             buttons.append(button)
@@ -54,7 +53,7 @@ class TextKeyboardView: UIView {
         
         let shiftImage = UIImage(named: "shiftarrow-black")
         
-        newButton.imageEdgeInsets = UIEdgeInsetsMake(10.0,10.0,10.0,10.0)
+        newButton.imageEdgeInsets = UIEdgeInsetsMake(12.0,10.0,12.0,10.0)
         
         newButton.setImage(shiftImage, forState: .Normal)
         newButton.tintColor = UIColor.whiteColor()
@@ -279,7 +278,15 @@ class TextKeyboardView: UIView {
     
     func createChangeKeyboardButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        
+        let changeKeyboardImage = UIImage(named: "globe-white-vectorized")
+        
+        button.imageEdgeInsets = UIEdgeInsetsMake(9.0,0.0,9.0,0.0)
+        
+        button.setImage(changeKeyboardImage, forState: .Normal)
+        button.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        button.tintColor = UIColor.whiteColor()
+        
         button.backgroundColor = navColor
         
         return button
@@ -287,6 +294,8 @@ class TextKeyboardView: UIView {
     
     func createSpaceButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
+        button.setTitle("Space", forState: .Normal)
+        button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
         button.addTarget(self, action: "didPressSpace:", forControlEvents: .TouchUpInside)
@@ -296,6 +305,8 @@ class TextKeyboardView: UIView {
     
     func createTrumpButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
+        button.setTitle("Trump 'Em", forState: .Normal)
+        button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.backgroundColor = navColor
         
