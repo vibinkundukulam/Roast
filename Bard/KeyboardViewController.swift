@@ -239,10 +239,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         nameEntryButtonLeft.constant = 30.0
         
-        UIView.animateWithDuration(0.2, animations: {
         self.nameView.layoutIfNeeded()
-        })
- 
 
         nameEntryButton.layer.borderColor = navColor.CGColor
 
