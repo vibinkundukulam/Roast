@@ -153,6 +153,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         // Set up text keyboard in background
         
         backButton.addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+        backButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
+        backButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
         
         self.view.setNeedsLayout()
         self.textKeyboardRowOne.setNeedsLayout()
@@ -180,8 +182,15 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         
         textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+        
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
-        textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents:. TouchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
+        
+        textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
         
         
         backButton.hidden = true
@@ -217,8 +226,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         
-        nextKeyboard.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        nextKeyboard.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
+        nextKeyboard.addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+        nextKeyboard.addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
         nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
     }
     
@@ -265,8 +274,18 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
             
             textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+            
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
-            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents:. TouchUpInside)
+            
+            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+            
+            textKeyboardView.shiftButton.backgroundColor = navColor
+            textKeyboardView.shiftImageView.tintColor = UIColor.whiteColor()
+
             
         } else {
             
@@ -285,8 +304,17 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
             
             textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+            
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
-            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents:. TouchUpInside)
+    
+            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+            
+            textKeyboardView.shiftButton.backgroundColor = activeColor
+            textKeyboardView.shiftImageView.tintColor = UIColor.blackColor()
         }
         
         shiftButtonPressed = !shiftButtonPressed
@@ -510,6 +538,14 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     }
     
     func buttonInactive(button: UIButton) {
+        button.backgroundColor = UIColor.whiteColor()
+    }
+    
+    func navButtonActive(button: UIButton) {
+        button.backgroundColor = activeColor
+    }
+    
+    func navButtonInactive(button: UIButton) {
         button.backgroundColor = navColor
     }
 

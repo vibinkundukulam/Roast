@@ -13,6 +13,7 @@ import QuartzCore
 class TextKeyboardView: UIView {
     var activeButton: UIButton? = nil
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
+    let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
     
     // Creating buttons for text keyboard
     
@@ -73,7 +74,6 @@ class TextKeyboardView: UIView {
             } else {
                 button = createTrumpButton()
             }
-            
             button.layer.cornerRadius = 5
             button.translatesAutoresizingMaskIntoConstraints = false
             buttonsRowFour.append(button)
@@ -307,6 +307,7 @@ class TextKeyboardView: UIView {
     func createButtonWithTitle() -> UIButton {
         let button = UIButton(type: .System) as UIButton         // exact size doesn't matter
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
         button.addTarget(self, action: "didTapTextButton:", forControlEvents: .TouchUpInside)
         
         return button
@@ -325,7 +326,8 @@ class TextKeyboardView: UIView {
         deleteImageView.translatesAutoresizingMaskIntoConstraints = false
         deleteImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
-        button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchDown)
+        button.addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
         
         return button
     }
@@ -335,7 +337,6 @@ class TextKeyboardView: UIView {
         changeKeyboardImageView.translatesAutoresizingMaskIntoConstraints = false
         changeKeyboardImageView.contentMode = .ScaleAspectFit
         button.tintColor = UIColor.whiteColor()
-        
         button.backgroundColor = navColor
         
         return button
@@ -362,12 +363,11 @@ class TextKeyboardView: UIView {
         return button
     }
     
-    func didTapTextButton(sender: AnyObject?) {
-   
-        let button = sender as! UIButton
+    func didTapTextButton(button: UIButton) {
         let letter = button.titleForState(.Normal)
         let oldLabel = activeButton!.titleForState(.Normal)
         activeButton!.setTitle("\(oldLabel!)\(letter!)", forState: .Normal)
+        button.backgroundColor = UIColor.whiteColor()
         
     }
     
@@ -376,12 +376,22 @@ class TextKeyboardView: UIView {
         activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
     }
     
-    func didPressDelete(sender: AnyObject?) {
+    func didPressDelete(button: UIButton) {
         let oldLabel = activeButton!.titleForState(.Normal)
         if oldLabel!.characters.count > 0 {
             let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
             activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
         }
+        button.backgroundColor = activeColor
+        button.imageView!.tintColor = UIColor.blackColor()
+    }
+    
+    func navButtonInactive(button: UIButton) {
+        button.backgroundColor = navColor
+    }
+    
+    func textButtonActive(button: UIButton) {
+        button.backgroundColor = activeColor
     }
     
 
