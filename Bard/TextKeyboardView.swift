@@ -52,8 +52,12 @@ class TextKeyboardView: UIView {
         var newButton: UIButton
         newButton = createShiftButton()
         
-        newButton.setTitle("CAPS", forState: .Normal)
-        newButton.titleLabel!.font = UIFont.systemFontOfSize(16)
+        let shiftImage = UIImage(named: "shiftarrow-black")
+        
+        newButton.imageEdgeInsets = UIEdgeInsetsMake(10.0,10.0,10.0,10.0)
+        
+        newButton.setImage(shiftImage, forState: .Normal)
+        newButton.tintColor = UIColor.whiteColor()
         newButton.layer.cornerRadius = 5
         newButton.translatesAutoresizingMaskIntoConstraints = false
         button = newButton
@@ -64,8 +68,12 @@ class TextKeyboardView: UIView {
         var newButton: UIButton
         newButton = createDeleteButton()
         
-        newButton.setTitle("DEL", forState: .Normal)
-        newButton.titleLabel!.font = UIFont.systemFontOfSize(16)
+        let deleteImage = UIImage(named: "delete-white-vectorized")
+        
+        newButton.setImage(deleteImage, forState: .Normal)
+        
+        
+        newButton.tintColor = UIColor.whiteColor()
         newButton.layer.cornerRadius = 5
         newButton.translatesAutoresizingMaskIntoConstraints = false
         button = newButton
@@ -255,16 +263,16 @@ class TextKeyboardView: UIView {
     
     func createShiftButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.backgroundColor = navColor
         
         return button
     }
     
     func createDeleteButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        button.backgroundColor = navColor
         
         return button
     }
