@@ -11,7 +11,12 @@ import UIKit
 import QuartzCore
 
 class TextKeyboardView: UIView {
-    var activeButton: UIButton!
+    var activeButton = UIButton()
+    var name = "" {
+        didSet {
+            checkWhetherNameEmpty()
+        }
+    }
     var timer: NSTimer!
     var timecount: Int = 0
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
@@ -31,12 +36,14 @@ class TextKeyboardView: UIView {
     var buttonsRowFour = [UIButton]()
     var shiftButton = UIButton()
     var deleteButton = UIButton()
+    var cancelButton = UIButton()
     
     // Creating image icons
     
     let changeKeyboardImageView = UIImageView(image: UIImage(named: "globe-white-vectorized"))
     let shiftImageView = UIImageView(image: UIImage(named: "shiftarrow-black")?.imageWithRenderingMode(.AlwaysTemplate))
     let deleteImageView = UIImageView(image: UIImage(named: "delete-white-vectorized"))
+    let cancelImageView = UIImageView(image: UIImage(named: "cancel-black"))
     
     
     func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String]) {
@@ -83,6 +90,20 @@ class TextKeyboardView: UIView {
         }
         
         
+    }
+    
+    func addCancelButton(inout nameEntryButton: UIButton!){
+        cancelButton = UIButton(type: .System) as UIButton
+        cancelImageView.translatesAutoresizingMaskIntoConstraints = false
+        cancelImageView.contentMode = .ScaleAspectFit
+        cancelImageView.tintColor = UIColor.grayColor()
+        cancelButton.addSubview(cancelImageView)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        nameEntryButton.addSubview(cancelButton)
+        
+        cancelButton.addTarget(self, action: "clearName:", forControlEvents: .TouchUpInside)
+        cancelButton.addTarget(self, action: "cancelButtonActive:", forControlEvents: .TouchDown)
+        cancelButton.addTarget(self, action: "cancelButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
     }
     
     func addShiftButton(inout keyboardRowView: UIView!) {
@@ -160,6 +181,31 @@ class TextKeyboardView: UIView {
             
         }
         buttons.removeAll()
+    }
+    
+    func addCancelButtonConstraints(nameEntryButton: UIButton) {
+        
+        // Add button constraints
+        
+        let rightConstraint = NSLayoutConstraint(item: cancelButton, attribute: .Right, relatedBy: .Equal, toItem: nameEntryButton, attribute: .Right, multiplier: 1.0, constant: -10.0)
+        
+        let centerY = NSLayoutConstraint(item: cancelButton, attribute: .CenterY, relatedBy: .Equal, toItem: nameEntryButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+        
+        let heightConstraint = NSLayoutConstraint(item: cancelButton, attribute: .Height, relatedBy: .Equal, toItem: nameEntryButton, attribute: .Height, multiplier: 1.0, constant: 0.0)
+        
+        let widthConstraint = NSLayoutConstraint(item: cancelButton, attribute: .Width, relatedBy: .Equal, toItem: nameEntryButton, attribute: .Height, multiplier: 1.0, constant: 0.0)
+        
+        nameEntryButton.addConstraints([rightConstraint, centerY, heightConstraint, widthConstraint])
+        
+        // Add image constraints
+        
+        let cancelImageHeight = NSLayoutConstraint(item: cancelImageView, attribute: .Height, relatedBy: .Equal, toItem: cancelButton, attribute: .Height, multiplier: 0.60, constant: 0)
+        
+        let cancelImageX = NSLayoutConstraint(item: cancelImageView, attribute: .CenterX, relatedBy: .Equal, toItem: cancelButton, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
+        
+        let cancelImageY = NSLayoutConstraint(item: cancelImageView, attribute: .CenterY, relatedBy: .Equal, toItem: cancelButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+        
+        nameEntryButton.addConstraints([cancelImageHeight, cancelImageX, cancelImageY])
     }
     
     func addShiftButtonConstraints(mainView: UIView) {
@@ -360,30 +406,31 @@ class TextKeyboardView: UIView {
         button.setTitle("Trump 'Em", forState: .Normal)
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.backgroundColor = navColor
-        
+        button.backgroundColor = UIColor.darkGrayColor()
         return button
     }
     
     func didTapTextButton(button: UIButton) {
         let letter = button.titleForState(.Normal)
-        let oldLabel = activeButton!.titleForState(.Normal)
-        activeButton!.setTitle("\(oldLabel!)\(letter!)", forState: .Normal)
+        let oldLabel = activeButton.titleForState(.Normal)
+        name = "\(oldLabel!)\(letter!)"
+        activeButton.setTitle(name, forState: .Normal)
         button.backgroundColor = UIColor.whiteColor()
         
     }
     
     func didPressSpace(button: UIButton) {
-        let oldLabel = activeButton!.titleForState(.Normal)
-        activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
+        let oldLabel = activeButton.titleForState(.Normal)
+        name = "\(oldLabel!) "
+        activeButton.setTitle(name, forState: .Normal)
         button.backgroundColor = UIColor.whiteColor()
     }
     
     func didPressDelete(sender: AnyObject?) {
-        let oldLabel = activeButton!.titleForState(.Normal)
+        let oldLabel = activeButton.titleForState(.Normal)
         if oldLabel!.characters.count > 0 {
-            let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
-            activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
+            name = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
+            activeButton.setTitle(name, forState: .Normal)
         }
         deleteButton.backgroundColor = activeColor
         deleteButton.imageView!.tintColor = UIColor.blackColor()
@@ -397,13 +444,34 @@ class TextKeyboardView: UIView {
     
     func rapidDelete(sender: AnyObject?) {
         
-        let oldLabel = activeButton!.titleForState(.Normal)
+        let oldLabel = activeButton.titleForState(.Normal)
         if oldLabel!.characters.count > 0 {
-            let oldLabelDeleted = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
-            activeButton!.setTitle("\(oldLabelDeleted)", forState: .Normal)
+            name = (oldLabel! as NSString).substringToIndex(oldLabel!.characters.count - 1)
+            activeButton.setTitle(name, forState: .Normal)
         }
         deleteButton.backgroundColor = activeColor
         deleteButton.imageView!.tintColor = UIColor.blackColor()
+    }
+    
+    func checkWhetherNameEmpty() {
+        if name == "" {
+            cancelButton.hidden = true
+        } else {
+            cancelButton.hidden = false
+        }
+    }
+    
+    func clearName(sender: UIButton) {
+        name = ""
+        activeButton.setTitle(name, forState: .Normal)
+    }
+    
+    func cancelButtonActive(sender: UIButton) {
+        cancelButton.tintColor = activeColor
+    }
+    
+    func cancelButtonInactive(sender: UIButton) {
+        cancelButton.tintColor = UIColor.grayColor()
     }
     
     func navButtonInactive(button: UIButton) {

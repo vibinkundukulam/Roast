@@ -602,9 +602,9 @@
                                 </variation>
                             </view>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-xO-Rxa" userLabel="Test Text Field">
-                                <rect key="frame" x="38" y="27" width="300" height="30"/>
+                                <rect key="frame" x="38" y="17" width="300" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="GGu-tv-Q33"/>
+                                    <constraint firstAttribute="height" constant="100" id="GGu-tv-Q33"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -625,7 +625,7 @@
                             <constraint firstItem="cRh-xO-Rxa" firstAttribute="width" secondItem="1WC-h5-f02" secondAttribute="width" id="aBN-Es-32j"/>
                             <constraint firstItem="mwy-9B-4Gs" firstAttribute="top" secondItem="1WC-h5-f02" secondAttribute="bottom" id="b2D-fz-GTX"/>
                             <constraint firstItem="1WC-h5-f02" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.75" id="gzN-s1-X6U"/>
-                            <constraint firstItem="1WC-h5-f02" firstAttribute="top" secondItem="cRh-xO-Rxa" secondAttribute="bottom" constant="10" id="lQO-ce-Zgm"/>
+                            <constraint firstItem="1WC-h5-f02" firstAttribute="top" secondItem="cRh-xO-Rxa" secondAttribute="bottom" constant="-50" id="lQO-ce-Zgm"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="centerY" secondItem="1WC-h5-f02" secondAttribute="bottom" multiplier="1.2" id="nyt-Rc-gXc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwy-9B-4Gs" secondAttribute="trailing" id="szk-xR-xWN"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="1WC-h5-f02" secondAttribute="bottom" constant="200" id="yhc-lb-myy"/>

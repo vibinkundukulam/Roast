@@ -43,6 +43,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     
     
+    
     // Choose quote
     
     @IBOutlet weak var chooseQuoteView: UIView!
@@ -140,13 +141,14 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.layer.borderWidth = 1
         nameEntryButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)
         nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        
         nameEntryButton.addTarget(self, action: "nameEntryButtonPressed:", forControlEvents: .TouchUpInside)
         
         nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
         showNameLabel()
         
-        
+        textKeyboardView.addCancelButton(&nameEntryButton)
+        textKeyboardView.addCancelButtonConstraints(nameEntryButton)
+        textKeyboardView.cancelButton.hidden = true
         
         self.view.autoresizesSubviews = true
         
@@ -236,8 +238,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // End of view loading method
     //
     //
+
     
-    func nameEntryButtonPressed(button: UIButton) {    //delegate method
+    func nameEntryButtonPressed(button: UIButton) {
         
         backButton.backgroundColor = UIColor.whiteColor()
         nameLabel.hidden = true
@@ -247,6 +250,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.hidden = false
         
         nameEntryButtonLeft.constant = 30.0
+        
+        if nameEntryButton.titleForState(.Normal) == "" {
+            textKeyboardView.cancelButton.hidden = true
+        } else {
+            textKeyboardView.cancelButton.hidden = false
+        }
         
         self.nameView.layoutIfNeeded()
 
@@ -321,7 +330,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     }
     
     func nameEntryButtonDidEndEditing(sender: AnyObject?) {
-        name = textKeyboardView.activeButton!.titleForState(.Normal)!
+        name = textKeyboardView.activeButton.titleForState(.Normal)!
         
         nameEntryButton.layer.borderColor = borderColor
         textKeyboardView.hidden = true
@@ -337,11 +346,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             createInsultsWithName()
         }
         
-        
+        textKeyboardView.cancelButton.hidden = true
         tableView1.reloadData()
-        
-        textKeyboardView.activeButton = nil
-
 
     }
 
