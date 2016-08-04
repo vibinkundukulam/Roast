@@ -310,7 +310,7 @@ class TextKeyboardView: UIView {
         let button = UIButton(type: .System) as UIButton         // exact size doesn't matter
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
-        button.addTarget(self, action: "didTapTextButton:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: "didTapTextButton:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         
         return button
     }
@@ -329,7 +329,7 @@ class TextKeyboardView: UIView {
         deleteImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
         button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchDown)
-        button.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
+        button.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragExit, .TouchDragOutside])
         
         return button
     }
@@ -350,8 +350,8 @@ class TextKeyboardView: UIView {
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.addTarget(self, action: "didPressSpace:", forControlEvents: .TouchUpInside)
-        
+        button.addTarget(self, action: "didPressSpace:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
+        button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
         return button
     }
     
@@ -373,9 +373,10 @@ class TextKeyboardView: UIView {
         
     }
     
-    func didPressSpace(sender: AnyObject?) {
+    func didPressSpace(button: UIButton) {
         let oldLabel = activeButton!.titleForState(.Normal)
         activeButton!.setTitle("\(oldLabel!) ", forState: .Normal)
+        button.backgroundColor = UIColor.whiteColor()
     }
     
     func didPressDelete(sender: AnyObject?) {
@@ -387,8 +388,11 @@ class TextKeyboardView: UIView {
         deleteButton.backgroundColor = activeColor
         deleteButton.imageView!.tintColor = UIColor.blackColor()
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "rapidDelete:", userInfo: nil, repeats: true)
-        
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "beginRapidDelete:", userInfo: nil, repeats: false)
+    }
+    
+    func beginRapidDelete(sender: AnyObject?) {
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "rapidDelete:", userInfo: nil, repeats: true)
     }
     
     func rapidDelete(sender: AnyObject?) {

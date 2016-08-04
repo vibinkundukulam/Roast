@@ -154,7 +154,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         backButton.addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
         backButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        backButton.addTarget(self, action: "buttonInactive:", forControlEvents: .TouchDragExit)
+        backButton.addTarget(self, action: "buttonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         self.view.setNeedsLayout()
         self.textKeyboardRowOne.setNeedsLayout()
@@ -183,10 +183,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
         textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
         
@@ -227,7 +227,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         
         nextKeyboard.addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-        nextKeyboard.addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+        nextKeyboard.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
     }
     
@@ -275,10 +275,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
             textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
             
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
             
             textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
@@ -305,10 +305,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
             textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
             
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchDragExit)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
     
             textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
