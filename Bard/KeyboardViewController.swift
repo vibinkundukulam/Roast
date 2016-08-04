@@ -144,7 +144,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         nameEntryButton.addTarget(self, action: "nameEntryButtonPressed:", forControlEvents: .TouchUpInside)
         
-        nameLabel.attributedText = NSAttributedString(string: "Name...", attributes: inactiveTextAttributes)
+        nameLabel.attributedText = NSAttributedString(string: "Change name...", attributes: inactiveTextAttributes)
         showNameLabel()
         
         textKeyboardView.addCancelButton(&nameEntryButton)

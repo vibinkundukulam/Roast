@@ -27,6 +27,7 @@ class TextKeyboardView: UIView {
     var timecount: Int = 0
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
+    let trumpDisabledColor = UIColor(red: (170+136)/2/255, green: (5+170/2)/255, blue: (5+170)/2/255, alpha: 1.0)
     
     // Creating buttons for text keyboard
     
@@ -424,10 +425,10 @@ class TextKeyboardView: UIView {
     
     func createTrumpButton() -> UIButton {
         let button = UIButton(type: .System) as UIButton
-        button.setTitle("Trump 'Em", forState: .Normal)
+        button.setTitle("Change", forState: .Normal)
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        button.backgroundColor = UIColor.darkGrayColor()
+        button.backgroundColor = trumpDisabledColor
         addButtonShadow(button)
         return button
     }
@@ -512,7 +513,7 @@ class TextKeyboardView: UIView {
     
     func trumpButtonDisabled(sender: UIButton) {
         trumpButton.enabled = false
-        trumpButton.backgroundColor = UIColor.darkGrayColor()
+        trumpButton.backgroundColor = trumpDisabledColor
     }
     
 
