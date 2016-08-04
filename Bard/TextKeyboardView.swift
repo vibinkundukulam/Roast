@@ -215,7 +215,7 @@ class TextKeyboardView: UIView {
         
         // Add image constraints
         
-        let cancelImageHeight = NSLayoutConstraint(item: cancelImageView, attribute: .Height, relatedBy: .Equal, toItem: cancelButton, attribute: .Height, multiplier: 0.60, constant: 0)
+        let cancelImageHeight = NSLayoutConstraint(item: cancelImageView, attribute: .Height, relatedBy: .Equal, toItem: cancelButton, attribute: .Height, multiplier: 0.70, constant: 0)
         
         let cancelImageX = NSLayoutConstraint(item: cancelImageView, attribute: .CenterX, relatedBy: .Equal, toItem: cancelButton, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
         

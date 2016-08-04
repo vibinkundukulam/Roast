@@ -59,6 +59,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     var lastRow = -1
     var lastCategorySelected = ""
+    var lastQuote = ""
     var selectedCategory = ""
     var lastCategoryDisplayed = ""
     var sectionExpanded = false
@@ -347,6 +348,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
         
         textKeyboardView.cancelButton.hidden = true
+        lastRow = -2
         tableView1.reloadData()
 
     }
@@ -488,10 +490,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             let string = quote.0.string
             
             if lastRow != -1 {
-                let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
-                let lastQuote = lastCategoryQuotes![lastRow]
-                let lastString = lastQuote.0.string
-                let lastStringLength = lastString.characters.count
+                let lastStringLength = lastQuote.characters.count
                 for var i = lastStringLength; i > 0; --i {
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
@@ -500,10 +499,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     self.tableView1.deselectRowAtIndexPath(indexPath, animated: false)
                     lastRow = -1
                     lastCategorySelected = ""
+                    lastQuote = ""
                 } else {
                     (textDocumentProxy as UIKeyInput).insertText("\(string)")
                     lastRow = indexPath.row
                     lastCategorySelected = selectedCategory
+                    let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
+                    lastQuote = lastCategoryQuotes![lastRow].0.string
                 }
                 
                 lastCategoryDisplayed = selectedCategory
@@ -512,6 +514,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 (textDocumentProxy as UIKeyInput).insertText("\(string)")
                 lastRow = indexPath.row
                 lastCategorySelected = selectedCategory
+                let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
+                lastQuote = lastCategoryQuotes![lastRow].0.string
             }
         } else {
                 var categoryArray = Array(self.buttonTitles.keys).sort(<)
@@ -525,18 +529,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
         
         
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView == tableView1 {
-                var categoryQuotes = self.buttonTitles[selectedCategory]
-                let quote = categoryQuotes![indexPath.row]
-                let string = quote.0.string + "- " + quote.1.string
-                let stringLength = string.characters.count
-                for var i = stringLength; i > 0; --i {
-                    (textDocumentProxy as UIKeyInput).deleteBackward()
-                }
-        }
     }
    
     func buttonActive(button: UIButton) {
