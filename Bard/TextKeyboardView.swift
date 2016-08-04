@@ -11,10 +11,15 @@ import UIKit
 import QuartzCore
 
 class TextKeyboardView: UIView {
-    var activeButton = UIButton()
+    
     var name = "" {
         didSet {
             checkWhetherNameEmpty()
+            if cancelButton.hidden {
+                trumpButtonDisabled(UIButton())
+            } else {
+                trumpButtonEnabled(UIButton())
+            }
         }
     }
     var timer: NSTimer!
@@ -37,6 +42,8 @@ class TextKeyboardView: UIView {
     var shiftButton = UIButton()
     var deleteButton = UIButton()
     var cancelButton = UIButton()
+    var trumpButton = UIButton()
+    var activeButton = UIButton()
     
     // Creating image icons
     
@@ -78,18 +85,26 @@ class TextKeyboardView: UIView {
             if index == 0 {
                 button = createChangeKeyboardButton()
                 button.addSubview(changeKeyboardImageView)
+                button.layer.cornerRadius = 5
+                button.translatesAutoresizingMaskIntoConstraints = false
+                buttonsRowFour.append(button)
+                keyboardRowView.addSubview(button)
             } else if index == 1 {
                 button = createSpaceButton()
+                button.layer.cornerRadius = 5
+                button.translatesAutoresizingMaskIntoConstraints = false
+                buttonsRowFour.append(button)
+                keyboardRowView.addSubview(button)
             } else {
-                button = createTrumpButton()
+                trumpButton = createTrumpButton()
+                trumpButton.layer.cornerRadius = 5
+                trumpButton.translatesAutoresizingMaskIntoConstraints = false
+                trumpButtonDisabled(UIButton())
+                buttonsRowFour.append(trumpButton)
+                keyboardRowView.addSubview(trumpButton)
             }
-            button.layer.cornerRadius = 5
-            button.translatesAutoresizingMaskIntoConstraints = false
-            buttonsRowFour.append(button)
-            keyboardRowView.addSubview(button)
+           
         }
-        
-        
     }
     
     func addCancelButton(inout nameEntryButton: UIButton!){
@@ -330,18 +345,15 @@ class TextKeyboardView: UIView {
                     let spaceWidthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: spaceButtonWidth)
                     
                     mainView.addConstraint(spaceWidthConstraint)
-                    spaceWidthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
                     
                 } else if index == 2 {
                     let changeKeyboardButton = buttonsRowFour[0]
                     let trumpWidthConstraint = NSLayoutConstraint(item: button, attribute: .Width, relatedBy: . Equal, toItem: changeKeyboardButton, attribute: .Width, multiplier: 1.0, constant: 0.0)
                     
                     mainView.addConstraint(trumpWidthConstraint)
-                    trumpWidthConstraint.identifier = "Width Constraint for \(button.titleLabel!.text)"
                 }
                 
             }
-            leftConstraint.identifier = "Left Constraint for \(button.titleLabel!.text)"
             
             
             mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
@@ -481,6 +493,16 @@ class TextKeyboardView: UIView {
     
     func textButtonActive(button: UIButton) {
         button.backgroundColor = activeColor
+    }
+    
+    func trumpButtonEnabled(sender: UIButton) {
+        trumpButton.enabled = true
+        trumpButton.backgroundColor = navColor
+    }
+    
+    func trumpButtonDisabled(sender: UIButton) {
+        trumpButton.enabled = false
+        trumpButton.backgroundColor = UIColor.darkGrayColor()
     }
     
 
