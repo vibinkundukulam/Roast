@@ -202,7 +202,7 @@ class TextKeyboardView: UIView {
         
         // Add button constraints
         
-        let rightConstraint = NSLayoutConstraint(item: cancelButton, attribute: .Right, relatedBy: .Equal, toItem: nameEntryButton, attribute: .Right, multiplier: 1.0, constant: -10.0)
+        let rightConstraint = NSLayoutConstraint(item: cancelButton, attribute: .Right, relatedBy: .Equal, toItem: nameEntryButton, attribute: .Right, multiplier: 1.0, constant: -5.0)
         
         let centerY = NSLayoutConstraint(item: cancelButton, attribute: .CenterY, relatedBy: .Equal, toItem: nameEntryButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
         
@@ -362,6 +362,12 @@ class TextKeyboardView: UIView {
 
     }
     
+    func addButtonShadow(button: UIButton) {
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).CGColor
+        button.layer.shadowOffset = CGSizeMake(0.0, 2.0)
+        button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 0.0
+    }
     
     
     func createButtonWithTitle() -> UIButton {
@@ -369,7 +375,7 @@ class TextKeyboardView: UIView {
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
         button.addTarget(self, action: "didTapTextButton:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
-        
+        addButtonShadow(button)
         return button
     }
     
@@ -378,6 +384,7 @@ class TextKeyboardView: UIView {
         shiftImageView.translatesAutoresizingMaskIntoConstraints = false
         shiftImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
+        addButtonShadow(button)
         return button
     }
     
@@ -388,7 +395,7 @@ class TextKeyboardView: UIView {
         button.backgroundColor = navColor
         button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchDown)
         button.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragExit, .TouchDragOutside])
-        
+        addButtonShadow(button)
         return button
     }
     
@@ -398,7 +405,7 @@ class TextKeyboardView: UIView {
         changeKeyboardImageView.contentMode = .ScaleAspectFit
         button.tintColor = UIColor.whiteColor()
         button.backgroundColor = navColor
-        
+        addButtonShadow(button)
         return button
     }
     
@@ -410,6 +417,7 @@ class TextKeyboardView: UIView {
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
         button.addTarget(self, action: "didPressSpace:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
         button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
+        addButtonShadow(button)
         return button
     }
     
@@ -419,6 +427,7 @@ class TextKeyboardView: UIView {
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.backgroundColor = UIColor.darkGrayColor()
+        addButtonShadow(button)
         return button
     }
     
@@ -479,11 +488,11 @@ class TextKeyboardView: UIView {
     }
     
     func cancelButtonActive(sender: UIButton) {
-        cancelButton.tintColor = activeColor
+        cancelImageView.tintColor = activeColor
     }
     
     func cancelButtonInactive(sender: UIButton) {
-        cancelButton.tintColor = UIColor.grayColor()
+        cancelImageView.tintColor = UIColor.grayColor()
     }
     
     func navButtonInactive(button: UIButton) {
