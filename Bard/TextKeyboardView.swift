@@ -18,6 +18,7 @@ class TextKeyboardView: UIView {
             if cancelButton.hidden {
                 trumpButtonDisabled(UIButton())
             } else {
+                cancelImageView.tintColor = UIColor.grayColor()
                 trumpButtonEnabled(UIButton())
             }
         }
@@ -50,7 +51,7 @@ class TextKeyboardView: UIView {
     let changeKeyboardImageView = UIImageView(image: UIImage(named: "globe-white-vectorized"))
     let shiftImageView = UIImageView(image: UIImage(named: "shiftarrow-black")?.imageWithRenderingMode(.AlwaysTemplate))
     let deleteImageView = UIImageView(image: UIImage(named: "delete-white-vectorized"))
-    let cancelImageView = UIImageView(image: UIImage(named: "cancel-black"))
+    let cancelImageView = UIImageView(image: UIImage(named: "cancel-black")?.imageWithRenderingMode(.AlwaysTemplate))
     
     
     func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String]) {
@@ -111,8 +112,8 @@ class TextKeyboardView: UIView {
         cancelButton = UIButton(type: .System) as UIButton
         cancelImageView.translatesAutoresizingMaskIntoConstraints = false
         cancelImageView.contentMode = .ScaleAspectFit
-        cancelImageView.tintColor = UIColor.grayColor()
         cancelButton.addSubview(cancelImageView)
+        cancelImageView.tintColor = UIColor.grayColor()
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         nameEntryButton.addSubview(cancelButton)
         
