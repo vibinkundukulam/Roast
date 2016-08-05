@@ -373,7 +373,7 @@ class TextKeyboardView: UIView {
     
     
     func createButtonWithTitle() -> UIButton {
-        let button = UIButton(type: .System) as UIButton         // exact size doesn't matter
+        let button = UIButton(type: .Custom) as UIButton         // exact size doesn't matter
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
         button.addTarget(self, action: "didTapTextButton:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
@@ -382,7 +382,7 @@ class TextKeyboardView: UIView {
     }
     
     func createShiftButton() -> UIButton {
-        let button = UIButton(type: .System) as UIButton
+        let button = UIButton(type: .Custom) as UIButton
         shiftImageView.translatesAutoresizingMaskIntoConstraints = false
         shiftImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
@@ -391,7 +391,7 @@ class TextKeyboardView: UIView {
     }
     
     func createDeleteButton() -> UIButton {
-        let button = UIButton(type: .System) as UIButton
+        let button = UIButton(type: .Custom) as UIButton
         deleteImageView.translatesAutoresizingMaskIntoConstraints = false
         deleteImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
@@ -402,7 +402,7 @@ class TextKeyboardView: UIView {
     }
     
     func createChangeKeyboardButton() -> UIButton {
-        let button = UIButton(type: .System) as UIButton
+        let button = UIButton(type: .Custom) as UIButton
         changeKeyboardImageView.translatesAutoresizingMaskIntoConstraints = false
         changeKeyboardImageView.contentMode = .ScaleAspectFit
         button.tintColor = UIColor.whiteColor()
@@ -412,7 +412,7 @@ class TextKeyboardView: UIView {
     }
     
     func createSpaceButton() -> UIButton {
-        let button = UIButton(type: .System) as UIButton
+        let button = UIButton(type: .Custom) as UIButton
         button.setTitle("Space", forState: .Normal)
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
@@ -424,7 +424,7 @@ class TextKeyboardView: UIView {
     }
     
     func createTrumpButton() -> UIButton {
-        let button = UIButton(type: .System) as UIButton
+        let button = UIButton(type: .Custom) as UIButton
         button.setTitle("Change", forState: .Normal)
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
