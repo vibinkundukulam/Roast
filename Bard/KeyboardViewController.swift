@@ -376,7 +376,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
         } else {
             self.categoryLabel.text = ""
-            
             nameView.hidden = true
             
             NSLayoutConstraint.deactivateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
