@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import QuartzCore
 
-class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIApplicationDelegate {
     
     // Table consraints
     
@@ -18,9 +18,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var categoryTableViewHeaderBottom: NSLayoutConstraint!
     var expandedCategoryTableViewHeaderTopConstraint: NSLayoutConstraint? = nil
     var expandedChooseQuoteViewBottomConstraint: NSLayoutConstraint? = nil
-    
-
-
     
     // Text keyboard
     
@@ -124,6 +121,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         createInsultsWithoutName()
+        
+        // Add observer for rotation
         
         let nib = UINib(nibName: "View", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
@@ -235,6 +234,67 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     //
     //
 
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        if shiftButtonPressed {
+            
+            for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
+            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.shiftedButtonTitlesRowOne)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.shiftedButtonTitlesRowTwo)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.shiftedButtonTitlesRowThree)
+            textKeyboardView.addShiftButton(&textKeyboardRowThree)
+            textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
+            textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
+            
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+            
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
+            
+            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+            
+            textKeyboardView.shiftButton.backgroundColor = activeColor
+            textKeyboardView.shiftImageView.tintColor = UIColor.blackColor()
+            
+        } else {
+            for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
+            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
+            textKeyboardView.addShiftButton(&textKeyboardRowThree)
+            textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
+            textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
+            
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+            
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
+            
+            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+            
+            textKeyboardView.shiftButton.backgroundColor = navColor
+            textKeyboardView.shiftImageView.tintColor = UIColor.whiteColor()
+            
+        }
+
+    }
     
     func nameEntryButtonPressed(button: UIButton) {
         
