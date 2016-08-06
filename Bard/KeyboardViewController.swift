@@ -17,7 +17,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var categoryTableViewHeaderTop: NSLayoutConstraint!
     @IBOutlet weak var categoryTableViewHeaderBottom: NSLayoutConstraint!
     var expandedCategoryTableViewHeaderTopConstraint: NSLayoutConstraint? = nil
-    var expandedQuoteTableViewBottomConstraint: NSLayoutConstraint? = nil
+    var expandedChooseQuoteViewBottomConstraint: NSLayoutConstraint? = nil
     
 
 
@@ -365,7 +365,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             nameView.hidden = false
             
-            NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedQuoteTableViewBottomConstraint!])
+            NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!])
             NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
             
             UIView.animateWithDuration(0.2, animations: {
@@ -391,9 +391,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             )
             expandedCategoryTableViewHeaderTopConstraint!.identifier = "New Category Header Top - Parent View Top"
             
-            expandedQuoteTableViewBottomConstraint =
+            expandedChooseQuoteViewBottomConstraint =
             NSLayoutConstraint(
-                item: self.tableView1,
+                item: self.chooseQuoteView,
                 attribute: .Bottom,
                 relatedBy: .Equal,
                 toItem: self.view,
@@ -401,9 +401,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 multiplier: 1,
                 constant: 0
             )
-            expandedQuoteTableViewBottomConstraint!.identifier = "New Quote Table Bottom - Parent View Bottom"
+            expandedChooseQuoteViewBottomConstraint!.identifier = "New Quote Table Bottom - Parent View Bottom"
             
-            self.view.addConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedQuoteTableViewBottomConstraint!])
+            self.view.addConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!])
             
             UIView.animateWithDuration(0.2, animations: {
                 self.view.layoutIfNeeded()
