@@ -329,7 +329,7 @@ class TextKeyboardView: UIView {
                 
                 // Globe constraints
                 
-                let heightGlobeConstraint = NSLayoutConstraint(item: changeKeyboardImageView, attribute: .Height, relatedBy: .Equal, toItem: button, attribute: .Height, multiplier: 0.70, constant: 0)
+                let heightGlobeConstraint = NSLayoutConstraint(item: changeKeyboardImageView, attribute: .Height, relatedBy: .Equal, toItem: button, attribute: .Height, multiplier: 0.80, constant: 0)
                 
                 let xGlobeConstraint = NSLayoutConstraint(item: changeKeyboardImageView, attribute: .CenterX, relatedBy: .Equal, toItem: button, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
                 

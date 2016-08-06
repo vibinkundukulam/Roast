@@ -122,8 +122,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         createInsultsWithoutName()
         
-        // Add observer for rotation
-        
         let nib = UINib(nibName: "View", bundle: nil)
         let objects = nib.instantiateWithOwner(self, options: nil)
         view = objects[0] as! UIView;
@@ -240,14 +238,20 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
             for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
             for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
-            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.shiftedButtonTitlesRowOne)
-            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.shiftedButtonTitlesRowTwo)
-            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.shiftedButtonTitlesRowThree)
+            for subview in textKeyboardRowFour.subviews { subview.removeFromSuperview() }
+            
+            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
+            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
+            textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour)
+            
             textKeyboardView.addShiftButton(&textKeyboardRowThree)
             textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+            
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            textKeyboardView.addFinalRowButtonConstraints(textKeyboardRowFour)
             textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
             textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
             
@@ -258,6 +262,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
             
             textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
             
@@ -268,14 +273,20 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
             for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
             for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
+            for subview in textKeyboardRowFour.subviews { subview.removeFromSuperview() }
+            
             textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
             textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
             textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
+            textKeyboardView.addFinalRowOfButtons(&textKeyboardRowFour)
+            
             textKeyboardView.addShiftButton(&textKeyboardRowThree)
             textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+            
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            textKeyboardView.addFinalRowButtonConstraints(textKeyboardRowFour)
             textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
             textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
             
@@ -286,6 +297,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
             
             textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
             
