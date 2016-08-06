@@ -233,8 +233,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // End of view loading method
     //
     //
-
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+        
         if shiftButtonPressed {
             
             for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
@@ -293,7 +293,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.shiftImageView.tintColor = UIColor.whiteColor()
             
         }
-
     }
     
     func nameEntryButtonPressed(button: UIButton) {
