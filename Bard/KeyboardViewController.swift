@@ -175,7 +175,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
         */
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
-        print("Complete individual")
         textKeyboardView.addFinalRowButtonConstraints(textKeyboardRowFour)
         textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
         textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)

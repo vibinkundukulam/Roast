@@ -256,7 +256,7 @@ class TextKeyboardView: UIView {
                 
             } else {
                 
-                let prevtButton = buttonsRowTwo[index-1]
+                let prevtButton = buttonsRowThree[index-1]
                 leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: spaceBetweenButtons)
                 
                 self.addConstraint(leftConstraint)
