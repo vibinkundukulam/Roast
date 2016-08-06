@@ -153,11 +153,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         self.view.autoresizesSubviews = true
         
-        // Set up text keyboard in background
-        
-        backButton.addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
-        backButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        backButton.addTarget(self, action: "buttonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         self.view.setNeedsLayout()
         self.textKeyboardRowOne.setNeedsLayout()
@@ -166,6 +161,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.textKeyboardRowFour.setNeedsLayout()
         self.view.layoutIfNeeded()
         
+        backButton.addTarget(self, action: "nameEntryButtonOldName:", forControlEvents: .TouchUpInside)
+        backButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
+        backButton.addTarget(self, action: "buttonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
         textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
@@ -175,7 +173,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addShiftButton(&textKeyboardRowThree)
         textKeyboardView.addDeleteButton(&textKeyboardRowThree)
         
-        
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
@@ -183,18 +180,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
         textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
         
-        
         textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
         textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
         textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
         textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
         
         textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
-        
         
         backButton.hidden = true
         textKeyboardView.hidden = true
@@ -247,6 +242,35 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameLabel.hidden = true
         chooseQuoteView.hidden = true
         
+        
+        // Set up text keyboard in background
+        
+        for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
+        for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
+        for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
+        textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
+        textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
+        textKeyboardView.addShiftButton(&textKeyboardRowThree)
+        textKeyboardView.addDeleteButton(&textKeyboardRowThree)
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+        textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
+        textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
+        
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
+        
+        textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+        
+        
+        
         backButton.hidden = false
         textKeyboardView.hidden = false
         
@@ -259,11 +283,11 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
         
         self.nameView.layoutIfNeeded()
-
         nameEntryButton.layer.borderColor = navColor.CGColor
 
-        
         textKeyboardView.activeButton = nameEntryButton
+        name = textKeyboardView.activeButton.titleForState(.Normal)!
+
 
     }
     
@@ -289,7 +313,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
-            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
             
             textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
             
@@ -319,7 +343,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
             textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
-            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonDidEndEditing:", forControlEvents: .TouchUpInside)
+            textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
     
             textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
             
@@ -330,8 +354,17 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         shiftButtonPressed = !shiftButtonPressed
     }
     
-    func nameEntryButtonDidEndEditing(sender: AnyObject?) {
+    func nameEntryButtonNewName(sender: AnyObject?) {
         name = textKeyboardView.activeButton.titleForState(.Normal)!
+        nameEntryButtonDidEndEditing(UIButton())
+    }
+    
+    func nameEntryButtonOldName(sender: AnyObject?) {
+        textKeyboardView.activeButton.setTitle(name, forState: .Normal)
+        nameEntryButtonDidEndEditing(UIButton())
+    }
+    
+    func nameEntryButtonDidEndEditing(sender: AnyObject?) {
         
         nameEntryButton.layer.borderColor = borderColor
         textKeyboardView.hidden = true
@@ -359,7 +392,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
     }
     
-    @IBAction func expandCategory() {
+    func expandCategory() {
         if sectionExpanded {
             self.categoryLabel.text = lastCategoryDisplayed
             
