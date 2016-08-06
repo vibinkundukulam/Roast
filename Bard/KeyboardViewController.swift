@@ -357,6 +357,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func nameEntryButtonNewName(sender: AnyObject?) {
         name = textKeyboardView.activeButton.titleForState(.Normal)!
         nameEntryButtonDidEndEditing(UIButton())
+        lastRow = -2
+        tableView1.reloadData()
     }
     
     func nameEntryButtonOldName(sender: AnyObject?) {
@@ -381,8 +383,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
         
         textKeyboardView.cancelButton.hidden = true
-        lastRow = -2
-        tableView1.reloadData()
+        
 
     }
 

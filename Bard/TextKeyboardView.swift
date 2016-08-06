@@ -146,11 +146,11 @@ class TextKeyboardView: UIView {
         // Calculate spaces
         
         let numButtons = buttons.count
-        let buttonWidth = mainView.frame.width / 12
+        let buttonWidth = mainView.bounds.width / 12
         let buttonSpace = CGFloat(numButtons) * buttonWidth
         let spaceBetweenButtons = buttonWidth / 5
         let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
-        let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
+        let leftOverSpace = mainView.bounds.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
         
         
@@ -229,12 +229,12 @@ class TextKeyboardView: UIView {
         
         // Calculate side margin based off 10 buttons in the top row
         
-        let sideMargin = (mainView.frame.width - 10 * mainView.frame.width / 12 - mainView.frame.width / 60 * 9)/2
+        let sideMargin = (mainView.bounds.width - 10 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 9)/2
         
         // Calculate the button width
         
-        let thirdRowSideMargin = (mainView.frame.width - 7 * mainView.frame.width / 12 - mainView.frame.width / 60 * 6)/2
-        let spaceBetweenButtons = mainView.frame.width / 60
+        let thirdRowSideMargin = (mainView.bounds.width - 7 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 6)/2
+        let spaceBetweenButtons = mainView.bounds.width / 60
         let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
         
         let topConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
@@ -262,12 +262,12 @@ class TextKeyboardView: UIView {
         
         // Calculate side margin based off 10 buttons in the top row
         
-        let sideMargin = (mainView.frame.width - 10 * mainView.frame.width / 12 - mainView.frame.width / 60 * 9)/2
+        let sideMargin = (mainView.bounds.width - 10 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 9)/2
         
         // Calculate the button width
         
-        let thirdRowSideMargin = (mainView.frame.width - 7 * mainView.frame.width / 12 - mainView.frame.width / 60 * 6)/2
-        let spaceBetweenButtons = mainView.frame.width / 60
+        let thirdRowSideMargin = (mainView.bounds.width - 7 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 6)/2
+        let spaceBetweenButtons = mainView.bounds.width / 60
         let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
         
         let topConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
@@ -295,11 +295,11 @@ class TextKeyboardView: UIView {
         // Calculate spaces
         
         let numButtons = 10
-        let textButtonWidth = mainView.frame.width / 12
+        let textButtonWidth = mainView.bounds.width / 12
         let buttonSpace = CGFloat(numButtons) * textButtonWidth
         let spaceBetweenButtons = textButtonWidth / 5
         let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
-        let leftOverSpace = mainView.frame.width - buttonSpace - spaceSpace
+        let leftOverSpace = mainView.bounds.width - buttonSpace - spaceSpace
         let sideMargin = leftOverSpace/2
         let spaceButtonWidth = 5 * textButtonWidth + 4 * spaceBetweenButtons
         
