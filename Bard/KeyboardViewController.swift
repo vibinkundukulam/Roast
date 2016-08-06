@@ -170,9 +170,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addShiftButton(&textKeyboardRowThree)
         textKeyboardView.addDeleteButton(&textKeyboardRowThree)
         
-        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+        /*    textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+        */
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
+        print("Complete individual")
         textKeyboardView.addFinalRowButtonConstraints(textKeyboardRowFour)
         textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
         textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
@@ -231,7 +234,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // End of view loading method
     //
     //
-    override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
+   /* override func willAnimateRotationToInterfaceOrientation(toInterfaceOrientation: UIInterfaceOrientation, duration: NSTimeInterval) {
         
         if shiftButtonPressed {
             
@@ -306,6 +309,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
         }
     }
+*/
     
     func nameEntryButtonPressed(button: UIButton) {
         
@@ -314,7 +318,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         chooseQuoteView.hidden = true
         
         
-        // Set up text keyboard in background
+   /*     // Set up text keyboard in background
         
         for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
         for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
@@ -324,9 +328,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
         textKeyboardView.addShiftButton(&textKeyboardRowThree)
         textKeyboardView.addDeleteButton(&textKeyboardRowThree)
-        textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+    /*    textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
         textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+*/
+        textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
+
         textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
         textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
         
@@ -340,7 +347,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
         
-        
+   */     
         
         backButton.hidden = false
         textKeyboardView.hidden = false
@@ -372,9 +379,11 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
             textKeyboardView.addShiftButton(&textKeyboardRowThree)
             textKeyboardView.addDeleteButton(&textKeyboardRowThree)
-            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+            /*    textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            */
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
             textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
             textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
             
@@ -402,9 +411,11 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.shiftedButtonTitlesRowThree)
             textKeyboardView.addShiftButton(&textKeyboardRowThree)
             textKeyboardView.addDeleteButton(&textKeyboardRowThree)
-            textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
+            /*    textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowOne, mainView: textKeyboardRowOne)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowTwo, mainView: textKeyboardRowTwo)
             textKeyboardView.addIndividualButtonConstraints(&textKeyboardView.buttonsRowThree, mainView: textKeyboardRowThree)
+            */
+            textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
             textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
             textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
             
