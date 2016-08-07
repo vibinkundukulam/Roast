@@ -148,12 +148,15 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
         nameEntryButton.addTarget(self, action: "nameEntryButtonPressed:", forControlEvents: .TouchUpInside)
         
-        nameLabel.attributedText = NSAttributedString(string: "Change name...", attributes: inactiveTextAttributes)
+        nameLabel.attributedText = NSAttributedString(string: "Replace name...", attributes: inactiveTextAttributes)
         showNameLabel()
         
         textKeyboardView.addCancelButton(&nameEntryButton)
         textKeyboardView.addCancelButtonConstraints(nameEntryButton)
         textKeyboardView.cancelButton.hidden = true
+        
+        textKeyboardView.addCursorWithConstraints(&nameView, nameEntryButton: &nameEntryButton)
+        textKeyboardView.cursor.hidden = true
         
         self.view.autoresizesSubviews = true
         
@@ -253,6 +256,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         backButton.hidden = false
         textKeyboardView.hidden = false
+        textKeyboardView.cursor.hidden = false
+        textKeyboardView.startCursorBlinking()
+
         
         if nameEntryButton.titleForState(.Normal) == "" {
             textKeyboardView.cancelButton.hidden = true
@@ -306,6 +312,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.layer.borderColor = borderColor
         textKeyboardView.hidden = true
         backButton.hidden = true
+        textKeyboardView.cursor.hidden = true
+        textKeyboardView.stopCursorBlinking()
         chooseQuoteView.hidden = false
         shareButton.hidden = false
         shareButtonImage.hidden = false
@@ -387,9 +395,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!])
             NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
-            
-            newCategoryHeaderBorderViewHeight!.active = false
-            categoryHeaderBorderViewHeight.active = true
             
             UIView.animateWithDuration(0.2, animations: {
                 self.view.layoutIfNeeded()
