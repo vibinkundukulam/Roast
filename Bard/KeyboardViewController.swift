@@ -38,6 +38,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var backButton: Draw2D!
     @IBOutlet weak var nameEntryButtonLeft: NSLayoutConstraint!
     
+    // Share button
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var shareButtonImage: UIImageView!
+    
     
     
     
@@ -111,6 +115,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     var buttonTitles = Dictionary<String,[(NSMutableAttributedString, NSAttributedString)]>()
     
+    var shareAppArray: [NSMutableAttributedString] = []
+    
     
     //
     //
@@ -130,6 +136,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         selectedCategory = categoryArray[0]
         lastCategoryDisplayed = selectedCategory
         nameEntryButton.setTitle("", forState: .Normal)
+        shareButtonImage.image?.imageWithRenderingMode(.AlwaysTemplate)
+        shareButtonImage.tintColor = UIColor.blackColor()
+        createShareQuotesWithoutName()
         
         
         // Set up name entry text field
@@ -157,6 +166,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.textKeyboardRowThree.setNeedsLayout()
         self.textKeyboardRowFour.setNeedsLayout()
         self.view.layoutIfNeeded()
+        
+        shareButton.addTarget(self, action: "shareApp:", forControlEvents: .TouchUpInside)
+        shareButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
+        shareButton.addTarget(self, action: "buttonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         backButton.addTarget(self, action: "nameEntryButtonOldName:", forControlEvents: .TouchUpInside)
         backButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
@@ -229,16 +242,19 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     //
     //
     
+    
+    
     func nameEntryButtonPressed(button: UIButton) {
         
         backButton.backgroundColor = UIColor.whiteColor()
         nameLabel.hidden = true
         chooseQuoteView.hidden = true
+        shareButton.hidden = true
+        shareButtonImage.hidden = true
+        categoryHeader.hidden = true
         
         backButton.hidden = false
         textKeyboardView.hidden = false
-        
-        nameEntryButtonLeft.constant = 30.0
         
         if nameEntryButton.titleForState(.Normal) == "" {
             textKeyboardView.cancelButton.hidden = true
@@ -293,19 +309,62 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.hidden = true
         backButton.hidden = true
         chooseQuoteView.hidden = false
+        shareButton.hidden = false
+        shareButtonImage.hidden = false
+        categoryHeader.hidden = false
         showNameLabel()
-        
-        nameEntryButtonLeft.constant = 10.0
         
         if name == "" {
             createInsultsWithoutName()
+            createShareQuotesWithoutName()
         } else {
             createInsultsWithName()
+            createShareQuotesWithName()
         }
         
         textKeyboardView.cancelButton.hidden = true
         
 
+    }
+    
+    func shareApp(button: UIButton){
+        let randomIndex = Int(arc4random_uniform(UInt32(shareAppArray.count)))
+        let string = shareAppArray[randomIndex].string
+        
+        if lastRow != -1 {
+            let lastStringLength = lastQuote.characters.count
+            for var i = lastStringLength; i > 0; --i {
+                (textDocumentProxy as UIKeyInput).deleteBackward()
+            }
+            
+            if lastRow == -3 {
+                buttonInactive(shareButton)
+                lastRow = -1
+                lastCategorySelected = ""
+                lastQuote = ""
+            } else {
+                (textDocumentProxy as UIKeyInput).insertText("\(string)")
+                lastRow = -3
+                lastCategorySelected = ""
+                lastQuote = shareAppArray[randomIndex].string
+            }
+            
+        } else {
+            (textDocumentProxy as UIKeyInput).insertText("\(string)")
+            lastRow = -3
+            lastCategorySelected = ""
+            lastQuote = shareAppArray[randomIndex].string
+        }
+    }
+    
+    func createShareQuotesWithName() {
+        shareAppArray.removeAll()
+        shareAppArray += [NSMutableAttributedString(string: "Here, take this link, \(name)!", attributes: normalAttributes)]
+    }
+    
+    func createShareQuotesWithoutName() {
+        shareAppArray.removeAll()
+        shareAppArray += [NSMutableAttributedString(string: "Here, take this link!", attributes: normalAttributes)]
     }
 
     func showNameLabel() {
@@ -455,6 +514,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     lastCategorySelected = ""
                     lastQuote = ""
                 } else {
+                    buttonInactive(shareButton)
                     (textDocumentProxy as UIKeyInput).insertText("\(string)")
                     lastRow = indexPath.row
                     lastCategorySelected = selectedCategory
@@ -478,7 +538,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     categoryLabel.text = selectedCategory
                     lastCategoryDisplayed = selectedCategory
                     tableView1.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Right)
-                }
+                } else {
+                    
+            }
         expandCategory()
         }
         
