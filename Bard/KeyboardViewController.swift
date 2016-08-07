@@ -257,23 +257,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func shiftButtonPressed(sender: AnyObject?) {
         if shiftButtonPressed {
-            for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
-            for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
-            for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
-            textKeyboardView.clearButtons()
             
-            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
-            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
-            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.buttonTitlesRowThree)
-            textKeyboardView.addShiftButton(&textKeyboardRowThree)
-            textKeyboardView.addDeleteButton(&textKeyboardRowThree)
-            textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
-            textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
-            textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
-            
-            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
-            
-            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+            textKeyboardView.makeLowerCase()
             
             textKeyboardView.shiftButton.backgroundColor = navColor
             textKeyboardView.shiftImageView.tintColor = UIColor.whiteColor()
@@ -281,21 +266,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
         } else {
             
-            for subview in textKeyboardRowOne.subviews { subview.removeFromSuperview() }
-            for subview in textKeyboardRowTwo.subviews { subview.removeFromSuperview() }
-            for subview in textKeyboardRowThree.subviews { subview.removeFromSuperview() }
-            textKeyboardView.clearButtons()
-            
-            textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.shiftedButtonTitlesRowOne)
-            textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.shiftedButtonTitlesRowTwo)
-            textKeyboardView.addRowOfButtons(&textKeyboardRowThree, buttonTitles: textKeyboardView.shiftedButtonTitlesRowThree)
-            textKeyboardView.addShiftButton(&textKeyboardRowThree)
-            textKeyboardView.addDeleteButton(&textKeyboardRowThree)
-            textKeyboardView.addIndividualButtonConstraints(&textKeyboardRowOne, rowTwoView: &textKeyboardRowTwo, rowThreeView: &textKeyboardRowThree)
-            textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
-            textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
-    
-            textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+            textKeyboardView.makeCaps()
             
             textKeyboardView.shiftButton.backgroundColor = activeColor
             textKeyboardView.shiftImageView.tintColor = UIColor.blackColor()
