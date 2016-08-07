@@ -136,8 +136,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         var categoryArray = Array(self.buttonTitles.keys).sort(<)
         currentCategoryDisplayed = categoryArray[0]
         nameEntryButton.setTitle("", forState: .Normal)
-        shareButtonImage.image?.imageWithRenderingMode(.AlwaysTemplate)
-        shareButton.tintColor = UIColor.blackColor()
         createShareQuotesWithoutName()
         
         
@@ -386,7 +384,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop, categoryHeaderBorderViewHeight])
 
             nameView.hidden = false
-            print("here?")
             
             NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!])
             NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])

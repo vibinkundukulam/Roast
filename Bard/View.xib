@@ -72,7 +72,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trump-white-keyboard" translatesAutoresizingMaskIntoConstraints="NO" id="fOD-s2-0vS">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trump-black" translatesAutoresizingMaskIntoConstraints="NO" id="fOD-s2-0vS">
                             <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <constraints>
@@ -339,6 +339,6 @@
     <resources>
         <image name="arrow-white-vectorized" width="300" height="300"/>
         <image name="globe-white-vectorized" width="300" height="300"/>
-        <image name="trump-white-keyboard" width="2083" height="2083"/>
+        <image name="trump-black" width="2083" height="2083"/>
     </resources>
 </document>
