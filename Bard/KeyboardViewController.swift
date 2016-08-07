@@ -59,10 +59,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // Ensure keyboard remembers last key, quote, name
     
     var lastRow = -1
-    var lastCategorySelected = ""
+    var lastCategorySelected = ""   // Last category whose quote was used
     var lastQuote = ""
-    var selectedCategory = ""
-    var lastCategoryDisplayed = ""
+    var currentCategoryDisplayed = ""   // The current category the user is viewing
     var sectionExpanded = false
     var name = ""
     var shiftButtonPressed = false
@@ -133,8 +132,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         view = objects[0] as! UIView;
 
         var categoryArray = Array(self.buttonTitles.keys).sort(<)
-        selectedCategory = categoryArray[0]
-        lastCategoryDisplayed = selectedCategory
+        currentCategoryDisplayed = categoryArray[0]
         nameEntryButton.setTitle("", forState: .Normal)
         shareButtonImage.image?.imageWithRenderingMode(.AlwaysTemplate)
         shareButtonImage.tintColor = UIColor.blackColor()
@@ -226,7 +224,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         tableView2.estimatedRowHeight = 30
         tableView2.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell2")
         tableView2.backgroundColor = navColor
-        categoryLabel.text = selectedCategory
+        categoryLabel.text = currentCategoryDisplayed
         
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
@@ -343,6 +341,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 lastCategorySelected = ""
                 lastQuote = ""
             } else {
+                if lastCategorySelected == currentCategoryDisplayed {
+                    self.tableView1.deselectRowAtIndexPath(NSIndexPath(forRow: lastRow, inSection: 0), animated: false)
+                    lastRow = -1
+                    lastCategorySelected = ""
+                    lastQuote = ""
+                }
                 (textDocumentProxy as UIKeyInput).insertText("\(string)")
                 lastRow = -3
                 lastCategorySelected = ""
@@ -375,7 +379,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func expandCategory() {
         if sectionExpanded {
-            self.categoryLabel.text = lastCategoryDisplayed
             
             nameView.hidden = false
             
@@ -433,7 +436,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableView1 {
-            return buttonTitles[selectedCategory]!.count
+            return buttonTitles[currentCategoryDisplayed]!.count
         } else {
             return buttonTitles.count
 
@@ -442,11 +445,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-
         if tableView == tableView1 {
             let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell")
             
-            var categoryQuotes = self.buttonTitles[selectedCategory]
+            var categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
             let quote = categoryQuotes![indexPath.row].0
             let author = categoryQuotes![indexPath.row].1
             let fullQuote = NSMutableAttributedString()
@@ -498,7 +500,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView == tableView1 {
-            var categoryQuotes = self.buttonTitles[selectedCategory]
+            var categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
             let quote = categoryQuotes![indexPath.row]
             let string = quote.0.string
             
@@ -508,7 +510,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
           
-                if lastRow == indexPath.row && lastCategorySelected == selectedCategory {
+                if lastRow == indexPath.row && lastCategorySelected == currentCategoryDisplayed {
                     self.tableView1.deselectRowAtIndexPath(indexPath, animated: false)
                     lastRow = -1
                     lastCategorySelected = ""
@@ -517,31 +519,27 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     buttonInactive(shareButton)
                     (textDocumentProxy as UIKeyInput).insertText("\(string)")
                     lastRow = indexPath.row
-                    lastCategorySelected = selectedCategory
+                    lastCategorySelected = currentCategoryDisplayed
                     let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                     lastQuote = lastCategoryQuotes![lastRow].0.string
                 }
                 
-                lastCategoryDisplayed = selectedCategory
-                
             } else {
                 (textDocumentProxy as UIKeyInput).insertText("\(string)")
                 lastRow = indexPath.row
-                lastCategorySelected = selectedCategory
+                lastCategorySelected = currentCategoryDisplayed
                 let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                 lastQuote = lastCategoryQuotes![lastRow].0.string
             }
         } else {
-                var categoryArray = Array(self.buttonTitles.keys).sort(<)
-                selectedCategory = categoryArray[indexPath.row]
-                if lastCategoryDisplayed != selectedCategory {
-                    categoryLabel.text = selectedCategory
-                    lastCategoryDisplayed = selectedCategory
-                    tableView1.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Right)
-                } else {
-                    
+            var categoryArray = Array(self.buttonTitles.keys).sort(<)
+            currentCategoryDisplayed = categoryArray[indexPath.row]
+            categoryLabel.text = currentCategoryDisplayed
+            tableView1.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Right)
+            if lastCategorySelected == currentCategoryDisplayed {
+                self.tableView1.selectRowAtIndexPath(NSIndexPath(forRow: lastRow, inSection: 0), animated: false, scrollPosition: .Middle)
             }
-        expandCategory()
+            expandCategory()
         }
         
         
