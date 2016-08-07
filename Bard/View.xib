@@ -11,6 +11,8 @@
                 <outlet property="arrowIcon" destination="NeG-D6-vRC" id="4yG-Iu-yLD"/>
                 <outlet property="backButton" destination="mnK-9n-OIn" id="jvE-eh-y3u"/>
                 <outlet property="categoryHeader" destination="yXf-Vk-oPY" id="A5i-CJ-yCe"/>
+                <outlet property="categoryHeaderBorderView" destination="1Dy-eB-g35" id="qaA-xf-c03"/>
+                <outlet property="categoryHeaderBorderViewHeight" destination="xzs-Sn-8fG" id="B3M-x9-rqP"/>
                 <outlet property="categoryLabel" destination="g9M-jz-emq" id="FXe-fa-Ydh"/>
                 <outlet property="categoryTableViewHeaderBottom" destination="iv7-jz-mqz" id="vjg-TA-fB1"/>
                 <outlet property="categoryTableViewHeaderTop" destination="kpC-FZ-Dpc" id="GvL-hc-ag4"/>
@@ -70,7 +72,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trump-white" translatesAutoresizingMaskIntoConstraints="NO" id="fOD-s2-0vS">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trump-white-keyboard" translatesAutoresizingMaskIntoConstraints="NO" id="fOD-s2-0vS">
                             <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <constraints>
@@ -337,6 +339,6 @@
     <resources>
         <image name="arrow-white-vectorized" width="300" height="300"/>
         <image name="globe-white-vectorized" width="300" height="300"/>
-        <image name="trump-white" width="2083" height="2083"/>
+        <image name="trump-white-keyboard" width="2083" height="2083"/>
     </resources>
 </document>
