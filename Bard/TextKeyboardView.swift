@@ -363,7 +363,30 @@ class TextKeyboardView: UIView {
     
     func addShiftButtonConstraints(mainView: UIView) {
         
-        // Calculate side margin based off 10 buttons in the top row
+        let sideMargin = CGFloat(3)
+        let distanceToText = CGFloat(10)
+        
+        let topConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: sideMargin)
+        
+        let bottomConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -sideMargin)
+        
+        let leftConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
+        
+        let rightConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Right, relatedBy: . Equal, toItem: buttonsRowThree[0], attribute: .Left, multiplier: 1.0, constant: -distanceToText)
+        
+        self.addConstraints([topConstraint, bottomConstraint, leftConstraint, rightConstraint])
+        
+        // Add image constraints
+        
+        let heightShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .Height, relatedBy: .Equal, toItem: shiftButton, attribute: .Height, multiplier: 0.60, constant: 0)
+        
+        let xShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterX, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
+        
+        let yShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterY, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
+        
+        mainView.addConstraints([heightShiftConstraint, xShiftConstraint, yShiftConstraint])
+        
+       /* // Calculate side margin based off 10 buttons in the top row
         
         let sideMargin = (mainView.bounds.width - 10 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 9)/2
         
@@ -392,29 +415,24 @@ class TextKeyboardView: UIView {
         let yShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterY, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
         
         mainView.addConstraints([heightShiftConstraint, xShiftConstraint, yShiftConstraint])
+
+*/
     }
     
     func addDeleteButtonConstraints(mainView: UIView) {
         
-        // Calculate side margin based off 10 buttons in the top row
+        let sideMargin = CGFloat(3)
+        let distanceToText = CGFloat(10)
         
-        let sideMargin = (mainView.bounds.width - 10 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 9)/2
+        let topConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: sideMargin)
         
-        // Calculate the button width
-        
-        let thirdRowSideMargin = (mainView.bounds.width - 7 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 6)/2
-        let spaceBetweenButtons = mainView.bounds.width / 60
-        let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
-        
-        let topConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-        
-        let bottomConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
+        let bottomConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -sideMargin)
         
         let rightConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
         
-        let widthConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
+        let leftConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Left, relatedBy: . Equal, toItem: buttonsRowThree[6], attribute: .Right, multiplier: 1.0, constant: distanceToText)
         
-        mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, widthConstraint])
+        self.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
         
         // Add image constraints
         
