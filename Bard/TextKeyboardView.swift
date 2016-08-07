@@ -54,8 +54,14 @@ class TextKeyboardView: UIView {
     let deleteImageView = UIImageView(image: UIImage(named: "delete-white-vectorized"))
     let cancelImageView = UIImageView(image: UIImage(named: "cancel-black")?.imageWithRenderingMode(.AlwaysTemplate))
     
+    func clearButtons() {
+        buttonsRowOne.removeAll()
+        buttonsRowTwo.removeAll()
+        buttonsRowThree.removeAll()
+    }
     
     func addRowOfButtons(inout keyboardRowView: UIView!, buttonTitles: [String]) {
+        
             for buttonTitle in buttonTitles {
                 let button = createButtonWithTitle()
                 button.setTitle(buttonTitle, forState: .Normal)
