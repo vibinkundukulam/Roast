@@ -335,6 +335,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func shareApp(button: UIButton){
         let randomIndex = Int(arc4random_uniform(UInt32(shareAppArray.count)))
+        print(randomIndex)
         let string = shareAppArray[randomIndex].string
         var allTextBefore: String
         if let string = textDocumentProxy.documentContextBeforeInput {
@@ -393,6 +394,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func createShareQuotesWithName() {
         shareAppArray.removeAll()
         shareAppArray += [NSMutableAttributedString(string: "Check out the Trumped app, \(name) - <insert App Store link here>!", attributes: normalAttributes)]
+        print(name)
     }
     
     func createShareQuotesWithoutName() {
