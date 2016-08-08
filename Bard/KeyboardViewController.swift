@@ -304,6 +304,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func nameEntryButtonOldName(sender: AnyObject?) {
         textKeyboardView.activeButton.setTitle(name, forState: .Normal)
+        textKeyboardView.name = textKeyboardView.activeButton.titleForState(.Normal)!
         nameEntryButtonDidEndEditing(UIButton())
     }
     
