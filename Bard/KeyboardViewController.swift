@@ -146,7 +146,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.layer.borderWidth = 1
         nameEntryButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)
         nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        nameEntryButton.addTarget(self, action: "nameEntryButtonPressed:", forControlEvents: .TouchUpInside)
+        nameEntryButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         nameLabel.attributedText = NSAttributedString(string: "Replace name...", attributes: inactiveTextAttributes)
         showNameLabel()
@@ -168,13 +168,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.textKeyboardRowFour.setNeedsLayout()
         self.view.layoutIfNeeded()
         
-        shareButton.addTarget(self, action: "shareApp:", forControlEvents: .TouchUpInside)
-        shareButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        shareButton.addTarget(self, action: "buttonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareApp(_:)), forControlEvents: .TouchUpInside)
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.buttonActive(_:)), forControlEvents: .TouchDown)
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.buttonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
-        backButton.addTarget(self, action: "nameEntryButtonOldName:", forControlEvents: .TouchUpInside)
-        backButton.addTarget(self, action: "buttonActive:", forControlEvents: .TouchDown)
-        backButton.addTarget(self, action: "buttonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        backButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonOldName(_:)), forControlEvents: .TouchUpInside)
+        backButton.addTarget(self, action: #selector(KeyboardViewController.buttonActive(_:)), forControlEvents: .TouchDown)
+        backButton.addTarget(self, action: #selector(KeyboardViewController.buttonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
         textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
@@ -188,16 +188,16 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
         textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
         
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.nextKeyboardPressed(_:)), forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), forControlEvents: .TouchDown)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "nameEntryButtonNewName:", forControlEvents: .TouchUpInside)
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: "navButtonInactive:", forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), forControlEvents: .TouchDown)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonNewName(_:)), forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: .TouchUpInside)
         
-        textKeyboardView.shiftButton.addTarget(self, action: "shiftButtonPressed:", forControlEvents: .TouchDown)
+        textKeyboardView.shiftButton.addTarget(self, action: #selector(KeyboardViewController.shiftButtonPressed(_:)), forControlEvents: .TouchDown)
         
         backButton.hidden = true
         textKeyboardView.hidden = true
@@ -232,9 +232,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
         
-        nextKeyboard.addTarget(self, action: "navButtonActive:", forControlEvents: .TouchDown)
-        nextKeyboard.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
-        nextKeyboard.addTarget(self, action: "nextKeyboardPressed:", forControlEvents: .TouchUpInside)
+        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), forControlEvents: .TouchDown)
+        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.nextKeyboardPressed(_:)), forControlEvents: .TouchUpInside)
     }
     
     //
@@ -358,7 +358,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         if lastRow != -1 {
             
             if stringToCheck == lastQuote {
-                for var i = lastStringLength; i > 0; --i {
+                for _ in 1...lastStringLength {
                     (textDocumentProxy as UIKeyInput).deleteBackward()
                 }
             }
@@ -571,7 +571,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             if lastRow != -1 {
                 
                 if stringToCheck == lastQuote {
-                    for var i = lastStringLength; i > 0; --i {
+                    for _ in 1...lastStringLength {
                         (textDocumentProxy as UIKeyInput).deleteBackward()
                     }
                 }

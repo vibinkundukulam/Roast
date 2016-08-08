@@ -115,7 +115,7 @@ class TextKeyboardView: UIView {
     }
     
     func startCursorBlinking() {
-        cursorTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "blinkCursor", userInfo: nil, repeats: true)
+        cursorTimer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(TextKeyboardView.blinkCursor), userInfo: nil, repeats: true)
     }
     
     func stopCursorBlinking() {
@@ -185,9 +185,9 @@ class TextKeyboardView: UIView {
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         nameEntryButton.addSubview(cancelButton)
         
-        cancelButton.addTarget(self, action: "clearName:", forControlEvents: .TouchUpInside)
-        cancelButton.addTarget(self, action: "cancelButtonActive:", forControlEvents: .TouchDown)
-        cancelButton.addTarget(self, action: "cancelButtonInactive:", forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        cancelButton.addTarget(self, action: #selector(TextKeyboardView.clearName(_:)), forControlEvents: .TouchUpInside)
+        cancelButton.addTarget(self, action: #selector(TextKeyboardView.cancelButtonActive(_:)), forControlEvents: .TouchDown)
+        cancelButton.addTarget(self, action: #selector(TextKeyboardView.cancelButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
     }
     
     func addShiftButton(inout keyboardRowView: UIView!) {
@@ -587,8 +587,8 @@ class TextKeyboardView: UIView {
     func createButtonWithTitle() -> UIButton {
         let button = UIButton(type: .Custom) as UIButton         // exact size doesn't matter
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
-        button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
-        button.addTarget(self, action: "didTapTextButton:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
+        button.addTarget(self, action: #selector(TextKeyboardView.textButtonActive(_:)), forControlEvents: .TouchDown)
+        button.addTarget(self, action: #selector(TextKeyboardView.didTapTextButton(_:)), forControlEvents: [.TouchUpInside, .TouchUpOutside])
         addButtonShadow(button)
         return button
     }
@@ -607,8 +607,8 @@ class TextKeyboardView: UIView {
         deleteImageView.translatesAutoresizingMaskIntoConstraints = false
         deleteImageView.contentMode = .ScaleAspectFit
         button.backgroundColor = navColor
-        button.addTarget(self, action: "didPressDelete:", forControlEvents: .TouchDown)
-        button.addTarget(self, action: "navButtonInactive:", forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragExit, .TouchDragOutside])
+        button.addTarget(self, action: #selector(TextKeyboardView.didPressDelete(_:)), forControlEvents: .TouchDown)
+        button.addTarget(self, action: #selector(TextKeyboardView.navButtonInactive(_:)), forControlEvents: [.TouchUpInside, .TouchUpOutside, .TouchDragExit, .TouchDragOutside])
         addButtonShadow(button)
         return button
     }
@@ -629,8 +629,8 @@ class TextKeyboardView: UIView {
         button.titleLabel!.font = UIFont.systemFontOfSize(16)
         button.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
         button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        button.addTarget(self, action: "didPressSpace:", forControlEvents: [.TouchUpInside, .TouchUpOutside])
-        button.addTarget(self, action: "textButtonActive:", forControlEvents: .TouchDown)
+        button.addTarget(self, action: #selector(TextKeyboardView.didPressSpace(_:)), forControlEvents: [.TouchUpInside, .TouchUpOutside])
+        button.addTarget(self, action: #selector(TextKeyboardView.textButtonActive(_:)), forControlEvents: .TouchDown)
         addButtonShadow(button)
         return button
     }
@@ -670,11 +670,11 @@ class TextKeyboardView: UIView {
         deleteButton.backgroundColor = activeColor
         deleteButton.imageView!.tintColor = UIColor.blackColor()
         
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: "beginRapidDelete:", userInfo: nil, repeats: false)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.3, target: self, selector: #selector(TextKeyboardView.beginRapidDelete(_:)), userInfo: nil, repeats: false)
     }
     
     func beginRapidDelete(sender: AnyObject?) {
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "rapidDelete:", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: #selector(TextKeyboardView.rapidDelete(_:)), userInfo: nil, repeats: true)
     }
     
     func rapidDelete(sender: AnyObject?) {
