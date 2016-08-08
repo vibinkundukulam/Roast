@@ -67,6 +67,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     var sectionExpanded = false
     var name = ""
     var shiftButtonPressed = false
+    var textChangeCount = 0
     
     
     // Color scheme
@@ -137,7 +138,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         currentCategoryDisplayed = categoryArray[0]
         nameEntryButton.setTitle("", forState: .Normal)
         createShareQuotesWithoutName()
-        
         
         // Set up name entry text field
         
@@ -336,12 +336,35 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func shareApp(button: UIButton){
         let randomIndex = Int(arc4random_uniform(UInt32(shareAppArray.count)))
         let string = shareAppArray[randomIndex].string
+        var allTextBefore: String
+        if let string = textDocumentProxy.documentContextBeforeInput {
+            allTextBefore = string
+        } else {
+            allTextBefore = ""
+        }
+        
+        let allTextBeforeLength = allTextBefore.characters.count
+        let lastStringLength = lastQuote.characters.count
+        var stringToCheck: String?
+        
+        if allTextBeforeLength <= lastStringLength {
+            let indexToCheckFrom = allTextBefore.startIndex
+            stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+        } else {
+            let indexToCheckFrom = allTextBefore.endIndex.advancedBy(-lastStringLength)
+            stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+        }
+        
+        print(stringToCheck)
         
         if lastRow != -1 {
-            let lastStringLength = lastQuote.characters.count
-            for var i = lastStringLength; i > 0; --i {
-                (textDocumentProxy as UIKeyInput).deleteBackward()
+            
+            if stringToCheck == lastQuote {
+                for var i = lastStringLength; i > 0; --i {
+                    (textDocumentProxy as UIKeyInput).deleteBackward()
+                }
             }
+            
             
             if lastRow == -3 {
                 buttonInactive(shareButton)
@@ -371,12 +394,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func createShareQuotesWithName() {
         shareAppArray.removeAll()
-        shareAppArray += [NSMutableAttributedString(string: "Here, take this link, \(name)!", attributes: normalAttributes)]
+        shareAppArray += [NSMutableAttributedString(string: "Check out the Trumped app, \(name) - <insert App Store link here>!", attributes: normalAttributes)]
     }
     
     func createShareQuotesWithoutName() {
         shareAppArray.removeAll()
-        shareAppArray += [NSMutableAttributedString(string: "Here, take this link!", attributes: normalAttributes)]
+        shareAppArray += [NSMutableAttributedString(string: "Check out the Trumped app - <insert App Store link here>!", attributes: normalAttributes)]
     }
 
     func showNameLabel() {
@@ -528,18 +551,44 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             var categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
             let quote = categoryQuotes![indexPath.row]
             let string = quote.0.string
+            var allTextBefore: String
+            if let string = textDocumentProxy.documentContextBeforeInput {
+                allTextBefore = string
+            } else {
+                allTextBefore = ""
+            }
+            
+            let allTextBeforeLength = allTextBefore.characters.count
+            let lastStringLength = lastQuote.characters.count
+            var stringToCheck: String?
+            
+            if allTextBeforeLength <= lastStringLength {
+                let indexToCheckFrom = allTextBefore.startIndex
+                stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+            } else {
+                let indexToCheckFrom = allTextBefore.endIndex.advancedBy(-lastStringLength)
+                stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+            }
+            
+            print(stringToCheck)
+            
+           
             
             if lastRow != -1 {
-                let lastStringLength = lastQuote.characters.count
-                for var i = lastStringLength; i > 0; --i {
-                    (textDocumentProxy as UIKeyInput).deleteBackward()
+                
+                if stringToCheck == lastQuote {
+                    for var i = lastStringLength; i > 0; --i {
+                        (textDocumentProxy as UIKeyInput).deleteBackward()
+                    }
                 }
-          
+                
                 if lastRow == indexPath.row && lastCategorySelected == currentCategoryDisplayed {
+
                     self.tableView1.deselectRowAtIndexPath(indexPath, animated: false)
                     lastRow = -1
                     lastCategorySelected = ""
                     lastQuote = ""
+
                 } else {
                     buttonInactive(shareButton)
                     (textDocumentProxy as UIKeyInput).insertText("\(string)")
@@ -548,7 +597,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                     lastQuote = lastCategoryQuotes![lastRow].0.string
                 }
-                
+
             } else {
                 (textDocumentProxy as UIKeyInput).insertText("\(string)")
                 lastRow = indexPath.row
@@ -556,6 +605,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                 lastQuote = lastCategoryQuotes![lastRow].0.string
             }
+            
         } else {
             var categoryArray = Array(self.buttonTitles.keys).sort(<)
             currentCategoryDisplayed = categoryArray[indexPath.row]
@@ -566,8 +616,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             }
             expandCategory()
         }
-        
-        
+    
     }
    
     func buttonActive(button: UIButton) {
