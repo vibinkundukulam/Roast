@@ -33,7 +33,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To install Roast:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdb-DH-NWJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To install Trumped:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdb-DH-NWJ">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -180,7 +180,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under &quot;Third-Party Keyboards&quot;, tap &quot;Roast&quot;" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHj-0p-qz8">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under &quot;Third-Party Keyboards&quot;, tap &quot;Trumped&quot;" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHj-0p-qz8">
                                         <rect key="frame" x="15" y="176" width="285" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -224,7 +224,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="10"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use Roast:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="612-mT-8sc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use Trumped:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="612-mT-8sc">
                                         <rect key="frame" x="0.0" y="253" width="300" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -252,7 +252,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold the globe icon in the bottom-left of your keyboard and choose &quot;Roast&quot;" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLN-oc-mPM">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold the globe icon in the bottom-left of your keyboard and choose &quot;Trumped&quot;" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DLN-oc-mPM">
                                         <rect key="frame" x="15" y="288" width="285" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -601,19 +601,10 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cRh-xO-Rxa" userLabel="Test Text Field">
-                                <rect key="frame" x="38" y="17" width="300" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="GGu-tv-Q33"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="1WC-h5-f02" secondAttribute="trailing" constant="20" id="4ZA-r4-fOU"/>
-                            <constraint firstItem="cRh-xO-Rxa" firstAttribute="leading" secondItem="1WC-h5-f02" secondAttribute="leading" id="4gB-Pj-RWV"/>
                             <constraint firstItem="1WC-h5-f02" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="Efh-nL-1CR"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="mwy-9B-4Gs" secondAttribute="bottom" constant="305" id="HFN-Pu-0Lv"/>
                             <constraint firstAttribute="centerX" secondItem="1WC-h5-f02" secondAttribute="centerX" id="HLN-pU-obH"/>
@@ -622,10 +613,8 @@
                             <constraint firstItem="1WC-h5-f02" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" multiplier="3" id="RXc-DM-s7o"/>
                             <constraint firstItem="mwy-9B-4Gs" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="S3z-EE-38I"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="bottom" secondItem="mwy-9B-4Gs" secondAttribute="bottom" id="Zfo-wg-S0B"/>
-                            <constraint firstItem="cRh-xO-Rxa" firstAttribute="width" secondItem="1WC-h5-f02" secondAttribute="width" id="aBN-Es-32j"/>
                             <constraint firstItem="mwy-9B-4Gs" firstAttribute="top" secondItem="1WC-h5-f02" secondAttribute="bottom" id="b2D-fz-GTX"/>
                             <constraint firstItem="1WC-h5-f02" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" multiplier="0.75" id="gzN-s1-X6U"/>
-                            <constraint firstItem="1WC-h5-f02" firstAttribute="top" secondItem="cRh-xO-Rxa" secondAttribute="bottom" constant="-50" id="lQO-ce-Zgm"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="centerY" secondItem="1WC-h5-f02" secondAttribute="bottom" multiplier="1.2" id="nyt-Rc-gXc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mwy-9B-4Gs" secondAttribute="trailing" id="szk-xR-xWN"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="1WC-h5-f02" secondAttribute="bottom" constant="200" id="yhc-lb-myy"/>

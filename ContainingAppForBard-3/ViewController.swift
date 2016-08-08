@@ -40,7 +40,7 @@ class ViewController: UIViewController, MFMailComposeViewControllerDelegate {
         mailComposerVC.mailComposeDelegate = self 
         mailComposerVC.setToRecipients(["vibin.kundukulam@gmail.com"])
         mailComposerVC.setSubject("Feedback")
-        let messageBody = "Feel free to comment on... \n\nUX - Easy to install and use?\n\nDesign - Colors and layout?\n\nContent - Favorite category? Which ones need more quotes?\n\nBugs - What broke, and what were you doing that led up to it? Please include iPhone model and iOS version.\n\nMarketing - Who do you think would love Bard, and what would they use it for?"
+        let messageBody = "Feel free to comment on... \n\nUX - Easy to install and use?\n\nDesign - Colors and layout?\n\nContent - Favorite category? Which ones need more quotes?\n\nBugs - What broke, and what were you doing that led up to it? Please include iPhone model and iOS version.\n\nMarketing - Who do you think would love Trumped, and what would they use it for?"
         
         mailComposerVC.setMessageBody(messageBody, isHTML: false)
         
