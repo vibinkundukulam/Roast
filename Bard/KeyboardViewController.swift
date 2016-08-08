@@ -355,8 +355,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
         }
         
-        print(stringToCheck)
-        
         if lastRow != -1 {
             
             if stringToCheck == lastQuote {
@@ -569,10 +567,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 let indexToCheckFrom = allTextBefore.endIndex.advancedBy(-lastStringLength)
                 stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
             }
-            
-            print(stringToCheck)
-            
-           
             
             if lastRow != -1 {
                 
