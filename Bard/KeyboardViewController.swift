@@ -335,7 +335,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func shareApp(button: UIButton){
         let randomIndex = Int(arc4random_uniform(UInt32(shareAppArray.count)))
-        print(randomIndex)
         let string = shareAppArray[randomIndex].string
         var allTextBefore: String
         if let string = textDocumentProxy.documentContextBeforeInput {
@@ -359,9 +358,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         if lastRow != -1 {
             
             if stringToCheck == lastQuote {
-                for _ in 1...lastStringLength {
-                    (textDocumentProxy as UIKeyInput).deleteBackward()
-                }
+                deleteBackwardRepeat(lastStringLength)
             }
             
             
@@ -394,7 +391,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     func createShareQuotesWithName() {
         shareAppArray.removeAll()
         shareAppArray += [NSMutableAttributedString(string: "Check out the Trumped app, \(name) - <insert App Store link here>!", attributes: normalAttributes)]
-        print(name)
     }
     
     func createShareQuotesWithoutName() {
@@ -548,12 +544,18 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView == tableView1 {
-            var categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
-            let quote = categoryQuotes![indexPath.row]
+            let categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
+            var quote: (NSMutableAttributedString, NSAttributedString)
+            if let selectedCategoryQuotes = categoryQuotes {
+                quote = selectedCategoryQuotes[0]
+            } else {
+                quote = (NSMutableAttributedString(string: "", attributes: normalAttributes), NSAttributedString(string: "" , attributes: subtitleAttributes))
+            }
             let string = quote.0.string
+            
             var allTextBefore: String
-            if let string = textDocumentProxy.documentContextBeforeInput {
-                allTextBefore = string
+            if let stringToTest = textDocumentProxy.documentContextBeforeInput {
+                allTextBefore = stringToTest
             } else {
                 allTextBefore = ""
             }
@@ -573,9 +575,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             if lastRow != -1 {
                 
                 if stringToCheck == lastQuote {
-                    for _ in 1...lastStringLength {
-                        (textDocumentProxy as UIKeyInput).deleteBackward()
-                    }
+                    deleteBackwardRepeat(lastStringLength)
                 }
                 
                 if lastRow == indexPath.row && lastCategorySelected == currentCategoryDisplayed {
@@ -614,7 +614,15 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
     
     }
-   
+    
+    func deleteBackwardRepeat(numberOfTimes: Int) {
+        var i = numberOfTimes
+        while i > 0 {
+            (textDocumentProxy as UIKeyInput).deleteBackward()
+            i -= 1
+        }
+    }
+    
     func buttonActive(button: UIButton) {
         button.backgroundColor = activeColor
     }
@@ -638,7 +646,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
 
     
     func createInsultsWithoutName() {
-        
         liarArray.removeAll()
         weakArray.removeAll()
         uglyArray.removeAll()
