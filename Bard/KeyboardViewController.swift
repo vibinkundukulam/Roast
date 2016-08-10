@@ -73,7 +73,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     // Color scheme
     
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
-    let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
+    let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 1.0)
     let quoteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
     let borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).CGColor
     let textColor = UIColor.blackColor()
@@ -548,7 +548,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             let categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
             var quote: (NSMutableAttributedString, NSAttributedString)
             if let selectedCategoryQuotes = categoryQuotes {
-                quote = selectedCategoryQuotes[0]
+                quote = selectedCategoryQuotes[indexPath.row]
             } else {
                 quote = (NSMutableAttributedString(string: "", attributes: normalAttributes), NSAttributedString(string: "" , attributes: subtitleAttributes))
             }

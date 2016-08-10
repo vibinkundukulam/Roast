@@ -35,7 +35,7 @@ class TextKeyboardView: UIView {
     var cursorTimer: NSTimer!
     var timecount: Int = 0
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
-    let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 0.5)
+    let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 1.0)
     let trumpDisabledColor = UIColor(red: (170+136)/2/255, green: (5+170/2)/255, blue: (5+170)/2/255, alpha: 1.0)
     
     // Creating buttons for text keyboard
