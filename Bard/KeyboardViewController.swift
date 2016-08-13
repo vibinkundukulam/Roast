@@ -96,7 +96,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             return [NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 14)!,NSForegroundColorAttributeName : textColor]
         }
     }
-
     
     // Creating initial arrays to hold quotes
     
@@ -398,12 +397,28 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func createShareQuotesWithName() {
         shareAppArray.removeAll()
-        shareAppArray += [NSMutableAttributedString(string: "Check out the Trumped app, \(name) - <insert App Store link here>!", attributes: normalAttributes)]
+        let linkOne = NSMutableAttributedString(string: "\(name) doesn't have the Trumped app? SAD! bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkTwo = NSMutableAttributedString(string: "\(name) should check out bit.ly/2aRrcR0 - if their short fingers can handle it..", attributes: normalAttributes)
+        let linkThree = NSMutableAttributedString(string: "#MakeDonaldDrumpfAgain at bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkFour = NSMutableAttributedString(string: "\(name) has ZERO imagination. You need bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkFive = NSMutableAttributedString(string: "\(name) is a dumb mouthpiece. Maybe this will help - bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkSix = NSMutableAttributedString(string: "Wacko! All \(name) does is talk, talk, talk. This will make it easier. bit.ly/2aRrcR0", attributes: normalAttributes)
+        shareAppArray += [addLinkToString(linkOne), addLinkToString(linkTwo), addLinkToString(linkThree), addLinkToString(linkFour), addLinkToString(linkFive), addLinkToString(linkSix)]
     }
     
     func createShareQuotesWithoutName() {
-        shareAppArray.removeAll()
-        shareAppArray += [NSMutableAttributedString(string: "Check out the Trumped app - <insert App Store link here>!", attributes: normalAttributes)]
+        let linkOne = NSMutableAttributedString(string: "You don't have the Trumped app? SAD! bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkTwo = NSMutableAttributedString(string: "Check out bit.ly/2aRrcR0 - if your short fingers can handle it.", attributes: normalAttributes)
+        let linkThree = NSMutableAttributedString(string: "#MakeDonaldDrumpfAgain. bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkFour = NSMutableAttributedString(string: "ZERO imagination. You need bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkFive = NSMutableAttributedString(string: "You're a dumb mouthpiece. Maybe this will help - bit.ly/2aRrcR0", attributes: normalAttributes)
+        let linkSix = NSMutableAttributedString(string: "Wacko! All you do is talk, talk, talk. This will make it easier. bit.ly/2aRrcR0", attributes: normalAttributes)
+        shareAppArray += [addLinkToString(linkOne), addLinkToString(linkTwo), addLinkToString(linkThree), addLinkToString(linkFour), addLinkToString(linkFive), addLinkToString(linkSix)]
+    }
+    
+    func addLinkToString(string: NSMutableAttributedString) -> NSMutableAttributedString {
+        string.addAttribute(NSLinkAttributeName, value: "www.facebook.com/trumpedkeyboard", range: (string.string as NSString).rangeOfString(string.string))
+        return string
     }
 
     func showNameLabel() {
