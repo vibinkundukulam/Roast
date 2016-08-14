@@ -12,10 +12,13 @@ import QuartzCore
 
 class TextKeyboardView: UIView {
     
+    var didNameChange = false
+    var oldName = ""
     var name = "" {
         didSet {
             checkWhetherNameEmpty()
-            if cancelButton.hidden {
+            checkWhetherNameChanged()
+            if !didNameChange && name == "" {
                 trumpButtonDisabled(UIButton())
             } else {
                 cancelImageView.tintColor = UIColor.grayColor()
@@ -343,64 +346,6 @@ class TextKeyboardView: UIView {
         }
         
         
-     
-      /*  
-        func addIndividualButtonConstraints(inout buttons: [UIButton], mainView: UIView) {
-        
-        // Calculate spaces
-        
-        let numButtons = buttons.count
-        let buttonWidth = mainView.bounds.width / 12
-        let buttonSpace = CGFloat(numButtons) * buttonWidth
-        let spaceBetweenButtons = buttonWidth / 5
-        let spaceSpace = spaceBetweenButtons * (CGFloat(numButtons) - 1)
-        let leftOverSpace = mainView.bounds.width - buttonSpace - spaceSpace
-        let sideMargin = leftOverSpace/2
-        
-        
-        // Set constraints
-        
-        for (index, button) in buttons.enumerate() {
-            
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-            
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
-            
-            var rightConstraint : NSLayoutConstraint!
-            if index == buttons.count - 1 {
-                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
-            } else {
-                let nextButton = buttons[index+1]
-                rightConstraint = NSLayoutConstraint(item: button, attribute: .Right, relatedBy: .Equal, toItem: nextButton, attribute: .Left, multiplier: 1.0, constant: -spaceBetweenButtons)
-                
-            }
-            
-            var leftConstraint : NSLayoutConstraint!
-            var widthConstraint: NSLayoutConstraint!
-            if index == 0 {
-                
-                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
-                
-                
-            } else {
-                
-                let prevtButton = buttons[index-1]
-                leftConstraint = NSLayoutConstraint(item: button, attribute: .Left, relatedBy: .Equal, toItem: prevtButton, attribute: .Right, multiplier: 1.0, constant: spaceBetweenButtons)
-                
-                let firstButton = buttons[0]
-                widthConstraint = NSLayoutConstraint(item: firstButton, attribute: .Width, relatedBy: .Equal, toItem: button, attribute: .Width, multiplier: 1.0, constant: 0)
-                
-                mainView.addConstraint(widthConstraint)
-                
-            }
-            
-            
-            mainView.addConstraints([topConstraint, bottomConstraint, rightConstraint, leftConstraint])
-            
-        }
-        buttons.removeAll()
-
-    */
         
     }
     
@@ -454,38 +399,7 @@ class TextKeyboardView: UIView {
         
         mainView.addConstraints([heightShiftConstraint, xShiftConstraint, yShiftConstraint])
         
-       /* // Calculate side margin based off 10 buttons in the top row
-        
-        let sideMargin = (mainView.bounds.width - 10 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 9)/2
-        
-        // Calculate the button width
-        
-        let thirdRowSideMargin = (mainView.bounds.width - 7 * mainView.bounds.width / 12 - mainView.bounds.width / 60 * 6)/2
-        let spaceBetweenButtons = mainView.bounds.width / 60
-        let actualButtonWidth = thirdRowSideMargin - spaceBetweenButtons - sideMargin
-        
-        let topConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: 3)
-        
-        let bottomConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -3)
-        
-        let leftConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
-
-        let widthConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Width, relatedBy: . Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: actualButtonWidth)
-            
-        mainView.addConstraints([topConstraint, bottomConstraint, leftConstraint, widthConstraint])
-        
-        // Add image constraints
-        
-        let heightShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .Height, relatedBy: .Equal, toItem: shiftButton, attribute: .Height, multiplier: 0.60, constant: 0)
-        
-        let xShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterX, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterX, multiplier: 1.0, constant: 0.0)
-        
-        let yShiftConstraint = NSLayoutConstraint(item: shiftImageView, attribute: .CenterY, relatedBy: .Equal, toItem: shiftButton, attribute: .CenterY, multiplier: 1.0, constant: 0.0)
-        
-        mainView.addConstraints([heightShiftConstraint, xShiftConstraint, yShiftConstraint])
-
-*/
-    }
+        }
     
     func addDeleteButtonConstraints(mainView: UIView) {
         
@@ -693,6 +607,14 @@ class TextKeyboardView: UIView {
             cancelButton.hidden = true
         } else {
             cancelButton.hidden = false
+        }
+    }
+    
+    func checkWhetherNameChanged() {
+        if name == oldName {
+            didNameChange =  false
+        } else {
+            didNameChange = true
         }
     }
     

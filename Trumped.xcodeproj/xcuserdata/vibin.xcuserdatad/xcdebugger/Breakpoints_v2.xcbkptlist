@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bard/KeyboardViewController.swift"
-            timestampString = "492731553.366248"
+            timestampString = "492890954.501826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "341"
+            endingLineNumber = "341"
             landmarkName = "nameEntryButtonDidEndEditing(_:)"
             landmarkType = "5">
          </BreakpointContent>

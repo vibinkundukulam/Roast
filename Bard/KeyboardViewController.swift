@@ -277,6 +277,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
 
         textKeyboardView.activeButton = nameEntryButton
         name = textKeyboardView.activeButton.titleForState(.Normal)!
+        textKeyboardView.didNameChange = false
+        textKeyboardView.oldName = name
+        
+        if !textKeyboardView.didNameChange && textKeyboardView.name == "" {
+            textKeyboardView.trumpButtonDisabled(UIButton())
+        }
 
 
     }
