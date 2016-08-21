@@ -892,6 +892,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         dummyArray += [(NSMutableAttributedString(string: "Knitwit.", attributes: normalAttributes), NSAttributedString(string: "on Paul Ryan" , attributes: subtitleAttributes))]
         crazyArray += [(NSMutableAttributedString(string: "You are living in the world of make-believe.", attributes: normalAttributes), NSAttributedString(string: "on Chris Wallace" , attributes: subtitleAttributes))]
         unpopularArray += [(NSMutableAttributedString(string: "Now I know why people always treated you so badly - they couldn’t stand you.", attributes: normalAttributes), NSAttributedString(string: "on Kareem Abdul-Jabbar" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "I have never seen a human being eat in such a disgusting fashion.", attributes: normalAttributes), NSAttributedString(string: "on John Kasich" , attributes: subtitleAttributes))]
+        dummyArray += [(NSMutableAttributedString(string: "You're one of the dumbest human beings I have ever seen.", attributes: normalAttributes), NSAttributedString(string: "on Lindsey Graham" , attributes: subtitleAttributes))]
+        dummyArray += [(NSMutableAttributedString(string: "You're a lightweight - dumb as a rock.", attributes: normalAttributes), NSAttributedString(string: "on Don Lemon" , attributes: subtitleAttributes))]
         
         refreshButtonTitles()
     }
@@ -937,7 +940,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         weakArray += [(NSMutableAttributedString(string: "\(name)'s a perfect little puppet.", attributes: normalAttributes), NSAttributedString(string: "on Marco Rubio" , attributes: subtitleAttributes))]
         poorArray += [(NSMutableAttributedString(string: "\(name)'s never made ten cents.", attributes: normalAttributes), NSAttributedString(string: "on Marco Rubio" , attributes: subtitleAttributes))]
         cluelessArray += [(NSMutableAttributedString(string: "\(name) knows nothing about finance", attributes: normalAttributes), NSAttributedString(string: "on Marco Rubio" , attributes: subtitleAttributes))]
-        bestquotesArray += [(NSMutableAttributedString(string: "I know more about \(name) than they knows about themselves.", attributes: normalAttributes), NSAttributedString(string: "on Cory Booker" , attributes: subtitleAttributes))]
+        bestquotesArray += [(NSMutableAttributedString(string: "I know more about \(name) than they know about themselves.", attributes: normalAttributes), NSAttributedString(string: "on Cory Booker" , attributes: subtitleAttributes))]
         sleazyArray += [(NSMutableAttributedString(string: "\(name)'s the WORST abuser of woman in U.S. political history.", attributes: normalAttributes), NSAttributedString(string: "on Bill Clinton" , attributes: subtitleAttributes))]
         sleazyArray += [(NSMutableAttributedString(string: "\(name) DEMONSTRATED A PENCHANT FOR SEXISM.", attributes: normalAttributes), NSAttributedString(string: "on Bill Clinton" , attributes: subtitleAttributes))]
         sleazyArray += [(NSMutableAttributedString(string: "\(name)'s a crude dope!", attributes: normalAttributes), NSAttributedString(string: "on Michael Nutter" , attributes: subtitleAttributes))]
@@ -1074,6 +1077,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         dummyArray += [(NSMutableAttributedString(string: "Knitwit.", attributes: normalAttributes), NSAttributedString(string: "on Paul Ryan" , attributes: subtitleAttributes))]
         crazyArray += [(NSMutableAttributedString(string: "\(name) is living in the world of make-believe.", attributes: normalAttributes), NSAttributedString(string: "on Chris Wallace" , attributes: subtitleAttributes))]
         unpopularArray += [(NSMutableAttributedString(string: "Now I know why people always treated \(name) so badly - couldn’t stand them.", attributes: normalAttributes), NSAttributedString(string: "on Kareem Abdul-Jabbar" , attributes: subtitleAttributes))]
+        uglyArray += [(NSMutableAttributedString(string: "I have never seen a human being eat in such a disgusting fashion.", attributes: normalAttributes), NSAttributedString(string: "on John Kasich" , attributes: subtitleAttributes))]
+        dummyArray += [(NSMutableAttributedString(string: "\(name)'s one of the dumbest human beings I have ever seen.", attributes: normalAttributes), NSAttributedString(string: "on Lindsey Graham" , attributes: subtitleAttributes))]
+        dummyArray += [(NSMutableAttributedString(string: "\(name)'s a lightweight - dumb as a rock.", attributes: normalAttributes), NSAttributedString(string: "on Don Lemon" , attributes: subtitleAttributes))]
         
         refreshButtonTitles()
     }
