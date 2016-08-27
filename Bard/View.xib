@@ -53,17 +53,17 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Npz-By-jUS" userLabel="Name View">
-                    <rect key="frame" x="0.0" y="1" width="320" height="24"/>
+                    <rect key="frame" x="0.0" y="1" width="320" height="30"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mnK-9n-OIn" userLabel="Back Button" customClass="Draw2D" customModule="Bard" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="yGk-To-LPG"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JmJ-9Y-zbU">
-                            <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="NqK-jL-dU6"/>
                             </constraints>
@@ -73,21 +73,21 @@
                             </state>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="trump-black" translatesAutoresizingMaskIntoConstraints="NO" id="fOD-s2-0vS">
-                            <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
-                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="e6V-SR-FQN"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8p6-Gv-7WO" userLabel="Name Entry Button">
-                            <rect key="frame" x="30" y="4" width="280" height="16"/>
+                            <rect key="frame" x="30" y="4" width="280" height="22"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R9a-B8-WKM">
-                            <rect key="frame" x="40" y="2" width="45" height="21"/>
+                            <rect key="frame" x="40" y="5" width="45" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -111,7 +111,7 @@
                         <constraint firstItem="JmJ-9Y-zbU" firstAttribute="leading" secondItem="R9a-B8-WKM" secondAttribute="trailing" id="pAr-YP-xt2"/>
                         <constraint firstAttribute="bottom" secondItem="JmJ-9Y-zbU" secondAttribute="bottom" id="rKz-At-379"/>
                         <constraint firstItem="fOD-s2-0vS" firstAttribute="leading" secondItem="Npz-By-jUS" secondAttribute="leading" id="sDE-Ag-3LS"/>
-                        <constraint firstAttribute="height" constant="24" id="xqV-zx-6ix"/>
+                        <constraint firstAttribute="height" constant="30" id="xqV-zx-6ix"/>
                         <constraint firstItem="fOD-s2-0vS" firstAttribute="leading" secondItem="mnK-9n-OIn" secondAttribute="trailing" id="yIL-Di-58I"/>
                         <constraint firstAttribute="bottom" secondItem="8p6-Gv-7WO" secondAttribute="bottom" constant="4" id="z1Z-aC-trc"/>
                     </constraints>
@@ -124,7 +124,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cCg-gG-mVt" userLabel="Name-Quote Border View">
-                    <rect key="frame" x="0.0" y="25" width="320" height="1"/>
+                    <rect key="frame" x="0.0" y="31" width="320" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="1vF-0s-yw7"/>
@@ -137,22 +137,22 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-0C-ci4" userLabel="Text Keyboard View" customClass="TextKeyboardView" customModule="Bard" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="26" width="320" height="174"/>
+                    <rect key="frame" x="0.0" y="32" width="320" height="168"/>
                     <subviews>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTx-Mv-mme" userLabel="Row 1">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TVQ-bV-okK" userLabel="Row 2">
-                            <rect key="frame" x="0.0" y="43" width="320" height="43"/>
+                            <rect key="frame" x="0.0" y="42" width="320" height="42"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6S-JF-h7U" userLabel="Row 3">
-                            <rect key="frame" x="0.0" y="86" width="320" height="43"/>
+                            <rect key="frame" x="0.0" y="84" width="320" height="42"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJa-mM-82E" userLabel="Row 4">
-                            <rect key="frame" x="0.0" y="129" width="320" height="43"/>
+                            <rect key="frame" x="0.0" y="126" width="320" height="42"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
@@ -182,10 +182,10 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S6X-cn-8I0" userLabel="Choose Quote View">
-                    <rect key="frame" x="0.0" y="26" width="320" height="130"/>
+                    <rect key="frame" x="0.0" y="32" width="320" height="124"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Bz2-mo-z6s" userLabel="Quote Table View">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

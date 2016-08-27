@@ -20,9 +20,9 @@ class Draw2D: UIControl {
             CGContextSetLineWidth(context, 1.0)
             CGContextSetStrokeColorWithColor(context,
                 UIColor.darkGrayColor().CGColor)
-            CGContextMoveToPoint(context, 18, 8)
-            CGContextAddLineToPoint(context, 12, 12)
-            CGContextAddLineToPoint(context, 18, 16)
+            CGContextMoveToPoint(context, 18, 10)
+            CGContextAddLineToPoint(context, 12, 15)
+            CGContextAddLineToPoint(context, 18, 20)
             CGContextStrokePath(context)
         }
     
