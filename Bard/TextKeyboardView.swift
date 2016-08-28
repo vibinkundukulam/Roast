@@ -31,12 +31,17 @@ class TextKeyboardView: UIView {
         }
     }
     
+    // Cursor
+    
     var cursor: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 1, height: 10))
     var cursorOffsetAmount: CGFloat = CGFloat(0.0)
     var cursorLeft: NSLayoutConstraint!
     var timer: NSTimer!
     var cursorTimer: NSTimer!
     var timecount: Int = 0
+    
+    // Colors
+    
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 1.0)
     let trumpDisabledColor = UIColor(red: (170+136)/2/255, green: (5+170/2)/255, blue: (5+170)/2/255, alpha: 1.0)
@@ -65,6 +70,18 @@ class TextKeyboardView: UIView {
     let shiftImageView = UIImageView(image: UIImage(named: "shiftarrow-black")?.imageWithRenderingMode(.AlwaysTemplate))
     let deleteImageView = UIImageView(image: UIImage(named: "delete-white-vectorized"))
     let cancelImageView = UIImageView(image: UIImage(named: "cancel-black")?.imageWithRenderingMode(.AlwaysTemplate))
+    
+    // Button constraint constants
+    
+    let sideMarginFirstRow = CGFloat(3)
+    let sideMargin = CGFloat(3)
+    let spaceBetweenButtons = CGFloat(6)
+    let verticalMarginTop = CGFloat(4)
+    let verticalMarginMiddleOne = CGFloat(6)
+    let verticalMarginMiddleTwo = CGFloat (5)
+    let verticalMarginBottom = CGFloat(3)
+    let distanceToText = CGFloat(10)
+    
     
     func offsetCursor(offset: CGFloat) {
         cursorLeft.constant = 10 + cursorOffsetAmount
@@ -130,7 +147,8 @@ class TextKeyboardView: UIView {
             for buttonTitle in buttonTitles {
                 let button = createButtonWithTitle()
                 button.setTitle(buttonTitle, forState: .Normal)
-                button.titleLabel!.font = UIFont.systemFontOfSize(16)
+                button.titleLabel!.font = UIFont.systemFontOfSize(20)
+                button.contentVerticalAlignment = .Bottom
                 button.setTitleColor(UIColor.blackColor(), forState: .Normal)
                 button.layer.cornerRadius = 5
                 button.translatesAutoresizingMaskIntoConstraints = false
@@ -213,16 +231,13 @@ class TextKeyboardView: UIView {
 
     func addIndividualButtonConstraints(inout rowOneView: UIView!, inout rowTwoView: UIView!, inout rowThreeView: UIView!) {
         
-        let sideMarginFirstRow = CGFloat(3)
-        let spaceBetweenButtons = CGFloat(5)
-        
         // Add constraints for first row
         
         for (index, button) in buttonsRowOne.enumerate() {
             
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: rowOneView, attribute: .Top, multiplier: 1.0, constant: sideMarginFirstRow)
+            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: rowOneView, attribute: .Top, multiplier: 1.0, constant: verticalMarginTop)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: rowOneView, attribute: .Bottom, multiplier: 1.0, constant: -sideMarginFirstRow)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: rowOneView, attribute: .Bottom, multiplier: 1.0, constant: -verticalMarginMiddleOne)
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttonsRowOne.count - 1 {
@@ -261,9 +276,9 @@ class TextKeyboardView: UIView {
         
         for (index, button) in buttonsRowTwo.enumerate() {
             
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: rowTwoView, attribute: .Top, multiplier: 1.0, constant: sideMarginFirstRow)
+            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: rowTwoView, attribute: .Top, multiplier: 1.0, constant: verticalMarginMiddleOne)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: rowTwoView, attribute: .Bottom, multiplier: 1.0, constant: -sideMarginFirstRow)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: rowTwoView, attribute: .Bottom, multiplier: 1.0, constant: -verticalMarginMiddleOne)
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttonsRowTwo.count - 1 {
@@ -305,9 +320,9 @@ class TextKeyboardView: UIView {
         
         for (index, button) in buttonsRowThree.enumerate() {
             
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: rowThreeView, attribute: .Top, multiplier: 1.0, constant: sideMarginFirstRow)
+            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: rowThreeView, attribute: .Top, multiplier: 1.0, constant: verticalMarginMiddleOne)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: rowThreeView, attribute: .Bottom, multiplier: 1.0, constant: -sideMarginFirstRow)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: rowThreeView, attribute: .Bottom, multiplier: 1.0, constant: -verticalMarginMiddleTwo)
             
             var rightConstraint : NSLayoutConstraint!
             if index == buttonsRowThree.count - 1 {
@@ -376,12 +391,9 @@ class TextKeyboardView: UIView {
     
     func addShiftButtonConstraints(mainView: UIView) {
         
-        let sideMargin = CGFloat(3)
-        let distanceToText = CGFloat(10)
+        let topConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: verticalMarginMiddleOne)
         
-        let topConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: sideMargin)
-        
-        let bottomConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -sideMargin)
+        let bottomConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -verticalMarginMiddleTwo)
         
         let leftConstraint = NSLayoutConstraint(item: shiftButton, attribute: .Left, relatedBy: .Equal, toItem: mainView, attribute: .Left, multiplier: 1.0, constant: sideMargin)
         
@@ -403,12 +415,9 @@ class TextKeyboardView: UIView {
     
     func addDeleteButtonConstraints(mainView: UIView) {
         
-        let sideMargin = CGFloat(3)
-        let distanceToText = CGFloat(10)
+        let topConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: verticalMarginMiddleOne)
         
-        let topConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: sideMargin)
-        
-        let bottomConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -sideMargin)
+        let bottomConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -verticalMarginMiddleTwo)
         
         let rightConstraint = NSLayoutConstraint(item: deleteButton, attribute: .Right, relatedBy: .Equal, toItem: mainView, attribute: .Right, multiplier: 1.0, constant: -sideMargin)
         
@@ -429,14 +438,11 @@ class TextKeyboardView: UIView {
     
     func addFinalRowButtonConstraints(mainView: UIView) {
         
-        let sideMargin = CGFloat(3)
-        let distanceToText = CGFloat(10)
-        
         for (index, button) in buttonsRowFour.enumerate() {
             
-            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: sideMargin)
+            let topConstraint = NSLayoutConstraint(item: button, attribute: .Top, relatedBy: .Equal, toItem: mainView, attribute: .Top, multiplier: 1.0, constant: verticalMarginMiddleTwo)
             
-            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -sideMargin)
+            let bottomConstraint = NSLayoutConstraint(item: button, attribute: .Bottom, relatedBy: .Equal, toItem: mainView, attribute: .Bottom, multiplier: 1.0, constant: -verticalMarginBottom)
             
             var rightConstraint : NSLayoutConstraint!
             if index == 2 {

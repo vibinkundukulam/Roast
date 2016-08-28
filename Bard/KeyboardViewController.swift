@@ -142,9 +142,6 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.setTitle("", forState: .Normal)
         createShareQuotesWithoutName()
         
-        
-        
-        
         // Set up name entry text field
         
         nameEntryButton.layer.borderColor = borderColor
@@ -156,6 +153,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         nameLabel.attributedText = NSAttributedString(string: "Replace name...", attributes: inactiveTextAttributes)
         showNameLabel()
+        
+        
+        // Set up textKeyboard
         
         textKeyboardView.addCancelButton(&nameEntryButton)
         textKeyboardView.addCancelButtonConstraints(nameEntryButton)
@@ -175,8 +175,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.view.layoutIfNeeded()
         
         shareButton.addTarget(self, action: #selector(KeyboardViewController.shareApp(_:)), forControlEvents: .TouchUpInside)
-        shareButton.addTarget(self, action: #selector(KeyboardViewController.buttonActive(_:)), forControlEvents: .TouchDown)
-        shareButton.addTarget(self, action: #selector(KeyboardViewController.buttonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareButtonActive(_:)), forControlEvents: .TouchDown)
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
         
         backButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonOldName(_:)), forControlEvents: .TouchUpInside)
         backButton.addTarget(self, action: #selector(KeyboardViewController.buttonActive(_:)), forControlEvents: .TouchDown)
@@ -376,7 +376,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             
             if lastRow == -3 {
-                buttonInactive(shareButton)
+                shareButtonImage.image = UIImage(named: "share-gray")
                 lastRow = -1
                 lastCategorySelected = ""
                 lastQuote = ""
@@ -615,7 +615,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     lastQuote = ""
 
                 } else {
-                    buttonInactive(shareButton)
+                    shareButtonImage.image = UIImage(named: "share-gray")
                     (textDocumentProxy as UIKeyInput).insertText("\(string)")
                     lastRow = indexPath.row
                     lastCategorySelected = currentCategoryDisplayed
@@ -658,6 +658,14 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     func buttonInactive(button: UIButton) {
         button.backgroundColor = UIColor.whiteColor()
+    }
+    
+    func shareButtonActive(button: UIButton) {
+        shareButtonImage.image = UIImage(named: "share-red")
+    }
+    
+    func shareButtonInactive(button: UIButton) {
+        shareButtonImage.image = UIImage(named: "share-gray")
     }
     
     func navButtonActive(button: UIButton) {
