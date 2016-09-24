@@ -10,6 +10,20 @@ import UIKit
 import Foundation
 import QuartzCore
 
+// Colors
+
+// Yellow
+
+var navColor = UIColor(red: 218/255, green: 165/255, blue: 32/255, alpha: 1.0)
+var activeColor = UIColor(red: 244/255, green: 190/255, blue: 73/255, alpha: 1.0)
+var activeColorQuote = UIColor(red: 241/255, green: 211/255, blue: 132/255, alpha: 1.0)
+var quoteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
+var borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).cgColor
+var textColor = UIColor.black
+var textInactiveColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0)
+var trumpDisabledColor = activeColorQuote
+
+
 class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIApplicationDelegate {
     
     // Table constraints
@@ -17,6 +31,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     @IBOutlet var categoryTableViewHeaderTop: NSLayoutConstraint!
     @IBOutlet var categoryTableViewHeaderBottom: NSLayoutConstraint!
     var expandedCategoryTableViewHeaderTopConstraint: NSLayoutConstraint? = nil
+    var expandedCategoryTableViewHeaderTopConstraintTwo: NSLayoutConstraint? = nil
     var expandedChooseQuoteViewBottomConstraint: NSLayoutConstraint? = nil
     
     // Text keyboard
@@ -72,12 +87,21 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     
     // Color scheme
     
+   /* // Red
+    
     let navColor = UIColor(red: 136/255, green: 5/255, blue: 5/255, alpha: 1.0)
     let activeColor = UIColor(red: 223/255, green: 122/255, blue: 128/255, alpha: 1.0)
-    let quoteColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1.0)
-    let borderColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0).CGColor
-    let textColor = UIColor.blackColor()
-    let textInactiveColor = UIColor(red: 155/255, green: 155/255, blue: 155/255, alpha: 1.0)
+    
+    // Orange
+    
+    let navColor = UIColor(red: 241/255, green: 122/255, blue: 2/255, alpha: 1.0)
+    let activeColor = UIColor(red: 238/255, green: 169/255, blue: 99/255, alpha: 1.0)
+    
+    // Gold
+    
+    let navColor = UIColor(red: 137/255, green: 100/255, blue: 29/255, alpha: 1.0)
+    let activeColor = UIColor(red: 204/255, green: 178/255, blue: 128/255, alpha: 1.0)
+    */
     
     var inactiveTextAttributes: [String: NSObject] {
         get {
@@ -134,13 +158,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         createInsultsWithoutName()
         
         let nib = UINib(nibName: "View", bundle: nil)
-        let objects = nib.instantiateWithOwner(self, options: nil)
+        let objects = nib.instantiate(withOwner: self, options: nil)
         view = objects[0] as! UIView;
-
-        var categoryArray = Array(self.buttonTitles.keys).sort(<)
+        var categoryArray = Array(self.buttonTitles.keys).sorted(by: <)
         currentCategoryDisplayed = categoryArray[0]
-        nameEntryButton.setTitle("", forState: .Normal)
+        nameEntryButton.setTitle("", for: UIControlState())
         createShareQuotesWithoutName()
+        
         
         // Set up name entry text field
         
@@ -148,8 +172,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         nameEntryButton.layer.cornerRadius = 10
         nameEntryButton.layer.borderWidth = 1
         nameEntryButton.titleEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)
-        nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
-        nameEntryButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        nameEntryButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+        nameEntryButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonPressed(_:)), for: .touchUpInside)
         
         nameLabel.attributedText = NSAttributedString(string: "Replace name...", attributes: inactiveTextAttributes)
         showNameLabel()
@@ -159,10 +183,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         textKeyboardView.addCancelButton(&nameEntryButton)
         textKeyboardView.addCancelButtonConstraints(nameEntryButton)
-        textKeyboardView.cancelButton.hidden = true
+        textKeyboardView.cancelButton.isHidden = true
         
         textKeyboardView.addCursorWithConstraints(&nameView, nameEntryButton: &nameEntryButton)
-        textKeyboardView.cursor.hidden = true
+        textKeyboardView.cursor.isHidden = true
         
         self.view.autoresizesSubviews = true
         
@@ -174,13 +198,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         self.textKeyboardRowFour.setNeedsLayout()
         self.view.layoutIfNeeded()
         
-        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareApp(_:)), forControlEvents: .TouchUpInside)
-        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareButtonActive(_:)), forControlEvents: .TouchDown)
-        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareApp(_:)), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareButtonActive(_:)), for: .touchDown)
+        shareButton.addTarget(self, action: #selector(KeyboardViewController.shareButtonInactive(_:)), for: [.touchDragExit, .touchDragOutside])
         
-        backButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonOldName(_:)), forControlEvents: .TouchUpInside)
-        backButton.addTarget(self, action: #selector(KeyboardViewController.buttonActive(_:)), forControlEvents: .TouchDown)
-        backButton.addTarget(self, action: #selector(KeyboardViewController.buttonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        backButton.addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonOldName(_:)), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(KeyboardViewController.buttonActive(_:)), for: .touchDown)
+        backButton.addTarget(self, action: #selector(KeyboardViewController.buttonInactive(_:)), for: [.touchDragExit, .touchDragOutside])
         
         textKeyboardView.addRowOfButtons(&textKeyboardRowOne, buttonTitles: textKeyboardView.buttonTitlesRowOne)
         textKeyboardView.addRowOfButtons(&textKeyboardRowTwo, buttonTitles: textKeyboardView.buttonTitlesRowTwo)
@@ -194,19 +218,19 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         textKeyboardView.addShiftButtonConstraints(textKeyboardRowThree)
         textKeyboardView.addDeleteButtonConstraints(textKeyboardRowThree)
         
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.nextKeyboardPressed(_:)), forControlEvents: .TouchUpInside)
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), forControlEvents: .TouchDown)
-        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.nextKeyboardPressed(_:)), for: .touchUpInside)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), for: .touchDown)
+        textKeyboardView.buttonsRowFour[0].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), for: [.touchDragExit, .touchDragOutside])
         
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), forControlEvents: .TouchDown)
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonNewName(_:)), forControlEvents: .TouchUpInside)
-        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: .TouchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), for: .touchDown)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), for: [.touchDragExit, .touchDragOutside])
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.nameEntryButtonNewName(_:)), for: .touchUpInside)
+        textKeyboardView.buttonsRowFour[2].addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), for: .touchUpInside)
         
-        textKeyboardView.shiftButton.addTarget(self, action: #selector(KeyboardViewController.shiftButtonPressed(_:)), forControlEvents: .TouchDown)
+        textKeyboardView.shiftButton.addTarget(self, action: #selector(KeyboardViewController.shiftButtonPressed(_:)), for: .touchDown)
         
-        backButton.hidden = true
-        textKeyboardView.hidden = true
+        backButton.isHidden = true
+        textKeyboardView.isHidden = true
         
         
         // Set up table of quotes and categories
@@ -217,30 +241,33 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         tableView2.delegate = self
         tableView2.dataSource = self
         
+        nextKeyboard.backgroundColor = navColor
+        expandCategoryButton.backgroundColor = navColor
+        
         
         // Quotes
         
         tableView1.rowHeight = UITableViewAutomaticDimension
         tableView1.estimatedRowHeight = 30
-        tableView1.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell")
+        tableView1.register(UITableViewCell.self,forCellReuseIdentifier: "cell")
         tableView1.backgroundColor = quoteColor
-        tableView1.separatorColor = UIColor.clearColor()
+        tableView1.separatorColor = UIColor.clear
         
         
         // Categories
         
         tableView2.rowHeight = UITableViewAutomaticDimension
         tableView2.estimatedRowHeight = 30
-        tableView2.registerClass(UITableViewCell.self,forCellReuseIdentifier: "cell2")
+        tableView2.register(UITableViewCell.self,forCellReuseIdentifier: "cell2")
         tableView2.backgroundColor = navColor
         categoryLabel.text = currentCategoryDisplayed
         
-        let selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-        tableView2.selectRowAtIndexPath(selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.Top)
+        let selectedIndexPath = IndexPath(row: 0, section: 0)
+        tableView2.selectRow(at: selectedIndexPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
         
-        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), forControlEvents: .TouchDown)
-        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), forControlEvents: [.TouchDragExit, .TouchDragOutside])
-        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.nextKeyboardPressed(_:)), forControlEvents: .TouchUpInside)
+        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.navButtonActive(_:)), for: .touchDown)
+        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.navButtonInactive(_:)), for: [.touchDragExit, .touchDragOutside])
+        nextKeyboard.addTarget(self, action: #selector(KeyboardViewController.nextKeyboardPressed(_:)), for: .touchUpInside)
     }
     
     //
@@ -250,33 +277,32 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
     //
     
     
-    
-    func nameEntryButtonPressed(button: UIButton) {
+    func nameEntryButtonPressed(_ button: UIButton) {
         
-        backButton.backgroundColor = UIColor.whiteColor()
-        nameLabel.hidden = true
-        chooseQuoteView.hidden = true
-        shareButton.hidden = true
-        shareButtonImage.hidden = true
-        categoryHeader.hidden = true
+        backButton.backgroundColor = UIColor.white
+        nameLabel.isHidden = true
+        chooseQuoteView.isHidden = true
+        shareButton.isHidden = true
+        shareButtonImage.isHidden = true
+        categoryHeader.isHidden = true
         
-        backButton.hidden = false
-        textKeyboardView.hidden = false
-        textKeyboardView.cursor.hidden = false
+        backButton.isHidden = false
+        textKeyboardView.isHidden = false
+        textKeyboardView.cursor.isHidden = false
         textKeyboardView.startCursorBlinking()
 
         
-        if nameEntryButton.titleForState(.Normal) == "" {
-            textKeyboardView.cancelButton.hidden = true
+        if nameEntryButton.title(for: UIControlState()) == "" {
+            textKeyboardView.cancelButton.isHidden = true
         } else {
-            textKeyboardView.cancelButton.hidden = false
+            textKeyboardView.cancelButton.isHidden = false
         }
         
         self.nameView.layoutIfNeeded()
-        nameEntryButton.layer.borderColor = navColor.CGColor
+        nameEntryButton.layer.borderColor = navColor.cgColor
 
         textKeyboardView.activeButton = nameEntryButton
-        name = textKeyboardView.activeButton.titleForState(.Normal)!
+        name = textKeyboardView.activeButton.title(for: UIControlState())!
         textKeyboardView.didNameChange = false
         textKeyboardView.oldName = name
         
@@ -287,13 +313,13 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
 
     }
     
-    func shiftButtonPressed(sender: AnyObject?) {
+    func shiftButtonPressed(_ sender: AnyObject?) {
         if shiftButtonPressed {
             
             textKeyboardView.makeLowerCase()
             
             textKeyboardView.shiftButton.backgroundColor = navColor
-            textKeyboardView.shiftImageView.tintColor = UIColor.whiteColor()
+            textKeyboardView.shiftImageView.tintColor = UIColor.white
 
             
         } else {
@@ -301,36 +327,36 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             textKeyboardView.makeCaps()
             
             textKeyboardView.shiftButton.backgroundColor = activeColor
-            textKeyboardView.shiftImageView.tintColor = UIColor.blackColor()
+            textKeyboardView.shiftImageView.tintColor = UIColor.black
         }
         
         shiftButtonPressed = !shiftButtonPressed
     }
     
-    func nameEntryButtonNewName(sender: AnyObject?) {
-        name = textKeyboardView.activeButton.titleForState(.Normal)!
+    func nameEntryButtonNewName(_ sender: AnyObject?) {
+        name = textKeyboardView.activeButton.title(for: UIControlState())!
         nameEntryButtonDidEndEditing(UIButton())
         lastRow = -2
         tableView1.reloadData()
     }
     
-    func nameEntryButtonOldName(sender: AnyObject?) {
-        textKeyboardView.activeButton.setTitle(name, forState: .Normal)
-        textKeyboardView.name = textKeyboardView.activeButton.titleForState(.Normal)!
+    func nameEntryButtonOldName(_ sender: AnyObject?) {
+        textKeyboardView.activeButton.setTitle(name, for: UIControlState())
+        textKeyboardView.name = textKeyboardView.activeButton.title(for: UIControlState())!
         nameEntryButtonDidEndEditing(UIButton())
     }
     
-    func nameEntryButtonDidEndEditing(sender: AnyObject?) {
+    func nameEntryButtonDidEndEditing(_ sender: AnyObject?) {
         
         nameEntryButton.layer.borderColor = borderColor
-        textKeyboardView.hidden = true
-        backButton.hidden = true
-        textKeyboardView.cursor.hidden = true
+        textKeyboardView.isHidden = true
+        backButton.isHidden = true
+        textKeyboardView.cursor.isHidden = true
         textKeyboardView.stopCursorBlinking()
-        chooseQuoteView.hidden = false
-        shareButton.hidden = false
-        shareButtonImage.hidden = false
-        categoryHeader.hidden = false
+        chooseQuoteView.isHidden = false
+        shareButton.isHidden = false
+        shareButtonImage.isHidden = false
+        categoryHeader.isHidden = false
         showNameLabel()
         
         if name == "" {
@@ -341,12 +367,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             createShareQuotesWithName()
         }
         
-        textKeyboardView.cancelButton.hidden = true
+        textKeyboardView.cancelButton.isHidden = true
         
 
     }
     
-    func shareApp(button: UIButton){
+    func shareApp(_ button: UIButton){
         let randomIndex = Int(arc4random_uniform(UInt32(shareAppArray.count)))
         let string = shareAppArray[randomIndex].string
         var allTextBefore: String
@@ -362,10 +388,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
         if allTextBeforeLength <= lastStringLength {
             let indexToCheckFrom = allTextBefore.startIndex
-            stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+            stringToCheck = allTextBefore.substring(from: indexToCheckFrom)
         } else {
-            let indexToCheckFrom = allTextBefore.endIndex.advancedBy(-lastStringLength)
-            stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+            let indexToCheckFrom = allTextBefore.characters.index(allTextBefore.endIndex, offsetBy: -lastStringLength)
+            stringToCheck = allTextBefore.substring(from: indexToCheckFrom)
         }
         
         if lastRow != -1 {
@@ -382,7 +408,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 lastQuote = ""
             } else {
                 if lastCategorySelected == currentCategoryDisplayed {
-                    self.tableView1.deselectRowAtIndexPath(NSIndexPath(forRow: lastRow, inSection: 0), animated: false)
+                    self.tableView1.deselectRow(at: IndexPath(row: lastRow, section: 0), animated: false)
                     lastRow = -1
                     lastCategorySelected = ""
                     lastQuote = ""
@@ -422,92 +448,114 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         shareAppArray += [addLinkToString(linkOne), addLinkToString(linkTwo), addLinkToString(linkThree), addLinkToString(linkFour), addLinkToString(linkFive), addLinkToString(linkSix)]
     }
     
-    func addLinkToString(string: NSMutableAttributedString) -> NSMutableAttributedString {
-        string.addAttribute(NSLinkAttributeName, value: "www.facebook.com/trumpedkeyboard", range: (string.string as NSString).rangeOfString(string.string))
+    func addLinkToString(_ string: NSMutableAttributedString) -> NSMutableAttributedString {
+        string.addAttribute(NSLinkAttributeName, value: "www.facebook.com/trumpedkeyboard", range: (string.string as NSString).range(of: string.string))
         return string
     }
 
     func showNameLabel() {
         if name == "" {
-            nameLabel.hidden = false
+            nameLabel.isHidden = false
         }
     }
     
     func expandCategory() {
         if sectionExpanded {
             self.categoryLabel.text = currentCategoryDisplayed
-            NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!, newCategoryHeaderBorderViewHeight!])
-            NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop, categoryHeaderBorderViewHeight])
+            NSLayoutConstraint.deactivate([
+                expandedCategoryTableViewHeaderTopConstraint!,
+                expandedCategoryTableViewHeaderTopConstraintTwo!,
+                expandedChooseQuoteViewBottomConstraint!,
+                newCategoryHeaderBorderViewHeight!])
+            
+            NSLayoutConstraint.activate([
+                categoryTableViewHeaderBottom,
+                categoryTableViewHeaderTop,
+                categoryHeaderBorderViewHeight])
 
-            nameView.hidden = false
+            nameView.isHidden = false
             
-            NSLayoutConstraint.deactivateConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!])
-            NSLayoutConstraint.activateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop])
-            
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.view.layoutIfNeeded()
             })
             sectionExpanded = false
-            self.arrowIcon.transform = CGAffineTransformMakeScale(1,1)
+            self.arrowIcon.transform = CGAffineTransform(scaleX: 1,y: 1)
             
         } else {
             self.categoryLabel.text = ""
-            nameView.hidden = true
+            nameView.isHidden = true
             
-            NSLayoutConstraint.deactivateConstraints([categoryTableViewHeaderBottom, categoryTableViewHeaderTop, categoryHeaderBorderViewHeight])
+            NSLayoutConstraint.deactivate([
+                categoryTableViewHeaderBottom,
+                categoryTableViewHeaderTop,
+                categoryHeaderBorderViewHeight])
             
             
             expandedCategoryTableViewHeaderTopConstraint = NSLayoutConstraint(
                 item: self.categoryHeader,
-                attribute: .Top,
-                relatedBy: .Equal,
+                attribute: .top,
+                relatedBy: .greaterThanOrEqual,
                 toItem: self.view,
-                attribute: .Top,
+                attribute: .bottom,
                 multiplier: 1,
-                constant: 0
+                constant: -240
             )
-            expandedCategoryTableViewHeaderTopConstraint!.identifier = "New Category Header Top - Parent View Top"
             
+            expandedCategoryTableViewHeaderTopConstraint!.priority = 1000
+            
+            expandedCategoryTableViewHeaderTopConstraintTwo = NSLayoutConstraint(
+                item: self.categoryHeader,
+                attribute: .top,
+                relatedBy: .equal,
+                toItem: self.view,
+                attribute: .top,
+                multiplier: 1,
+                constant: 0.0
+            )
+            expandedCategoryTableViewHeaderTopConstraintTwo!.priority = 999
+       
             expandedChooseQuoteViewBottomConstraint =
             NSLayoutConstraint(
                 item: self.chooseQuoteView,
-                attribute: .Bottom,
-                relatedBy: .Equal,
+                attribute: .bottom,
+                relatedBy: .equal,
                 toItem: self.view,
-                attribute: .Bottom,
+                attribute: .bottom,
                 multiplier: 1,
                 constant: 0
             )
-            expandedChooseQuoteViewBottomConstraint!.identifier = "New Quote Table Bottom - Parent View Bottom"
-            
+ 
             newCategoryHeaderBorderViewHeight =
                 NSLayoutConstraint(
                     item: self.categoryHeaderBorderView,
-                    attribute: .Height,
-                    relatedBy: .Equal,
+                    attribute: .height,
+                    relatedBy: .equal,
                     toItem: nil,
-                    attribute: .NotAnAttribute,
+                    attribute: .notAnAttribute,
                     multiplier: 1,
                     constant: 1.0
             )
-            expandedChooseQuoteViewBottomConstraint!.identifier = "New Quote Table Bottom - Parent View Bottom"
             
-            self.view.addConstraints([expandedCategoryTableViewHeaderTopConstraint!, expandedChooseQuoteViewBottomConstraint!, newCategoryHeaderBorderViewHeight!])
+            self.view.addConstraints([
+                expandedCategoryTableViewHeaderTopConstraint!,
+                expandedCategoryTableViewHeaderTopConstraintTwo!,
+                expandedChooseQuoteViewBottomConstraint!,
+                newCategoryHeaderBorderViewHeight!])
             
             
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 self.view.layoutIfNeeded()
             })
             sectionExpanded = true
-            self.arrowIcon.transform = CGAffineTransformMakeScale(1,-1)
+            self.arrowIcon.transform = CGAffineTransform(scaleX: 1,y: -1)
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
        return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableView1 {
             return buttonTitles[currentCategoryDisplayed]!.count
         } else {
@@ -516,44 +564,45 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == tableView1 {
-            let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell")
+            let cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cell")
             
             var categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
-            let quote = categoryQuotes![indexPath.row].0
-            let author = categoryQuotes![indexPath.row].1
+            let quote = categoryQuotes![(indexPath as NSIndexPath).row].0
+            let author = categoryQuotes![(indexPath as NSIndexPath).row].1
             let fullQuote = NSMutableAttributedString()
-            fullQuote.appendAttributedString(quote)
-            fullQuote.appendAttributedString(NSAttributedString(string: "\n"))
-            fullQuote.appendAttributedString(author)
+            fullQuote.append(quote)
+            fullQuote.append(NSAttributedString(string: "\n"))
+            fullQuote.append(author)
             
             cell.textLabel?.attributedText = fullQuote
-            cell.textLabel?.textAlignment = .Center
+            cell.textLabel?.textAlignment = .center
             cell.textLabel?.numberOfLines = 0
+        
             
             cell.backgroundColor = quoteColor
             
             let myCustomSelectionColorView = UIView()
-            myCustomSelectionColorView.backgroundColor = activeColor
+            myCustomSelectionColorView.backgroundColor = activeColorQuote
             cell.selectedBackgroundView = myCustomSelectionColorView
             
             cell.preservesSuperviewLayoutMargins = false
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsets.zero
+            cell.separatorInset = UIEdgeInsets.zero
                 
             return cell
            
         } else {
             
-            let cell:UITableViewCell! = tableView.dequeueReusableCellWithIdentifier("cell2")
+            let cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "cell2")
             
-            var categoryArray = Array(self.buttonTitles.keys).sort(<)
-            cell.textLabel?.text = categoryArray[indexPath.row]
-            cell.textLabel?.textAlignment = .Center
+            var categoryArray = Array(self.buttonTitles.keys).sorted(by: <)
+            cell.textLabel?.text = categoryArray[(indexPath as NSIndexPath).row]
+            cell.textLabel?.textAlignment = .center
             cell.textLabel?.font = UIFont(name: "Helvetica Neue-Bold", size: 15)
-            cell.textLabel?.textColor = UIColor.whiteColor()
+            cell.textLabel?.textColor = UIColor.white
             cell.textLabel?.numberOfLines = 0
             cell.backgroundColor = navColor
             
@@ -562,8 +611,8 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             cell.selectedBackgroundView = myCustomSelectionColorView
             
             cell.preservesSuperviewLayoutMargins = false
-            cell.layoutMargins = UIEdgeInsetsZero
-            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsets.zero
+            cell.separatorInset = UIEdgeInsets.zero
             
             return cell
         }
@@ -571,12 +620,12 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tableView1 {
             let categoryQuotes = self.buttonTitles[currentCategoryDisplayed]
             var quote: (NSMutableAttributedString, NSAttributedString)
             if let selectedCategoryQuotes = categoryQuotes {
-                quote = selectedCategoryQuotes[indexPath.row]
+                quote = selectedCategoryQuotes[(indexPath as NSIndexPath).row]
             } else {
                 quote = (NSMutableAttributedString(string: "", attributes: normalAttributes), NSAttributedString(string: "" , attributes: subtitleAttributes))
             }
@@ -595,10 +644,10 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
             
             if allTextBeforeLength <= lastStringLength {
                 let indexToCheckFrom = allTextBefore.startIndex
-                stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+                stringToCheck = allTextBefore.substring(from: indexToCheckFrom)
             } else {
-                let indexToCheckFrom = allTextBefore.endIndex.advancedBy(-lastStringLength)
-                stringToCheck = allTextBefore.substringFromIndex(indexToCheckFrom)
+                let indexToCheckFrom = allTextBefore.characters.index(allTextBefore.endIndex, offsetBy: -lastStringLength)
+                stringToCheck = allTextBefore.substring(from: indexToCheckFrom)
             }
             
             if lastRow != -1 {
@@ -607,9 +656,9 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                     deleteBackwardRepeat(lastStringLength)
                 }
                 
-                if lastRow == indexPath.row && lastCategorySelected == currentCategoryDisplayed {
+                if lastRow == (indexPath as NSIndexPath).row && lastCategorySelected == currentCategoryDisplayed {
 
-                    self.tableView1.deselectRowAtIndexPath(indexPath, animated: false)
+                    self.tableView1.deselectRow(at: indexPath, animated: false)
                     lastRow = -1
                     lastCategorySelected = ""
                     lastQuote = ""
@@ -617,7 +666,7 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
                 } else {
                     shareButtonImage.image = UIImage(named: "share-gray")
                     (textDocumentProxy as UIKeyInput).insertText("\(string)")
-                    lastRow = indexPath.row
+                    lastRow = (indexPath as NSIndexPath).row
                     lastCategorySelected = currentCategoryDisplayed
                     let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                     lastQuote = lastCategoryQuotes![lastRow].0.string
@@ -625,26 +674,30 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
 
             } else {
                 (textDocumentProxy as UIKeyInput).insertText("\(string)")
-                lastRow = indexPath.row
+                lastRow = (indexPath as NSIndexPath).row
                 lastCategorySelected = currentCategoryDisplayed
                 let lastCategoryQuotes = self.buttonTitles[lastCategorySelected]
                 lastQuote = lastCategoryQuotes![lastRow].0.string
             }
             
         } else {
-            var categoryArray = Array(self.buttonTitles.keys).sort(<)
-            currentCategoryDisplayed = categoryArray[indexPath.row]
+            var categoryArray = Array(self.buttonTitles.keys).sorted(by: <)
+            currentCategoryDisplayed = categoryArray[(indexPath as NSIndexPath).row]
             categoryLabel.text = currentCategoryDisplayed
-            tableView1.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Right)
+            tableView1.reloadSections(IndexSet(integer: 0), with: UITableViewRowAnimation.right)
             if lastCategorySelected == currentCategoryDisplayed {
-                self.tableView1.selectRowAtIndexPath(NSIndexPath(forRow: lastRow, inSection: 0), animated: false, scrollPosition: .Middle)
+                self.tableView1.selectRow(at: IndexPath(row: lastRow, section: 0), animated: false, scrollPosition: .middle)
             }
             expandCategory()
         }
     
     }
     
-    func deleteBackwardRepeat(numberOfTimes: Int) {
+    func quotedQuote(_ sender: AnyObject?) {
+        
+    }
+    
+    func deleteBackwardRepeat(_ numberOfTimes: Int) {
         var i = numberOfTimes
         while i > 0 {
             (textDocumentProxy as UIKeyInput).deleteBackward()
@@ -652,31 +705,31 @@ class KeyboardViewController: UIInputViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func buttonActive(button: UIButton) {
+    func buttonActive(_ button: UIButton) {
         button.backgroundColor = activeColor
     }
     
-    func buttonInactive(button: UIButton) {
-        button.backgroundColor = UIColor.whiteColor()
+    func buttonInactive(_ button: UIButton) {
+        button.backgroundColor = UIColor.white
     }
     
-    func shareButtonActive(button: UIButton) {
-        shareButtonImage.image = UIImage(named: "share-red")
+    func shareButtonActive(_ button: UIButton) {
+        shareButtonImage.image = UIImage(named: "share-gold")
     }
     
-    func shareButtonInactive(button: UIButton) {
+    func shareButtonInactive(_ button: UIButton) {
         shareButtonImage.image = UIImage(named: "share-gray")
     }
     
-    func navButtonActive(button: UIButton) {
+    func navButtonActive(_ button: UIButton) {
         button.backgroundColor = activeColor
     }
     
-    func navButtonInactive(button: UIButton) {
+    func navButtonInactive(_ button: UIButton) {
         button.backgroundColor = navColor
     }
 
-    func nextKeyboardPressed(button: UIButton) {
+    func nextKeyboardPressed(_ button: UIButton) {
         advanceToNextInputMode()
     }
     

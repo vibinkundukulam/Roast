@@ -14,16 +14,15 @@ class Draw2D: UIControl {
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
 
-        override func drawRect(rect: CGRect)
+        override func draw(_ rect: CGRect)
         {
             let context = UIGraphicsGetCurrentContext()
-            CGContextSetLineWidth(context, 1.0)
-            CGContextSetStrokeColorWithColor(context,
-                UIColor.darkGrayColor().CGColor)
-            CGContextMoveToPoint(context, 18, 10)
-            CGContextAddLineToPoint(context, 12, 15)
-            CGContextAddLineToPoint(context, 18, 20)
-            CGContextStrokePath(context)
+            context?.setLineWidth(1.0)
+            context?.setStrokeColor(UIColor.darkGray.cgColor)
+            context?.move(to: CGPoint(x: 18, y: 10))
+            context?.addLine(to: CGPoint(x: 12, y: 15))
+            context?.addLine(to: CGPoint(x: 18, y: 20))
+            context?.strokePath()
         }
     
 }

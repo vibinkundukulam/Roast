@@ -36,7 +36,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To install Trumped:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cdb-DH-NWJ">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <color key="textColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.85490196080000003" green="0.64705882349999999" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fws-KN-fMo" userLabel="Separator 1">
@@ -227,7 +227,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To use Trumped:" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="612-mT-8sc">
                                         <rect key="frame" x="0.0" y="253" width="300" height="20"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                        <color key="textColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.85490196080000003" green="0.64705882349999999" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8cQ-o5-2KK" userLabel="Separator 6">
@@ -567,7 +567,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ti7-Jw-5ue" customClass="DesignableButton" customModule="Trumped" customModuleProvider="target">
                                         <rect key="frame" x="97" y="30" width="150" height="40"/>
-                                        <color key="backgroundColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.85490196080000003" green="0.64705882349999999" blue="0.0078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
                                         <state key="normal" title="Give us feedback.">
@@ -602,7 +602,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.53333333329999999" green="0.019607843140000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.85490196078431369" green="0.6470588235294118" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="1WC-h5-f02" secondAttribute="trailing" constant="20" id="4ZA-r4-fOU"/>
                             <constraint firstItem="1WC-h5-f02" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="20" id="Efh-nL-1CR"/>
